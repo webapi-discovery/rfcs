@@ -1,0 +1,183 @@
+﻿<pre class='metadata'>
+Title: WebAPI Discovery Community Group Request for comments WADG0001 
+H1: Version 0.3.0
+Date: 2017-05-03
+Shortname: wadg0001
+Level: 1
+Status: LS
+URL: https://github.io/webapi-discovery/rfcs/rfc0001.html
+Editor: Mike Ralphson, Mermade Software
+Authors: Mike Ralphson, Ivan Goncharov
+Repository: wadg/rfcs
+Abstract: It is proposed to create an extension to the Schema.Org WebAPI type to facilitate better automatic discovery of WebAPIs and associated machine- and human-readable documentation.
+Markup Shorthands: css no, markdown yes
+Ignored Terms: h1, h2, h3, h4, h5, h6, xmp
+</pre>
+
+<pre class=biblio>
+{
+	"OpenAPI-3.0.0-RC1": {
+		"title": "OpenAPI Specification v3.0.0-RC1",
+		"href": "https://github.com/OAI/OpenAPI-Specification"
+	},
+	"raml": {
+		"title": "RAML 1.0",
+		"href": "https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md"
+	},
+	"API-Blueprint": {
+		"title": "API Blueprint",
+		"href": "https://apiblueprint.org"
+	},
+	"JSON-home": {
+		"title": "JSON-home",
+		"href": "https://tools.ietf.org/html/draft-nottingham-json-home-06"
+	},
+	"apis.json": {
+		"title": "apis.json",
+		"href": "http://apisjson.org/format/apisjson_0.15.txt"
+	},
+	"semver": {
+		"title": "Semantic Versioning 2.0.0",
+		"href": "https://semver.org/"
+	}
+}
+</pre>
+
+This extension has been created based on real-world use of metadata in the [[OpenAPI-3.0.0-RC1]], [[raml]], [[API-Blueprint]], [[JSON-home]] and [[apis.json]] specifications.
+
+Extension
+=========
+
+The base WebAPI type, example:
+
+````json
+{
+  "@context": "http://schema.org/",
+  "@type": "WebAPI",
+  "name": "Google Knowledge Graph Search API",
+  "description": "The Knowledge Graph Search API lets you find entities in the Google Knowledge Graph. The API uses standard schema.org types and is compliant with the JSON-LD specification.",
+  "documentation": "https://developers.google.com/knowledge-graph/",
+  "termsOfService": "https://developers.google.com/knowledge-graph/terms",
+  "provider": {
+    "@type": "Organization",
+    "name": "Google Inc."
+  }
+}
+````
+
+Is to be extended as follows:
+
+The extension properties (and their types) are:
+* versions (OPTIONAL array of Thing -> Property -> softwareVersion). It is RECOMMENDED that APIs be versioned using [[semver]]
+* entryPoints (OPTIONAL array of Thing -> Intangible -> EntryPoint)
+   * extended with:
+      * responseContentTypes (OPTIONAL Text)
+* license (OPTIONAL, CreativeWork or URL) - the license for the design/signature of the API
+* transport (enumerated Text: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)
+* apiProtocol (OPTIONAL, enumerated Text:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)
+* webApiDescriptions (OPTIONAL array of EntryPoints) containing links to machine-readable API descriptions
+* webApiActions (OPTIONAL array of potential Actions)
+
+The Content-Type(s) consumed by the WebAPI MAY be included in the EntryPoint.contentType property. The Content-Type(s) produced by the WebAPI MAY be included in the EntryPoint.responseContentType property.
+
+Content-Types
+-------------
+
+The webAPIDescriptions (EntryPoint) contentType property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that IANA-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:
+
+<table class=data>
+<thead>
+<tr>
+<th>Format
+<th>Content-Type
+<tbody>
+<tr><td>OpenAPI / Swagger in JSON<td>application/openapi+json or application/x-openapi+json
+<tr><td>OpenAPI / Swagger in YAML<td>application/openapi+json or application/x-openapi+json
+<tr><td>RAML<td>application/raml+yaml
+<tr><td>API Blueprint in markdown<td>text/vnd.apiblueprint
+<tr><td>API Blueprint parsed in JSON<td>application/vnd.refract.parse-result+json
+<tr><td>API Blueprint parsed in YAML<td>application/vnd.refract.parse-result+yaml
+</tbody>
+</table>
+
+
+Other content-Types such as application/ld+json, application/json, text/markdown etc MAY be used, with decreasing levels of machine-readability. The webAPIDescription (EntryPoint) encodingType property MAY also be specified.
+
+webAPIActions
+-------------
+
+Valid Action.names for webApiActions are:
+
+<table class=data>
+<thead>
+<tr>
+<th>Name
+<th>Description
+<tbody>
+<tr><td>apiAuthentication <td> Links to a resource detailing authentication requirements. Note this is a human-readable resource, not an authentication endpoint
+<tr><td>apiClientRegistration <td> Links to a resource where a client may register to use the API
+<tr><td>apiConsole <td> Links to an interactive console where API calls may be tested
+<tr><td>apiPayment <td> Links to a resource detailing pricing details of the API
+</tbody>
+</table>
+	
+________________
+
+
+A fuller example of a WebAPI annotation, including the extension attributes. Note the @type name is still to be determined.
+
+````json
+{
+  "@context": "http://schema.org/",
+  "@type": "ActionableWebAPI",
+  "name": "Google Knowledge Graph Search API",
+  "description": "The Knowledge Graph Search API lets you find entities in the Google Knowledge Graph. The API uses standard schema.org types and is compliant with the JSON-LD specification.",
+  "documentation": "https://developers.google.com/knowledge-graph/",
+  "termsOfService": "https://developers.google.com/knowledge-graph/terms",
+  "logo": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Google Inc.",
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "name": "Google",
+        "url": "https://google.com"
+      }
+    ],
+  },
+  "versions": [
+    "1.0.0"
+  ],
+  "entryPoints": [
+    {
+      "@type": "EntryPoint",
+      "url": "https://kgsearch.googleapis.com/",
+      "contentType": "application/json",
+      "responseContentTypes": "application/json"
+    }
+  ],
+  "transport": "HTTP",
+  "apiProtocol": "JSON API",
+  "webApiDescriptions": [
+    {
+      "@type": "EntryPoint",
+      "contentType": "application/json",
+      "url": "https://kgsearch.googleapis.com/$discovery/rest?version=v1"
+    },
+    {
+      "@type": "WebAPIDescription",
+      "contentType": "application/openapi+json",
+      "url": "https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"
+    },
+"apiActions": [
+    {
+      "@type": "ConsumeAction",
+      "name": "apiAuthentication",
+      "target": "https://developers.google.com/knowledge-graph/how-tos/authorizing"
+    }
+  ]
+}
+````
+

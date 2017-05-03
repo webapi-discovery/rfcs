@@ -48,7 +48,9 @@ This extension has been created based on real-world use of metadata in the [[Ope
 Definitions
 ===========
 
-<dfn>Machine-readable API Definition</dfn> a structured document defining the inputs and outputs of an API in a standardised format. See <a href="http://nordicapis.com/difference-api-documentation-specification-definition/">this article</a> for an explanation of the difference between API documentation, specifications and definitions.
+<dfn>Machine-readable API Definition</dfn> a structured document defining the inputs and outputs of an API in a standardised format, primarily designed for automated processing, not human consumption.
+
+<div class="note">See <a href="http://nordicapis.com/difference-api-documentation-specification-definition/">this article</a> for an explanation of the difference between API documentation, specifications and definitions.</div>
 
 Proposed Extension
 ==================

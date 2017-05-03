@@ -8,7 +8,7 @@ Status: LS
 URL: https://webapi-discovery.github.io/rfcs/rfc0001.html
 Editor: Mike Ralphson, Mermade Software
 Authors: Mike Ralphson, Ivan Goncharov
-Repository: wadg/rfcs
+Repository: webapi-discovery/rfcs
 Abstract: It is proposed to create an extension to the Schema.Org WebAPI type to facilitate better automatic discovery of WebAPIs and associated machine- and human-readable documentation.
 Markup Shorthands: css no, markdown yes
 Ignored Terms: h1, h2, h3, h4, h5, h6, xmp

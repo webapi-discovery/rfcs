@@ -88,7 +88,7 @@ The Content-Type(s) consumed by the WebAPI MAY be included in the <a href="http:
 Content-Types
 -------------
 
-The webAPIDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:
+The webApiDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:
 
 <table class=data>
 <thead>
@@ -105,9 +105,9 @@ The webAPIDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a
 </tbody>
 </table>
 
-Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webAPIDefinition (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.
+Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webApiDefinition (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.
 
-webAPIActions
+webApiActions
 -------------
 
 Valid <a href="https://schema.org/Action">Action</a>.<a href="https://schema.org/name">name</a>s for webApiActions are:

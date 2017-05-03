@@ -1457,7 +1457,7 @@ Parts of this work may be from another specification document.  If so, those par
      <a href="#proposed-extension"><span class="secno">2</span> <span class="content">Proposed Extension</span></a>
      <ol class="toc">
       <li><a href="#content-types"><span class="secno">2.1</span> <span class="content">Content-Types</span></a>
-      <li><a href="#webapiactions"><span class="secno">2.2</span> <span class="content">webAPIActions</span></a>
+      <li><a href="#webapiactions"><span class="secno">2.2</span> <span class="content">webApiActions</span></a>
      </ol>
     <li><a href="#example"><span class="secno">3</span> <span class="content">Example</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
@@ -1519,7 +1519,7 @@ Parts of this work may be from another specification document.  If so, those par
    </ul>
    <p>The Content-Type(s) consumed by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.<a href="http://schema.org/contentType">contentType</a> property. The Content-Type(s) produced by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.responseContentType property.</p>
    <h3 class="heading settled" data-level="2.1" id="content-types"><span class="secno">2.1. </span><span class="content">Content-Types</span><a class="self-link" href="#content-types"></a></h3>
-   <p>The webAPIDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:</p>
+   <p>The webApiDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:</p>
    <table class="data">
     <thead>
      <tr>
@@ -1545,8 +1545,8 @@ Parts of this work may be from another specification document.  If so, those par
       <td>API Blueprint parsed in YAML
       <td>application/vnd.refract.parse-result+yaml 
    </table>
-   <p>Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webAPIDefinition (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.</p>
-   <h3 class="heading settled" data-level="2.2" id="webapiactions"><span class="secno">2.2. </span><span class="content">webAPIActions</span><a class="self-link" href="#webapiactions"></a></h3>
+   <p>Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webApiDefinition (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.</p>
+   <h3 class="heading settled" data-level="2.2" id="webapiactions"><span class="secno">2.2. </span><span class="content">webApiActions</span><a class="self-link" href="#webapiactions"></a></h3>
    <p>Valid <a href="https://schema.org/Action">Action</a>.<a href="https://schema.org/name">name</a>s for webApiActions are:</p>
    <table class="data">
     <thead>

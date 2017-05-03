@@ -16,11 +16,11 @@ Ignored Terms: h1, h2, h3, h4, h5, h6, xmp
 
 <pre class=biblio>
 {
-	"OpenAPI-3.0.0-RC1": {
+	"OpenAPI": {
 		"title": "OpenAPI Specification v3.0.0-RC1",
 		"href": "https://github.com/OAI/OpenAPI-Specification"
 	},
-	"raml": {
+	"RAML": {
 		"title": "RAML 1.0",
 		"href": "https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md"
 	},
@@ -43,7 +43,7 @@ Ignored Terms: h1, h2, h3, h4, h5, h6, xmp
 }
 </pre>
 
-This extension has been created based on real-world use of metadata in the [[OpenAPI-3.0.0-RC1]], [[raml]], [[API-Blueprint]], [[JSON-home]] and [[apis.json]] specifications.
+This extension has been created based on real-world use of metadata in the [[OpenAPI]], [[RAML]], [[API-Blueprint]], [[JSON-home]] and [[apis.json]] specifications.
 
 Extension
 =========
@@ -68,8 +68,8 @@ The base WebAPI type, example:
 Is to be extended as follows:
 
 The extension properties (and their types) are:
-* versions (OPTIONAL array of Thing -> Property -> softwareVersion). It is RECOMMENDED that APIs be versioned using [[semver]]
-* entryPoints (OPTIONAL array of Thing -> Intangible -> EntryPoint)
+* versions (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="http://meta.schema.org/Property">Property</a> -> <a href="http://schema.org/softwareVersion">softwareVersion</a>). It is RECOMMENDED that APIs be versioned using [[semver]]
+* entryPoints (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="https://schema.org/Intangible">Intangible</a> -> <a href="https://schema.org/EntryPoint">EntryPoint</a>)
    * extended with:
       * responseContentTypes (OPTIONAL Text)
 * license (OPTIONAL, CreativeWork or URL) - the license for the design/signature of the API

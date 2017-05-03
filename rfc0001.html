@@ -1431,7 +1431,7 @@ Parts of this work may be from another specification document.  If so, those par
    </ol>
   </nav>
   <main>
-   <p>This extension has been created based on real-world use of metadata in the <a data-link-type="biblio" href="#biblio-openapi-300-rc1">[OpenAPI-3.0.0-RC1]</a>, <a data-link-type="biblio" href="#biblio-raml">[raml]</a>, <a data-link-type="biblio" href="#biblio-api-blueprint">[API-Blueprint]</a>, <a data-link-type="biblio" href="#biblio-json-home">[JSON-home]</a> and <a data-link-type="biblio" href="#biblio-apisjson">[apis.json]</a> specifications.</p>
+   <p>This extension has been created based on real-world use of metadata in the <a data-link-type="biblio" href="#biblio-openapi">[OpenAPI]</a>, <a data-link-type="biblio" href="#biblio-raml">[RAML]</a>, <a data-link-type="biblio" href="#biblio-api-blueprint">[API-Blueprint]</a>, <a data-link-type="biblio" href="#biblio-json-home">[JSON-home]</a> and <a data-link-type="biblio" href="#biblio-apisjson">[apis.json]</a> specifications.</p>
    <h2 class="heading settled" data-level="1" id="extension"><span class="secno">1. </span><span class="content">Extension</span><a class="self-link" href="#extension"></a></h2>
    <p>The base WebAPI type, example:</p>
 <pre class="language-json highlight"><span class="p">{</span>
@@ -1451,9 +1451,9 @@ Parts of this work may be from another specification document.  If so, those par
    <p>The extension properties (and their types) are:</p>
    <ul>
     <li data-md="">
-     <p>versions (OPTIONAL array of Thing -> Property -> softwareVersion). It is RECOMMENDED that APIs be versioned using <a data-link-type="biblio" href="#biblio-semver">[semver]</a></p>
+     <p>versions (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="http://meta.schema.org/Property">Property</a> -> <a href="http://schema.org/softwareVersion">softwareVersion</a>). It is RECOMMENDED that APIs be versioned using <a data-link-type="biblio" href="#biblio-semver">[semver]</a></p>
     <li data-md="">
-     <p>entryPoints (OPTIONAL array of Thing -> Intangible -> EntryPoint)</p>
+     <p>entryPoints (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="https://schema.org/Intangible">Intangible</a> -> <a href="https://schema.org/EntryPoint">EntryPoint</a>)</p>
     <li data-md="">
      <p>extended with:</p>
      <ul>
@@ -1737,7 +1737,7 @@ Parts of this work may be from another specification document.  If so, those par
    <dd><a href="http://apisjson.org/format/apisjson_0.15.txt">apis.json</a>. URL: <a href="http://apisjson.org/format/apisjson_0.15.txt">http://apisjson.org/format/apisjson_0.15.txt</a>
    <dt id="biblio-json-home">[JSON-home]
    <dd><a href="https://tools.ietf.org/html/draft-nottingham-json-home-06">JSON-home</a>. URL: <a href="https://tools.ietf.org/html/draft-nottingham-json-home-06">https://tools.ietf.org/html/draft-nottingham-json-home-06</a>
-   <dt id="biblio-openapi-300-rc1">[OpenAPI-3.0.0-RC1]
+   <dt id="biblio-openapi">[OpenAPI]
    <dd><a href="https://github.com/OAI/OpenAPI-Specification">OpenAPI Specification v3.0.0-RC1</a>. URL: <a href="https://github.com/OAI/OpenAPI-Specification">https://github.com/OAI/OpenAPI-Specification</a>
    <dt id="biblio-raml">[RAML]
    <dd><a href="https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md">RAML 1.0</a>. URL: <a href="https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md">https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md</a>

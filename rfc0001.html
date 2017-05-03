@@ -1188,93 +1188,6 @@ Possible extra rowspan handling
             [data-md] > :last-child {
                 margin-bottom: 0;
             }</style>
-<style>/* style-counters */
-
-            body {
-                counter-reset: example figure issue;
-            }
-            .issue {
-                counter-increment: issue;
-            }
-            .issue:not(.no-marker)::before {
-                content: "Issue " counter(issue);
-            }
-
-            .example {
-                counter-increment: example;
-            }
-            .example:not(.no-marker)::before {
-                content: "Example " counter(example);
-            }
-            .invalid.example:not(.no-marker)::before,
-            .illegal.example:not(.no-marker)::before {
-                content: "Invalid Example" counter(example);
-            }
-
-            figcaption {
-                counter-increment: figure;
-            }
-            figcaption:not(.no-marker)::before {
-                content: "Figure " counter(figure) " ";
-            }</style>
-<style>/* style-syntax-highlighting */
-
-        .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
-        code.highlight { padding: .1em; border-radius: .3em; }
-        pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
-        .highlight .c { color: #708090 } /* Comment */
-        .highlight .k { color: #990055 } /* Keyword */
-        .highlight .l { color: #000000 } /* Literal */
-        .highlight .n { color: #0077aa } /* Name */
-        .highlight .o { color: #999999 } /* Operator */
-        .highlight .p { color: #999999 } /* Punctuation */
-        .highlight .cm { color: #708090 } /* Comment.Multiline */
-        .highlight .cp { color: #708090 } /* Comment.Preproc */
-        .highlight .c1 { color: #708090 } /* Comment.Single */
-        .highlight .cs { color: #708090 } /* Comment.Special */
-        .highlight .kc { color: #990055 } /* Keyword.Constant */
-        .highlight .kd { color: #990055 } /* Keyword.Declaration */
-        .highlight .kn { color: #990055 } /* Keyword.Namespace */
-        .highlight .kp { color: #990055 } /* Keyword.Pseudo */
-        .highlight .kr { color: #990055 } /* Keyword.Reserved */
-        .highlight .kt { color: #990055 } /* Keyword.Type */
-        .highlight .ld { color: #000000 } /* Literal.Date */
-        .highlight .m { color: #000000 } /* Literal.Number */
-        .highlight .s { color: #a67f59 } /* Literal.String */
-        .highlight .na { color: #0077aa } /* Name.Attribute */
-        .highlight .nc { color: #0077aa } /* Name.Class */
-        .highlight .no { color: #0077aa } /* Name.Constant */
-        .highlight .nd { color: #0077aa } /* Name.Decorator */
-        .highlight .ni { color: #0077aa } /* Name.Entity */
-        .highlight .ne { color: #0077aa } /* Name.Exception */
-        .highlight .nf { color: #0077aa } /* Name.Function */
-        .highlight .nl { color: #0077aa } /* Name.Label */
-        .highlight .nn { color: #0077aa } /* Name.Namespace */
-        .highlight .py { color: #0077aa } /* Name.Property */
-        .highlight .nt { color: #669900 } /* Name.Tag */
-        .highlight .nv { color: #222222 } /* Name.Variable */
-        .highlight .ow { color: #999999 } /* Operator.Word */
-        .highlight .mb { color: #000000 } /* Literal.Number.Bin */
-        .highlight .mf { color: #000000 } /* Literal.Number.Float */
-        .highlight .mh { color: #000000 } /* Literal.Number.Hex */
-        .highlight .mi { color: #000000 } /* Literal.Number.Integer */
-        .highlight .mo { color: #000000 } /* Literal.Number.Oct */
-        .highlight .sb { color: #a67f59 } /* Literal.String.Backtick */
-        .highlight .sc { color: #a67f59 } /* Literal.String.Char */
-        .highlight .sd { color: #a67f59 } /* Literal.String.Doc */
-        .highlight .s2 { color: #a67f59 } /* Literal.String.Double */
-        .highlight .se { color: #a67f59 } /* Literal.String.Escape */
-        .highlight .sh { color: #a67f59 } /* Literal.String.Heredoc */
-        .highlight .si { color: #a67f59 } /* Literal.String.Interpol */
-        .highlight .sx { color: #a67f59 } /* Literal.String.Other */
-        .highlight .sr { color: #a67f59 } /* Literal.String.Regex */
-        .highlight .s1 { color: #a67f59 } /* Literal.String.Single */
-        .highlight .ss { color: #a67f59 } /* Literal.String.Symbol */
-        .highlight .vc { color: #0077aa } /* Name.Variable.Class */
-        .highlight .vg { color: #0077aa } /* Name.Variable.Global */
-        .highlight .vi { color: #0077aa } /* Name.Variable.Instance */
-        .highlight .il { color: #000000 } /* Literal.Number.Integer.Long */
-        </style>
 <style>/* style-selflinks */
 
             .heading, .issue, .note, .example, li, dt {
@@ -1321,6 +1234,35 @@ Possible extra rowspan handling
             a.self-link::before            { content: "¶"; }
             .heading > a.self-link::before { content: "§"; }
             dfn > a.self-link::before      { content: "#"; }</style>
+<style>/* style-counters */
+
+            body {
+                counter-reset: example figure issue;
+            }
+            .issue {
+                counter-increment: issue;
+            }
+            .issue:not(.no-marker)::before {
+                content: "Issue " counter(issue);
+            }
+
+            .example {
+                counter-increment: example;
+            }
+            .example:not(.no-marker)::before {
+                content: "Example " counter(example);
+            }
+            .invalid.example:not(.no-marker)::before,
+            .illegal.example:not(.no-marker)::before {
+                content: "Invalid Example" counter(example);
+            }
+
+            figcaption {
+                counter-increment: figure;
+            }
+            figcaption:not(.no-marker)::before {
+                content: "Figure " counter(figure) " ";
+            }</style>
 <style>/* style-autolinks */
 
             .css.css, .property.property, .descriptor.descriptor {
@@ -1383,6 +1325,101 @@ Possible extra rowspan handling
             [data-link-type=biblio] {
                 white-space: pre;
             }</style>
+<style>/* style-dfn-panel */
+
+        .dfn-panel {
+            position: absolute;
+            z-index: 35;
+            height: auto;
+            width: -webkit-fit-content;
+            width: fit-content;
+            max-width: 300px;
+            max-height: 500px;
+            overflow: auto;
+            padding: 0.5em 0.75em;
+            font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+            background: #DDDDDD;
+            color: black;
+            border: outset 0.2em;
+        }
+        .dfn-panel:not(.on) { display: none; }
+        .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+        .dfn-panel > b { display: block; }
+        .dfn-panel a { color: black; }
+        .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+        .dfn-panel > b + b { margin-top: 0.25em; }
+        .dfn-panel ul { padding: 0; }
+        .dfn-panel li { list-style: inside; }
+        .dfn-panel.activated {
+            display: inline-block;
+            position: fixed;
+            left: .5em;
+            bottom: 2em;
+            margin: 0 auto;
+            max-width: calc(100vw - 1.5em - .4em - .5em);
+            max-height: 30vh;
+        }
+
+        .dfn-paneled { cursor: pointer; }
+        </style>
+<style>/* style-syntax-highlighting */
+
+        .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
+        code.highlight { padding: .1em; border-radius: .3em; }
+        pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+        .highlight .c { color: #708090 } /* Comment */
+        .highlight .k { color: #990055 } /* Keyword */
+        .highlight .l { color: #000000 } /* Literal */
+        .highlight .n { color: #0077aa } /* Name */
+        .highlight .o { color: #999999 } /* Operator */
+        .highlight .p { color: #999999 } /* Punctuation */
+        .highlight .cm { color: #708090 } /* Comment.Multiline */
+        .highlight .cp { color: #708090 } /* Comment.Preproc */
+        .highlight .c1 { color: #708090 } /* Comment.Single */
+        .highlight .cs { color: #708090 } /* Comment.Special */
+        .highlight .kc { color: #990055 } /* Keyword.Constant */
+        .highlight .kd { color: #990055 } /* Keyword.Declaration */
+        .highlight .kn { color: #990055 } /* Keyword.Namespace */
+        .highlight .kp { color: #990055 } /* Keyword.Pseudo */
+        .highlight .kr { color: #990055 } /* Keyword.Reserved */
+        .highlight .kt { color: #990055 } /* Keyword.Type */
+        .highlight .ld { color: #000000 } /* Literal.Date */
+        .highlight .m { color: #000000 } /* Literal.Number */
+        .highlight .s { color: #a67f59 } /* Literal.String */
+        .highlight .na { color: #0077aa } /* Name.Attribute */
+        .highlight .nc { color: #0077aa } /* Name.Class */
+        .highlight .no { color: #0077aa } /* Name.Constant */
+        .highlight .nd { color: #0077aa } /* Name.Decorator */
+        .highlight .ni { color: #0077aa } /* Name.Entity */
+        .highlight .ne { color: #0077aa } /* Name.Exception */
+        .highlight .nf { color: #0077aa } /* Name.Function */
+        .highlight .nl { color: #0077aa } /* Name.Label */
+        .highlight .nn { color: #0077aa } /* Name.Namespace */
+        .highlight .py { color: #0077aa } /* Name.Property */
+        .highlight .nt { color: #669900 } /* Name.Tag */
+        .highlight .nv { color: #222222 } /* Name.Variable */
+        .highlight .ow { color: #999999 } /* Operator.Word */
+        .highlight .mb { color: #000000 } /* Literal.Number.Bin */
+        .highlight .mf { color: #000000 } /* Literal.Number.Float */
+        .highlight .mh { color: #000000 } /* Literal.Number.Hex */
+        .highlight .mi { color: #000000 } /* Literal.Number.Integer */
+        .highlight .mo { color: #000000 } /* Literal.Number.Oct */
+        .highlight .sb { color: #a67f59 } /* Literal.String.Backtick */
+        .highlight .sc { color: #a67f59 } /* Literal.String.Char */
+        .highlight .sd { color: #a67f59 } /* Literal.String.Doc */
+        .highlight .s2 { color: #a67f59 } /* Literal.String.Double */
+        .highlight .se { color: #a67f59 } /* Literal.String.Escape */
+        .highlight .sh { color: #a67f59 } /* Literal.String.Heredoc */
+        .highlight .si { color: #a67f59 } /* Literal.String.Interpol */
+        .highlight .sx { color: #a67f59 } /* Literal.String.Other */
+        .highlight .sr { color: #a67f59 } /* Literal.String.Regex */
+        .highlight .s1 { color: #a67f59 } /* Literal.String.Single */
+        .highlight .ss { color: #a67f59 } /* Literal.String.Symbol */
+        .highlight .vc { color: #0077aa } /* Name.Variable.Class */
+        .highlight .vg { color: #0077aa } /* Name.Variable.Global */
+        .highlight .vi { color: #0077aa } /* Name.Variable.Instance */
+        .highlight .il { color: #000000 } /* Literal.Number.Integer.Long */
+        </style>
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
@@ -1409,19 +1446,26 @@ Parts of this work may be from another specification document.  If so, those par
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
-   <p>It is proposed to create an extension to the Schema.Org WebAPI type to facilitate better automatic discovery of WebAPIs and associated machine- and human-readable documentation.</p>
+   <p>It is proposed to create an extension to the <a href="https://schema.org/">Schema.Org</a> <a href="https://pending.schema.org/WebAPI">WebAPI</a> type to facilitate better automatic discovery of WebAPIs and associated machine- and human-readable documentation.</p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
+    <li><a href="#definitions"><span class="secno">1</span> <span class="content">Definitions</span></a>
     <li>
-     <a href="#extension"><span class="secno">1</span> <span class="content">Extension</span></a>
+     <a href="#proposed-extension"><span class="secno">2</span> <span class="content">Proposed Extension</span></a>
      <ol class="toc">
-      <li><a href="#content-types"><span class="secno">1.1</span> <span class="content">Content-Types</span></a>
-      <li><a href="#webapiactions"><span class="secno">1.2</span> <span class="content">webAPIActions</span></a>
+      <li><a href="#content-types"><span class="secno">2.1</span> <span class="content">Content-Types</span></a>
+      <li><a href="#webapiactions"><span class="secno">2.2</span> <span class="content">webAPIActions</span></a>
      </ol>
+    <li><a href="#example"><span class="secno">3</span> <span class="content">Example</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
+    <li>
+     <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
+     <ol class="toc">
+      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+     </ol>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
@@ -1432,8 +1476,10 @@ Parts of this work may be from another specification document.  If so, those par
   </nav>
   <main>
    <p>This extension has been created based on real-world use of metadata in the <a data-link-type="biblio" href="#biblio-openapi">[OpenAPI]</a>, <a data-link-type="biblio" href="#biblio-raml">[RAML]</a>, <a data-link-type="biblio" href="#biblio-api-blueprint">[API-Blueprint]</a>, <a data-link-type="biblio" href="#biblio-json-home">[JSON-home]</a> and <a data-link-type="biblio" href="#biblio-apisjson">[apis.json]</a> specifications.</p>
-   <h2 class="heading settled" data-level="1" id="extension"><span class="secno">1. </span><span class="content">Extension</span><a class="self-link" href="#extension"></a></h2>
-   <p>The base WebAPI type, example:</p>
+   <h2 class="heading settled" data-level="1" id="definitions"><span class="secno">1. </span><span class="content">Definitions</span><a class="self-link" href="#definitions"></a></h2>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="machine-readable-api-definition">Machine-readable API Definition</dfn> a structured document defining the inputs and outputs of an API in a standardised format. See <a href="http://nordicapis.com/difference-api-documentation-specification-definition/">this article</a> for an explanation of the difference between API documentation, specifications and definitions.</p>
+   <h2 class="heading settled" data-level="2" id="proposed-extension"><span class="secno">2. </span><span class="content">Proposed Extension</span><a class="self-link" href="#proposed-extension"></a></h2>
+   <p>The base <a href="https://schema.org">Schema.org</a> <a href="https://pending.schema.org">WebAPI</a> type, for example:</p>
 <pre class="language-json highlight"><span class="p">{</span>
   <span class="nt">"@context"</span><span class="p">:</span> <span class="s2">"http://schema.org/"</span><span class="p">,</span>
   <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"WebAPI"</span><span class="p">,</span>
@@ -1447,7 +1493,7 @@ Parts of this work may be from another specification document.  If so, those par
   <span class="p">}</span>
 <span class="p">}</span>
 </pre>
-   <p>Is to be extended as follows:</p>
+   <p>is to be extended as follows:</p>
    <p>The extension properties (and their types) are:</p>
    <ul>
     <li data-md="">
@@ -1458,22 +1504,22 @@ Parts of this work may be from another specification document.  If so, those par
      <p>extended with:</p>
      <ul>
       <li data-md="">
-       <p>responseContentTypes (OPTIONAL Text)</p>
+       <p>responseContentTypes (OPTIONAL <a href="http://schema.org/Text">Text</a>)</p>
      </ul>
     <li data-md="">
-     <p>license (OPTIONAL, CreativeWork or URL) - the license for the design/signature of the API</p>
+     <p>license (OPTIONAL, <a href="http://schema.org/CreativeWork">CreativeWork</a> or <a href="http://schema.org/URL">URL</a>) - the license for the design/signature of the API</p>
     <li data-md="">
-     <p>transport (enumerated Text: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)</p>
+     <p>transport (enumerated <a href="http://schema.org/Text">Text</a>: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)</p>
     <li data-md="">
-     <p>apiProtocol (OPTIONAL, enumerated Text:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)</p>
+     <p>apiProtocol (OPTIONAL, enumerated <a href="http://schema.org/Text">Text</a>:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)</p>
     <li data-md="">
-     <p>webApiDescriptions (OPTIONAL array of EntryPoints) containing links to machine-readable API descriptions</p>
+     <p>webApiDescriptions (OPTIONAL array of <a href="http://schema.org/EntryPoint">EntryPoint</a>s) containing links to <a data-link-type="dfn" href="#machine-readable-api-definition" id="ref-for-machine-readable-api-definition-1">machine-readable API definition</a>s</p>
     <li data-md="">
-     <p>webApiActions (OPTIONAL array of potential Actions)</p>
+     <p>webApiActions (OPTIONAL array of potential <a href="http://schema.org/Action">Action</a>s)</p>
    </ul>
-   <p>The Content-Type(s) consumed by the WebAPI MAY be included in the EntryPoint.contentType property. The Content-Type(s) produced by the WebAPI MAY be included in the EntryPoint.responseContentType property.</p>
-   <h3 class="heading settled" data-level="1.1" id="content-types"><span class="secno">1.1. </span><span class="content">Content-Types</span><a class="self-link" href="#content-types"></a></h3>
-   <p>The webAPIDescriptions (EntryPoint) contentType property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that IANA-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:</p>
+   <p>The Content-Type(s) consumed by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.<a href="http://schema.org/contentType">contentType</a> property. The Content-Type(s) produced by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.responseContentType property.</p>
+   <h3 class="heading settled" data-level="2.1" id="content-types"><span class="secno">2.1. </span><span class="content">Content-Types</span><a class="self-link" href="#content-types"></a></h3>
+   <p>The webAPIDescriptions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:</p>
    <table class="data">
     <thead>
      <tr>
@@ -1499,9 +1545,9 @@ Parts of this work may be from another specification document.  If so, those par
       <td>API Blueprint parsed in YAML
       <td>application/vnd.refract.parse-result+yaml 
    </table>
-   <p>Other content-Types such as application/ld+json, application/json, text/markdown etc MAY be used, with decreasing levels of machine-readability. The webAPIDescription (EntryPoint) encodingType property MAY also be specified.</p>
-   <h3 class="heading settled" data-level="1.2" id="webapiactions"><span class="secno">1.2. </span><span class="content">webAPIActions</span><a class="self-link" href="#webapiactions"></a></h3>
-   <p>Valid Action.names for webApiActions are:</p>
+   <p>Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webAPIDescription (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.</p>
+   <h3 class="heading settled" data-level="2.2" id="webapiactions"><span class="secno">2.2. </span><span class="content">webAPIActions</span><a class="self-link" href="#webapiactions"></a></h3>
+   <p>Valid <a href="https://schema.org/Action">Action</a>.<a href="https://schema.org/name">name</a>s for webApiActions are:</p>
    <table class="data">
     <thead>
      <tr>
@@ -1521,7 +1567,7 @@ Parts of this work may be from another specification document.  If so, those par
       <td>apiPayment 
       <td> Links to a resource detailing pricing details of the API 
    </table>
-   <hr>
+   <h2 class="heading settled" data-level="3" id="example"><span class="secno">3. </span><span class="content">Example</span><a class="self-link" href="#example"></a></h2>
    <p>A fuller example of a WebAPI annotation, including the extension attributes. Note the @type name is still to be determined.</p>
 <pre class="language-json highlight"><span class="p">{</span>
   <span class="nt">"@context"</span><span class="p">:</span> <span class="s2">"http://schema.org/"</span><span class="p">,</span>
@@ -1723,6 +1769,11 @@ Parts of this work may be from another specification document.  If so, those par
 
 })();
 </script>
+  <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="index">
+   <li><a href="#machine-readable-api-definition">Machine-readable API Definition</a><span>, in §1</span>
+  </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
@@ -1744,3 +1795,66 @@ Parts of this work may be from another specification document.  If so, those par
    <dt id="biblio-semver">[SEMVER]
    <dd><a href="https://semver.org/">Semantic Versioning 2.0.0</a>. URL: <a href="https://semver.org/">https://semver.org/</a>
   </dl>
+  <aside class="dfn-panel" data-for="machine-readable-api-definition">
+   <b><a href="#machine-readable-api-definition">#machine-readable-api-definition</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-machine-readable-api-definition-1">2. Proposed Extension</a>
+   </ul>
+  </aside>
+<script>/* script-dfn-panel */
+
+        document.body.addEventListener("click", function(e) {
+            var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
+            // Find the dfn element or panel, if any, that was clicked on.
+            var el = e.target;
+            var target;
+            var hitALink = false;
+            while(el.parentElement) {
+                if(el.tagName == "A") {
+                    // Clicking on a link in a <dfn> shouldn't summon the panel
+                    hitALink = true;
+                }
+                if(el.classList.contains("dfn-paneled")) {
+                    target = "dfn";
+                    break;
+                }
+                if(el.classList.contains("dfn-panel")) {
+                    target = "dfn-panel";
+                    break;
+                }
+                el = el.parentElement;
+            }
+            if(target != "dfn-panel") {
+                // Turn off any currently "on" or "activated" panels.
+                queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
+                    el.classList.remove("on");
+                    el.classList.remove("activated");
+                });
+            }
+            if(target == "dfn" && !hitALink) {
+                // open the panel
+                var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
+                if(dfnPanel) {
+                    console.log(dfnPanel);
+                    dfnPanel.classList.add("on");
+                    var rect = el.getBoundingClientRect();
+                    dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
+                    dfnPanel.style.top = window.scrollY + rect.top + "px";
+                    var panelRect = dfnPanel.getBoundingClientRect();
+                    var panelWidth = panelRect.right - panelRect.left;
+                    if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
+                        // Reposition, because the panel is overflowing
+                        dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
+                    }
+                } else {
+                    console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
+                }
+            } else if(target == "dfn-panel") {
+                // Switch it to "activated" state, which pins it.
+                el.classList.add("activated");
+                el.style.left = null;
+                el.style.top = null;
+            }
+
+        });
+        </script>

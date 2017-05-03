@@ -80,7 +80,7 @@ The extension properties (and their types) are:
 * license (OPTIONAL, <a href="http://schema.org/CreativeWork">CreativeWork</a> or <a href="http://schema.org/URL">URL</a>) - the license for the design/signature of the API
 * transport (enumerated <a href="http://schema.org/Text">Text</a>: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)
 * apiProtocol (OPTIONAL, enumerated <a href="http://schema.org/Text">Text</a>:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)
-* webApiDescriptions (OPTIONAL array of <a href="http://schema.org/EntryPoint">EntryPoint</a>s) containing links to <a>machine-readable API definition</a>s
+* webApiDefinitions (OPTIONAL array of <a href="http://schema.org/EntryPoint">EntryPoint</a>s) containing links to <a>machine-readable API definition</a>s
 * webApiActions (OPTIONAL array of potential <a href="http://schema.org/Action">Action</a>s)
 
 The Content-Type(s) consumed by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.<a href="http://schema.org/contentType">contentType</a> property. The Content-Type(s) produced by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.responseContentType property.
@@ -88,7 +88,7 @@ The Content-Type(s) consumed by the WebAPI MAY be included in the <a href="http:
 Content-Types
 -------------
 
-The webAPIDescriptions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:
+The webAPIDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:
 
 <table class=data>
 <thead>
@@ -164,7 +164,7 @@ A fuller example of a WebAPI annotation, including the extension attributes. Not
   ],
   "transport": "HTTP",
   "apiProtocol": "JSON API",
-  "webApiDescriptions": [
+  "webApiDefinitions": [
     {
       "@type": "EntryPoint",
       "contentType": "application/json",

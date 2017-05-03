@@ -1513,13 +1513,13 @@ Parts of this work may be from another specification document.  If so, those par
     <li data-md="">
      <p>apiProtocol (OPTIONAL, enumerated <a href="http://schema.org/Text">Text</a>:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)</p>
     <li data-md="">
-     <p>webApiDescriptions (OPTIONAL array of <a href="http://schema.org/EntryPoint">EntryPoint</a>s) containing links to <a data-link-type="dfn" href="#machine-readable-api-definition" id="ref-for-machine-readable-api-definition-1">machine-readable API definition</a>s</p>
+     <p>webApiDefinitions (OPTIONAL array of <a href="http://schema.org/EntryPoint">EntryPoint</a>s) containing links to <a data-link-type="dfn" href="#machine-readable-api-definition" id="ref-for-machine-readable-api-definition-1">machine-readable API definition</a>s</p>
     <li data-md="">
      <p>webApiActions (OPTIONAL array of potential <a href="http://schema.org/Action">Action</a>s)</p>
    </ul>
    <p>The Content-Type(s) consumed by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.<a href="http://schema.org/contentType">contentType</a> property. The Content-Type(s) produced by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.responseContentType property.</p>
    <h3 class="heading settled" data-level="2.1" id="content-types"><span class="secno">2.1. </span><span class="content">Content-Types</span><a class="self-link" href="#content-types"></a></h3>
-   <p>The webAPIDescriptions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:</p>
+   <p>The webAPIDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:</p>
    <table class="data">
     <thead>
      <tr>
@@ -1602,7 +1602,7 @@ Parts of this work may be from another specification document.  If so, those par
   <span class="p">]</span><span class="p">,</span>
   <span class="nt">"transport"</span><span class="p">:</span> <span class="s2">"HTTP"</span><span class="p">,</span>
   <span class="nt">"apiProtocol"</span><span class="p">:</span> <span class="s2">"JSON API"</span><span class="p">,</span>
-  <span class="nt">"webApiDescriptions"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="nt">"webApiDefinitions"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"EntryPoint"</span><span class="p">,</span>
       <span class="nt">"contentType"</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>

@@ -1545,7 +1545,7 @@ Parts of this work may be from another specification document.  If so, those par
       <td>API Blueprint parsed in YAML
       <td>application/vnd.refract.parse-result+yaml 
    </table>
-   <p>Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webAPIDescription (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.</p>
+   <p>Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webAPIDefinition (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.</p>
    <h3 class="heading settled" data-level="2.2" id="webapiactions"><span class="secno">2.2. </span><span class="content">webAPIActions</span><a class="self-link" href="#webapiactions"></a></h3>
    <p>Valid <a href="https://schema.org/Action">Action</a>.<a href="https://schema.org/name">name</a>s for webApiActions are:</p>
    <table class="data">
@@ -1609,12 +1609,12 @@ Parts of this work may be from another specification document.  If so, those par
       <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"https://kgsearch.googleapis.com/$discovery/rest?version=v1"</span>
     <span class="p">}</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"WebAPIDescription"</span><span class="p">,</span>
+      <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"EntryPoint"</span><span class="p">,</span>
       <span class="nt">"contentType"</span><span class="p">:</span> <span class="s2">"application/openapi+json"</span><span class="p">,</span>
       <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"</span>
     <span class="p">}</span><span class="p">,</span>
   <span class="p">]</span><span class="p">,</span>
-  <span class="nt">"apiActions"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="nt">"webApiActions"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"ConsumeAction"</span><span class="p">,</span>
       <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"apiAuthentication"</span><span class="p">,</span>

@@ -105,7 +105,7 @@ The webAPIDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a
 </tbody>
 </table>
 
-Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webAPIDescription (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.
+Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webAPIDefinition (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.
 
 webAPIActions
 -------------
@@ -171,12 +171,12 @@ A fuller example of a WebAPI annotation, including the extension attributes. Not
       "url": "https://kgsearch.googleapis.com/$discovery/rest?version=v1"
     },
     {
-      "@type": "WebAPIDescription",
+      "@type": "EntryPoint",
       "contentType": "application/openapi+json",
       "url": "https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"
     },
   ],
-  "apiActions": [
+  "webApiActions": [
     {
       "@type": "ConsumeAction",
       "name": "apiAuthentication",

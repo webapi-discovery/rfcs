@@ -175,7 +175,8 @@ A fuller example of a WebAPI annotation, including the extension attributes. Not
       "contentType": "application/openapi+json",
       "url": "https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"
     },
-"apiActions": [
+  ],
+  "apiActions": [
     {
       "@type": "ConsumeAction",
       "name": "apiAuthentication",

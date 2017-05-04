@@ -1,14 +1,15 @@
 ﻿<a href=http://www.w3.org/><img alt=W3C height=48 src=http://www.w3.org/Icons/w3c_home width=72></a>
 <pre class='metadata'>
-Title: WebAPI Discovery Community Group Request for comments WADG0001 
+Title: WADG0001 WebAPI type extension
 H1: Version 0.3.0
 Date: 2017-05-03
 Shortname: wadg0001
 Level: 1
-Status: LS
+Status: w3c/FPWD
+Group: w3c
 URL: https://webapi-discovery.github.io/rfcs/rfc0001.html
 Editor: Mike Ralphson, Mermade Software
-Authors: Mike Ralphson, Ivan Goncharov
+Editor: Ivan Goncharov, APIs.guru
 Repository: webapi-discovery/rfcs
 Abstract: It is proposed to create an extension to the <a href="https://schema.org/">Schema.Org</a> <a href="https://pending.schema.org/WebAPI">WebAPI</a> type to facilitate better automatic discovery of WebAPIs and associated machine- and human-readable documentation.
 Markup Shorthands: css no, markdown yes
@@ -49,7 +50,7 @@ This draft report is the work of the <a href="https://www.w3.org/community/web-a
 <p>Copyright © 2017 the Contributors to the WADG0001/May2017, published by the <a href="https://www.w3.org/community/web-api-discovery">W3 WebAPI Discovery Community Group</a> under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.
 </p>
 
-<p>This report was published by the <a href=""https://www.w3.org/community/web-api-discovery">W3 WebAPI Discovery Community Group</a>. It is not a W3C Standard nor is it on the W3C Standards Track. Please note that under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a> there is a limited opt-out and other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</p>
+<p>This report was published by the <a href="https://www.w3.org/community/web-api-discovery">W3 WebAPI Discovery Community Group</a>. It is not a W3C Standard nor is it on the W3C Standards Track. Please note that under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a> there is a limited opt-out and other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</p>
 
 This extension has been created based on real-world use of metadata in the [[OpenAPI]], [[RAML]], [[API-Blueprint]], [[JSON-home]] and [[apis.json]] specifications.
 
@@ -58,7 +59,7 @@ Definitions
 
 <dfn>Machine-readable API Definition</dfn> a structured document defining the inputs and outputs of an API in a standardised format, primarily designed for automated processing, not human consumption.
 
-<div class="note">See <a href="http://nordicapis.com/difference-api-documentation-specification-definition/">this article</a> for an explanation of the difference between API documentation, specifications and definitions.</div>
+<div class="note">Note: See <a href="http://nordicapis.com/difference-api-documentation-specification-definition/">this article</a> for an explanation of the difference between API documentation, specifications and definitions.</div>
 
 Proposed Extension
 ==================
@@ -85,8 +86,7 @@ is to be extended as follows:
 The extension properties (and their types) are:
 * versions (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="http://meta.schema.org/Property">Property</a> -> <a href="http://schema.org/softwareVersion">softwareVersion</a>). It is RECOMMENDED that APIs be versioned using [[semver]]
 * entryPoints (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="https://schema.org/Intangible">Intangible</a> -> <a href="https://schema.org/EntryPoint">EntryPoint</a>)
-   * extended with:
-      * responseContentTypes (OPTIONAL <a href="http://schema.org/Text">Text</a>)
+      * extended with: responseContentTypes (OPTIONAL <a href="http://schema.org/Text">Text</a>)
 * license (OPTIONAL, <a href="http://schema.org/CreativeWork">CreativeWork</a> or <a href="http://schema.org/URL">URL</a>) - the license for the design/signature of the API
 * transport (enumerated <a href="http://schema.org/Text">Text</a>: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)
 * apiProtocol (OPTIONAL, enumerated <a href="http://schema.org/Text">Text</a>:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)

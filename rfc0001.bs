@@ -1,11 +1,15 @@
-﻿<a href=http://www.w3.org/><img alt=W3C height=48 src=http://www.w3.org/Icons/w3c_home width=72></a>
+﻿<p class="copyright">
+Copyright © 2017 the Contributors to the WADG0001/May2017, published by the <a href="https://www.w3.org/community/web-api-discovery">W3 WebAPI Discovery Community Group</a> under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.
+</p>
+
+<a href=http://www.w3.org/><img alt=W3C height=48 src=http://www.w3.org/Icons/w3c_home width=72></a>
 <pre class='metadata'>
 Title: WADG0001 WebAPI type extension
 H1: Version 0.3.0
 Date: 2017-05-03
 Shortname: wadg0001
 Level: 1
-Status: w3c/FPWD
+Status: w3c/CG-DRAFT
 Group: w3c
 URL: https://webapi-discovery.github.io/rfcs/rfc0001.html
 Editor: Mike Ralphson, Mermade Software
@@ -45,10 +49,9 @@ Ignored Terms: h1, h2, h3, h4, h5, h6, xmp
 }
 </pre>
 
-This draft report is the work of the <a href="https://www.w3.org/community/web-api-discovery/">W3 WebAPI Discovery Community Group</a>
+<p style="display:none" class="copyright" data-fill-with="copyright"></p>
 
-<p>Copyright © 2017 the Contributors to the WADG0001/May2017, published by the <a href="https://www.w3.org/community/web-api-discovery">W3 WebAPI Discovery Community Group</a> under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.
-</p>
+This draft report is the work of the <a href="https://www.w3.org/community/web-api-discovery/">W3 WebAPI Discovery Community Group</a>
 
 <p>This report was published by the <a href="https://www.w3.org/community/web-api-discovery">W3 WebAPI Discovery Community Group</a>. It is not a W3C Standard nor is it on the W3C Standards Track. Please note that under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a> there is a limited opt-out and other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</p>
 

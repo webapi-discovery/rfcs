@@ -1460,7 +1460,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">WADG0001 WebAPI type extension</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2017-05-03">3 May 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2019-02-20">20 February 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1507,11 +1507,11 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    </ol>
   </nav>
   <main>
-   <p class="copyright"> Copyright © 2017 the Contributors to the WADG0001/May2017, published by the <a href="https://www.w3.org/community/web-api-discovery">W3 WebAPI Discovery Community Group</a> under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available. </p>
+   <p class="copyright"> Copyright © 2017,2019 the Contributors to the WADG0001/Feb2019, published by the <a href="https://www.w3.org/community/web-api-discovery">W3 WebAPI Discovery Community Group</a> under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available. </p>
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <p class="copyright" data-fill-with="copyright" style="display:none"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 3 May 2017,
+In addition, as of 20 February 2019,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1540,27 +1540,27 @@ Parts of this work may be from another specification document.  If so, those par
    <p>The extension properties (and their types) are:</p>
    <ul>
     <li data-md>
-     <p>versions (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="http://meta.schema.org/Property">Property</a> -> <a href="http://schema.org/softwareVersion">softwareVersion</a>). It is RECOMMENDED that APIs be versioned using <a data-link-type="biblio" href="#biblio-semver">[semver]</a></p>
+     <p><code>versions</code> (OPTIONAL array of <a href="https://schema.org/Thing"><code>Thing</code></a> -> <a href="http://meta.schema.org/Property">Property</a> -> <a href="http://schema.org/softwareVersion"><code>softwareVersion</code></a>). It is RECOMMENDED that APIs be versioned using <a data-link-type="biblio" href="#biblio-semver">[semver]</a></p>
     <li data-md>
-     <p>entryPoints (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="https://schema.org/Intangible">Intangible</a> -> <a href="https://schema.org/EntryPoint">EntryPoint</a>)</p>
+     <p><code>entryPoints</code> (OPTIONAL array of <a href="https://schema.org/Thing"><code>Thing</code></a> -> <a href="https://schema.org/Intangible"><code>Intangible</code></a> -> <a href="https://schema.org/EntryPoint"><code>EntryPoint</code></a>)</p>
      <ul>
       <li data-md>
-       <p>extended with: responseContentTypes (OPTIONAL <a href="http://schema.org/Text">Text</a>)</p>
+       <p>extended with: <code>responseContentTypes</code> (OPTIONAL <a href="http://schema.org/Text"><code>Text</code></a>)</p>
      </ul>
     <li data-md>
-     <p>license (OPTIONAL, <a href="http://schema.org/CreativeWork">CreativeWork</a> or <a href="http://schema.org/URL">URL</a>) - the license for the design/signature of the API</p>
+     <p><code>license</code> (OPTIONAL, <a href="http://schema.org/CreativeWork"><code>CreativeWork</code></a> or <a href="http://schema.org/URL"><code>URL</code></a>) - the license for the design/signature of the API</p>
     <li data-md>
-     <p>transport (enumerated <a href="http://schema.org/Text">Text</a>: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)</p>
+     <p><code>transport</code> (enumerated <a href="http://schema.org/Text"><code>Text</code></a>: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)</p>
     <li data-md>
-     <p>apiProtocol (OPTIONAL, enumerated <a href="http://schema.org/Text">Text</a>:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)</p>
+     <p><code>apiProtocol</code> (OPTIONAL, enumerated <a href="http://schema.org/Text"><code>Text</code></a>:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)</p>
     <li data-md>
-     <p>webApiDefinitions (OPTIONAL array of <a href="http://schema.org/EntryPoint">EntryPoint</a>s) containing links to <a data-link-type="dfn" href="#machine-readable-api-definition" id="ref-for-machine-readable-api-definition">machine-readable API definition</a>s</p>
+     <p><code>webApiDefinitions</code> (OPTIONAL array of <a href="http://schema.org/EntryPoint"><code>EntryPoint</code></a>s) containing links to <a data-link-type="dfn" href="#machine-readable-api-definition" id="ref-for-machine-readable-api-definition">machine-readable API definition</a>s</p>
     <li data-md>
-     <p>webApiActions (OPTIONAL array of potential <a href="http://schema.org/Action">Action</a>s)</p>
+     <p><code>webApiActions</code> (OPTIONAL array of potential <a href="http://schema.org/Action"><code>Action</code></a>s)</p>
    </ul>
    <p>The Content-Type(s) consumed by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.<a href="http://schema.org/contentType">contentType</a> property. The Content-Type(s) produced by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.responseContentType property.</p>
    <h3 class="heading settled" data-level="2.1" id="content-types"><span class="secno">2.1. </span><span class="content">Content-Types</span><a class="self-link" href="#content-types"></a></h3>
-   <p>The webApiDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:</p>
+   <p>The webApiDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. For example, <code>application/wsdl+xml</code> is the IANA registered content-type for the Web Service Definition Language. The following non-IANA contentTypes MAY additionally be used:</p>
    <table class="data">
     <thead>
      <tr>
@@ -1568,24 +1568,25 @@ Parts of this work may be from another specification document.  If so, those par
       <th>Content-Type 
     <tbody>
      <tr>
-      <td>OpenAPI / Swagger in JSON
-      <td>application/openapi+json or application/x-openapi+json 
-     <tr>
       <td>OpenAPI / Swagger in YAML
-      <td>application/openapi+json or application/x-openapi+json 
+      <td><code>application/vnd.oai.openapi</code> 
+     <tr>
+      <td>OpenAPI / Swagger in JSON
+      <td><code>application/vnd.oai.openapi+json</code> 
      <tr>
       <td>RAML
-      <td>application/raml+yaml 
+      <td><code>application/raml+yaml</code> 
      <tr>
       <td>API Blueprint in markdown
-      <td>text/vnd.apiblueprint 
-     <tr>
-      <td>API Blueprint parsed in JSON
-      <td>application/vnd.refract.parse-result+json 
+      <td><code>text/vnd.apiblueprint</code> 
      <tr>
       <td>API Blueprint parsed in YAML
-      <td>application/vnd.refract.parse-result+yaml 
+      <td><code>application/vnd.refract.parse-result+yaml</code> 
+     <tr>
+      <td>API Blueprint parsed in JSON
+      <td><code>application/vnd.refract.parse-result+json</code> 
    </table>
+   <p>Content-Types MAY include a <code>;version</code> parameter where appropriate.</p>
    <p>Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webApiDefinition (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.</p>
    <h3 class="heading settled" data-level="2.2" id="webapiactions"><span class="secno">2.2. </span><span class="content">webApiActions</span><a class="self-link" href="#webapiactions"></a></h3>
    <p>Valid <a href="https://schema.org/Action">Action</a>.<a href="https://schema.org/name">name</a>s for webApiActions are:</p>
@@ -1596,17 +1597,23 @@ Parts of this work may be from another specification document.  If so, those par
       <th>Description 
     <tbody>
      <tr>
-      <td>apiAuthentication 
+      <td><code>apiAuthentication</code> 
       <td> Links to a resource detailing authentication requirements. Note this is a human-readable resource, not an authentication endpoint 
      <tr>
-      <td>apiClientRegistration 
+      <td><code>apiClientRegistration</code> 
       <td> Links to a resource where a client may register to use the API 
      <tr>
-      <td>apiConsole 
+      <td><code>apiConsole</code> 
       <td> Links to an interactive console where API calls may be tested 
      <tr>
-      <td>apiPayment 
+      <td><code>apiPayment</code> 
       <td> Links to a resource detailing pricing details of the API 
+     <tr>
+      <td><code>apiSLA</code> 
+      <td> Links to a resource detailing the Service Level Agreement relating to the API. This may be machine- or human-readble. 
+     <tr>
+      <td><code>apiSupport</code> 
+      <td> Links to a resource where a client may obtain support for the API 
    </table>
    <h2 class="heading settled" data-level="3" id="example"><span class="secno">3. </span><span class="content">Example</span><a class="self-link" href="#example"></a></h2>
    <p>A fuller example of a WebAPI annotation, including the extension attributes. Note the @type name is still to be determined.</p>
@@ -1651,7 +1658,7 @@ Parts of this work may be from another specification document.  If so, those par
     <c- p>},</c->
     <c- p>{</c->
       <c- f>"@type"</c-><c- p>:</c-> <c- u>"EntryPoint"</c-><c- p>,</c->
-      <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/openapi+json"</c-><c- p>,</c->
+      <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/vnd.oai.openapi+json;version=2.0"</c-><c- p>,</c->
       <c- f>"url"</c-><c- p>:</c-> <c- u>"https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"</c->
     <c- p>},</c->
   <c- p>],</c->
@@ -1831,7 +1838,7 @@ Parts of this work may be from another specification document.  If so, those par
    <dt id="biblio-json-home">[JSON-home]
    <dd><a href="https://tools.ietf.org/html/draft-nottingham-json-home-06">JSON-home</a>. URL: <a href="https://tools.ietf.org/html/draft-nottingham-json-home-06">https://tools.ietf.org/html/draft-nottingham-json-home-06</a>
    <dt id="biblio-openapi">[OpenAPI]
-   <dd><a href="https://github.com/OAI/OpenAPI-Specification">OpenAPI Specification v3.0.0-RC1</a>. URL: <a href="https://github.com/OAI/OpenAPI-Specification">https://github.com/OAI/OpenAPI-Specification</a>
+   <dd><a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md">OpenAPI Specification v3.0.2</a>. URL: <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md">https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md</a>
    <dt id="biblio-raml">[RAML]
    <dd><a href="https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md">RAML 1.0</a>. URL: <a href="https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md">https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md</a>
    <dt id="biblio-semver">[SEMVER]

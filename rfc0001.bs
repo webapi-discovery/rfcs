@@ -1,14 +1,14 @@
-﻿<p class="copyright">
-Copyright © 2017 the Contributors to the WADG0001/May2017, published by the <a href="https://www.w3.org/community/web-api-discovery">W3 WebAPI Discovery Community Group</a> under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.
+<p class="copyright">
+Copyright © 2017,2019 the Contributors to the WADG0001/Feb2019, published by the <a href="https://www.w3.org/community/web-api-discovery">W3 WebAPI Discovery Community Group</a> under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.
 </p>
 
 <a href=http://www.w3.org/><img alt=W3C height=48 src=http://www.w3.org/Icons/w3c_home width=72></a>
 <pre class='metadata'>
 Title: WADG0001 WebAPI type extension
-H1: Version 0.3.0
-Date: 2017-05-03
+H1: Version 0.4.0
+Date: 2019-02-20
 Shortname: wadg0001
-Level: 1
+Revision: 2
 Status: w3c/CG-DRAFT
 Group: w3c
 URL: https://webapi-discovery.github.io/rfcs/rfc0001.html
@@ -23,8 +23,8 @@ Ignored Terms: h1, h2, h3, h4, h5, h6, xmp
 <pre class=biblio>
 {
 	"OpenAPI": {
-		"title": "OpenAPI Specification v3.0.0-RC1",
-		"href": "https://github.com/OAI/OpenAPI-Specification"
+		"title": "OpenAPI Specification v3.0.2",
+		"href": "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md"
 	},
 	"RAML": {
 		"title": "RAML 1.0",
@@ -87,21 +87,21 @@ The base <a href="https://schema.org">Schema.org</a> <a href="https://pending.sc
 is to be extended as follows:
 
 The extension properties (and their types) are:
-* versions (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="http://meta.schema.org/Property">Property</a> -> <a href="http://schema.org/softwareVersion">softwareVersion</a>). It is RECOMMENDED that APIs be versioned using [[semver]]
-* entryPoints (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="https://schema.org/Intangible">Intangible</a> -> <a href="https://schema.org/EntryPoint">EntryPoint</a>)
-      * extended with: responseContentTypes (OPTIONAL <a href="http://schema.org/Text">Text</a>)
-* license (OPTIONAL, <a href="http://schema.org/CreativeWork">CreativeWork</a> or <a href="http://schema.org/URL">URL</a>) - the license for the design/signature of the API
-* transport (enumerated <a href="http://schema.org/Text">Text</a>: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)
-* apiProtocol (OPTIONAL, enumerated <a href="http://schema.org/Text">Text</a>:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)
-* webApiDefinitions (OPTIONAL array of <a href="http://schema.org/EntryPoint">EntryPoint</a>s) containing links to <a>machine-readable API definition</a>s
-* webApiActions (OPTIONAL array of potential <a href="http://schema.org/Action">Action</a>s)
+* `versions` (OPTIONAL array of <a href="https://schema.org/Thing">`Thing`</a> -> <a href="http://meta.schema.org/Property">Property</a> -> <a href="http://schema.org/softwareVersion">`softwareVersion`</a>). It is RECOMMENDED that APIs be versioned using [[semver]]
+* `entryPoints` (OPTIONAL array of <a href="https://schema.org/Thing">`Thing`</a> -> <a href="https://schema.org/Intangible">`Intangible`</a> -> <a href="https://schema.org/EntryPoint">`EntryPoint`</a>)
+      * extended with: `responseContentTypes` (OPTIONAL <a href="http://schema.org/Text">`Text`</a>)
+* `license` (OPTIONAL, <a href="http://schema.org/CreativeWork">`CreativeWork`</a> or <a href="http://schema.org/URL">`URL`</a>) - the license for the design/signature of the API
+* `transport` (enumerated <a href="http://schema.org/Text">`Text`</a>: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)
+* `apiProtocol` (OPTIONAL, enumerated <a href="http://schema.org/Text">`Text`</a>:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)
+* `webApiDefinitions` (OPTIONAL array of <a href="http://schema.org/EntryPoint">`EntryPoint`</a>s) containing links to <a>machine-readable API definition</a>s
+* `webApiActions` (OPTIONAL array of potential <a href="http://schema.org/Action">`Action`</a>s)
 
 The Content-Type(s) consumed by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.<a href="http://schema.org/contentType">contentType</a> property. The Content-Type(s) produced by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.responseContentType property.
 
 Content-Types
 -------------
 
-The webApiDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. The following non-IANA contentTypes MAY additionally be used:
+The webApiDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. For example, `application/wsdl+xml` is the IANA registered content-type for the Web Service Definition Language. The following non-IANA contentTypes MAY additionally be used:
 
 <table class=data>
 <thead>
@@ -109,14 +109,16 @@ The webApiDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a
 <th>Format
 <th>Content-Type
 <tbody>
-<tr><td>OpenAPI / Swagger in JSON<td>application/openapi+json or application/x-openapi+json
-<tr><td>OpenAPI / Swagger in YAML<td>application/openapi+json or application/x-openapi+json
-<tr><td>RAML<td>application/raml+yaml
-<tr><td>API Blueprint in markdown<td>text/vnd.apiblueprint
-<tr><td>API Blueprint parsed in JSON<td>application/vnd.refract.parse-result+json
-<tr><td>API Blueprint parsed in YAML<td>application/vnd.refract.parse-result+yaml
+<tr><td>OpenAPI / Swagger in YAML<td><code>application/vnd.oai.openapi</code>
+<tr><td>OpenAPI / Swagger in JSON<td><code>application/vnd.oai.openapi+json</code>
+<tr><td>RAML<td><code>application/raml+yaml</code>
+<tr><td>API Blueprint in markdown<td><code>text/vnd.apiblueprint</code>
+<tr><td>API Blueprint parsed in YAML<td><code>application/vnd.refract.parse-result+yaml</code>
+<tr><td>API Blueprint parsed in JSON<td><code>application/vnd.refract.parse-result+json</code>
 </tbody>
 </table>
+
+Content-Types MAY include a `;version` parameter where appropriate.
 
 Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webApiDefinition (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.
 
@@ -131,10 +133,12 @@ Valid <a href="https://schema.org/Action">Action</a>.<a href="https://schema.org
 <th>Name
 <th>Description
 <tbody>
-<tr><td>apiAuthentication <td> Links to a resource detailing authentication requirements. Note this is a human-readable resource, not an authentication endpoint
-<tr><td>apiClientRegistration <td> Links to a resource where a client may register to use the API
-<tr><td>apiConsole <td> Links to an interactive console where API calls may be tested
-<tr><td>apiPayment <td> Links to a resource detailing pricing details of the API
+<tr><td>`apiAuthentication` <td> Links to a resource detailing authentication requirements. Note this is a human-readable resource, not an authentication endpoint
+<tr><td>`apiClientRegistration` <td> Links to a resource where a client may register to use the API
+<tr><td>`apiConsole` <td> Links to an interactive console where API calls may be tested
+<tr><td>`apiPayment` <td> Links to a resource detailing pricing details of the API
+<tr><td>`apiSLA` <td> Links to a resource detailing the Service Level Agreement relating to the API. This may be machine- or human-readble.
+<tr><td>`apiSupport` <td> Links to a resource where a client may obtain support for the API
 </tbody>
 </table>
 
@@ -185,7 +189,7 @@ A fuller example of a WebAPI annotation, including the extension attributes. Not
     },
     {
       "@type": "EntryPoint",
-      "contentType": "application/openapi+json",
+      "contentType": "application/vnd.oai.openapi+json;version=2.0",
       "url": "https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"
     },
   ],

@@ -1,16 +1,30 @@
-var path = require('path');
+'use strict';
 
-var express = require('express');
-var ejs = require('ejs');
-var compression = require('compression');
+const fs = require('fs');
+const path = require('path');
 
-var app = express();
+const express = require('express');
+const ejs = require('ejs');
+const compression = require('compression');
+const markdown = require('markdown-it')();
+
+const app = express();
 app.use(compression());
-
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 
-app.get('/', function(req,res) { res.render(path.join(__dirname,'index.html')) });
+function sendMarkdown(res, filename) {
+  fs.readFile(filename,'utf8',function(err, data) {
+    if (err) res.send(s)
+    else {
+      const md = markdown.render(data);
+      res.send(md);
+    }
+  });
+}
+
+app.get('/', function(req,res) { sendMarkdown(res, path.join(__dirname,'README.md')) });
+app.get('/index.html', function(req,res) { sendMarkdown(res, path.join(__dirname,'README.md')) });
 app.get('*.html', function(req,res) { res.render(path.join(__dirname,req.path)) });
 app.use("/",  express.static(__dirname));
 

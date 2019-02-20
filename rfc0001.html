@@ -470,7 +470,7 @@
 		font-style: normal;
 	}
 	dt dfn code, code.idl {
-		font-size: normal;
+		font-size: medium;
 	}
 	dfn var {
 		font-style: normal;
@@ -992,57 +992,93 @@ Possible extra rowspan handling
 	.toc > li li          { font-weight: normal; }
 	.toc > li li li       { font-size:   95%;    }
 	.toc > li li li li    { font-size:   90%;    }
+	.toc > li li li li .secno { font-size: 85%; }
 	.toc > li li li li li { font-size:   85%;    }
+	.toc > li li li li li .secno { font-size: 100%; }
 
-	.toc > li             { margin: 1.5rem 0;    }
-	.toc > li li          { margin: 0.3rem 0;    }
-	.toc > li li li       { margin-left: 2rem;   }
+	/* @supports not (display:grid) { */
+		.toc > li             { margin: 1.5rem 0;    }
+		.toc > li li          { margin: 0.3rem 0;    }
+		.toc > li li li       { margin-left: 2rem;   }
 
-	/* Section numbers in a column of their own */
-	.toc .secno {
-		float: left;
-		width: 4rem;
-		white-space: nowrap;
-	}
-	.toc > li li li li .secno {
-		font-size: 85%;
-	}
-	.toc > li li li li li .secno {
-		font-size: 100%;
-	}
+		/* Section numbers in a column of their own */
+		.toc .secno {
+			float: left;
+			width: 4rem;
+			white-space: nowrap;
+		}
 
-	:not(li) > .toc              { margin-left:  5rem; }
-	.toc .secno                  { margin-left: -5rem; }
-	.toc > li li li .secno       { margin-left: -7rem; }
-	.toc > li li li li .secno    { margin-left: -9rem; }
-	.toc > li li li li li .secno { margin-left: -11rem; }
+		.toc li {
+			clear: both;
+		}
 
-	/* Tighten up indentation in narrow ToCs */
-	@media (max-width: 30em) {
-		:not(li) > .toc              { margin-left:  4rem; }
-		.toc .secno                  { margin-left: -4rem; }
-		.toc > li li li              { margin-left:  1rem; }
-		.toc > li li li .secno       { margin-left: -5rem; }
-		.toc > li li li li .secno    { margin-left: -6rem; }
-		.toc > li li li li li .secno { margin-left: -7rem; }
-	}
-	@media screen and (min-width: 78em) {
-		body:not(.toc-inline) :not(li) > .toc              { margin-left:  4rem; }
-		body:not(.toc-inline) .toc .secno                  { margin-left: -4rem; }
-		body:not(.toc-inline) .toc > li li li              { margin-left:  1rem; }
-		body:not(.toc-inline) .toc > li li li .secno       { margin-left: -5rem; }
-		body:not(.toc-inline) .toc > li li li li .secno    { margin-left: -6rem; }
-		body:not(.toc-inline) .toc > li li li li li .secno { margin-left: -7rem; }
-	}
-	body.toc-sidebar #toc :not(li) > .toc              { margin-left:  4rem; }
-	body.toc-sidebar #toc .toc .secno                  { margin-left: -4rem; }
-	body.toc-sidebar #toc .toc > li li li              { margin-left:  1rem; }
-	body.toc-sidebar #toc .toc > li li li .secno       { margin-left: -5rem; }
-	body.toc-sidebar #toc .toc > li li li li .secno    { margin-left: -6rem; }
-	body.toc-sidebar #toc .toc > li li li li li .secno { margin-left: -7rem; }
+		:not(li) > .toc              { margin-left:  5rem; }
+		.toc .secno                  { margin-left: -5rem; }
+		.toc > li li li .secno       { margin-left: -7rem; }
+		.toc > li li li li .secno    { margin-left: -9rem; }
+		.toc > li li li li li .secno { margin-left: -11rem; }
 
-	.toc li {
-		clear: both;
+		/* Tighten up indentation in narrow ToCs */
+		@media (max-width: 30em) {
+			:not(li) > .toc              { margin-left:  4rem; }
+			.toc .secno                  { margin-left: -4rem; }
+			.toc > li li li              { margin-left:  1rem; }
+			.toc > li li li .secno       { margin-left: -5rem; }
+			.toc > li li li li .secno    { margin-left: -6rem; }
+			.toc > li li li li li .secno { margin-left: -7rem; }
+		}
+	/* } */
+
+	@supports (display:grid) {
+		/* Use #toc over .toc to override non-@supports rules. */
+		#toc {
+			display: grid;
+			align-content: start;
+			grid-template-columns: auto 1fr;
+			grid-column-gap: 1rem;
+			column-gap: 1rem;
+			grid-row-gap: .6rem;
+			row-gap: .6rem;
+		}
+		#toc h2 {
+			grid-column: 1 / -1;
+			margin-bottom: 0;
+		}
+		#toc ol,
+		#toc li,
+		#toc a {
+			display: contents;
+			/* Switch <a> to subgrid when supported */
+		}
+		#toc span {
+			margin: 0;
+		}
+		#toc > .toc > li > a > span {
+			/* The spans of the top-level list,
+			   comprising the first items of each top-level section. */
+			margin-top: 1.1rem;
+		}
+		#toc#toc .secno { /* Ugh, need more specificity to override base.css */
+			grid-column: 1;
+			width: auto;
+			margin-left: 0;
+		}
+		#toc .content {
+			grid-column: 2;
+			width: auto;
+			margin-right: 1rem;
+		}
+		#toc .content:hover {
+			background: rgba(75%, 75%, 75%, .25);
+			border-bottom: 3px solid #054572;
+			margin-bottom: -3px;
+		}
+		#toc li li li .content {
+			margin-left: 1rem;
+		}
+		#toc li li li li .content {
+			margin-left: 2rem;
+		}
 	}
 
 
@@ -1176,250 +1212,250 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 5bd73bb15eb04ad9f7d1a57f012e9ee6eca5a765" name="generator">
+  <meta content="Bikeshed version 1cff2db4ee2c3bba7a4077d3007528ec73b0485d" name="generator">
   <link href="https://webapi-discovery.github.io/rfcs/rfc0001.html" rel="canonical">
 <style>/* style-md-lists */
 
-            /* This is a weird hack for me not yet following the commonmark spec
-               regarding paragraph and lists. */
-            [data-md] > :first-child {
-                margin-top: 0;
-            }
-            [data-md] > :last-child {
-                margin-bottom: 0;
-            }</style>
+/* This is a weird hack for me not yet following the commonmark spec
+   regarding paragraph and lists. */
+[data-md] > :first-child {
+    margin-top: 0;
+}
+[data-md] > :last-child {
+    margin-bottom: 0;
+}</style>
 <style>/* style-selflinks */
 
-            .heading, .issue, .note, .example, li, dt {
-                position: relative;
-            }
-            a.self-link {
-                position: absolute;
-                top: 0;
-                left: calc(-1 * (3.5rem - 26px));
-                width: calc(3.5rem - 26px);
-                height: 2em;
-                text-align: center;
-                border: none;
-                transition: opacity .2s;
-                opacity: .5;
-            }
-            a.self-link:hover {
-                opacity: 1;
-            }
-            .heading > a.self-link {
-                font-size: 83%;
-            }
-            li > a.self-link {
-                left: calc(-1 * (3.5rem - 26px) - 2em);
-            }
-            dfn > a.self-link {
-                top: auto;
-                left: auto;
-                opacity: 0;
-                width: 1.5em;
-                height: 1.5em;
-                background: gray;
-                color: white;
-                font-style: normal;
-                transition: opacity .2s, background-color .2s, color .2s;
-            }
-            dfn:hover > a.self-link {
-                opacity: 1;
-            }
-            dfn > a.self-link:hover {
-                color: black;
-            }
+.heading, .issue, .note, .example, li, dt {
+    position: relative;
+}
+a.self-link {
+    position: absolute;
+    top: 0;
+    left: calc(-1 * (3.5rem - 26px));
+    width: calc(3.5rem - 26px);
+    height: 2em;
+    text-align: center;
+    border: none;
+    transition: opacity .2s;
+    opacity: .5;
+}
+a.self-link:hover {
+    opacity: 1;
+}
+.heading > a.self-link {
+    font-size: 83%;
+}
+li > a.self-link {
+    left: calc(-1 * (3.5rem - 26px) - 2em);
+}
+dfn > a.self-link {
+    top: auto;
+    left: auto;
+    opacity: 0;
+    width: 1.5em;
+    height: 1.5em;
+    background: gray;
+    color: white;
+    font-style: normal;
+    transition: opacity .2s, background-color .2s, color .2s;
+}
+dfn:hover > a.self-link {
+    opacity: 1;
+}
+dfn > a.self-link:hover {
+    color: black;
+}
 
-            a.self-link::before            { content: "¶"; }
-            .heading > a.self-link::before { content: "§"; }
-            dfn > a.self-link::before      { content: "#"; }</style>
+a.self-link::before            { content: "¶"; }
+.heading > a.self-link::before { content: "§"; }
+dfn > a.self-link::before      { content: "#"; }</style>
 <style>/* style-counters */
 
-            body {
-                counter-reset: example figure issue;
-            }
-            .issue {
-                counter-increment: issue;
-            }
-            .issue:not(.no-marker)::before {
-                content: "Issue " counter(issue);
-            }
+body {
+    counter-reset: example figure issue;
+}
+.issue {
+    counter-increment: issue;
+}
+.issue:not(.no-marker)::before {
+    content: "Issue " counter(issue);
+}
 
-            .example {
-                counter-increment: example;
-            }
-            .example:not(.no-marker)::before {
-                content: "Example " counter(example);
-            }
-            .invalid.example:not(.no-marker)::before,
-            .illegal.example:not(.no-marker)::before {
-                content: "Invalid Example" counter(example);
-            }
+.example {
+    counter-increment: example;
+}
+.example:not(.no-marker)::before {
+    content: "Example " counter(example);
+}
+.invalid.example:not(.no-marker)::before,
+.illegal.example:not(.no-marker)::before {
+    content: "Invalid Example" counter(example);
+}
 
-            figcaption {
-                counter-increment: figure;
-            }
-            figcaption:not(.no-marker)::before {
-                content: "Figure " counter(figure) " ";
-            }</style>
+figcaption {
+    counter-increment: figure;
+}
+figcaption:not(.no-marker)::before {
+    content: "Figure " counter(figure) " ";
+}</style>
 <style>/* style-autolinks */
 
-            .css.css, .property.property, .descriptor.descriptor {
-                color: #005a9c;
-                font-size: inherit;
-                font-family: inherit;
-            }
-            .css::before, .property::before, .descriptor::before {
-                content: "‘";
-            }
-            .css::after, .property::after, .descriptor::after {
-                content: "’";
-            }
-            .property, .descriptor {
-                /* Don't wrap property and descriptor names */
-                white-space: nowrap;
-            }
-            .type { /* CSS value <type> */
-                font-style: italic;
-            }
-            pre .property::before, pre .property::after {
-                content: "";
-            }
-            [data-link-type="property"]::before,
-            [data-link-type="propdesc"]::before,
-            [data-link-type="descriptor"]::before,
-            [data-link-type="value"]::before,
-            [data-link-type="function"]::before,
-            [data-link-type="at-rule"]::before,
-            [data-link-type="selector"]::before,
-            [data-link-type="maybe"]::before {
-                content: "‘";
-            }
-            [data-link-type="property"]::after,
-            [data-link-type="propdesc"]::after,
-            [data-link-type="descriptor"]::after,
-            [data-link-type="value"]::after,
-            [data-link-type="function"]::after,
-            [data-link-type="at-rule"]::after,
-            [data-link-type="selector"]::after,
-            [data-link-type="maybe"]::after {
-                content: "’";
-            }
+.css.css, .property.property, .descriptor.descriptor {
+    color: #005a9c;
+    font-size: inherit;
+    font-family: inherit;
+}
+.css::before, .property::before, .descriptor::before {
+    content: "‘";
+}
+.css::after, .property::after, .descriptor::after {
+    content: "’";
+}
+.property, .descriptor {
+    /* Don't wrap property and descriptor names */
+    white-space: nowrap;
+}
+.type { /* CSS value <type> */
+    font-style: italic;
+}
+pre .property::before, pre .property::after {
+    content: "";
+}
+[data-link-type="property"]::before,
+[data-link-type="propdesc"]::before,
+[data-link-type="descriptor"]::before,
+[data-link-type="value"]::before,
+[data-link-type="function"]::before,
+[data-link-type="at-rule"]::before,
+[data-link-type="selector"]::before,
+[data-link-type="maybe"]::before {
+    content: "‘";
+}
+[data-link-type="property"]::after,
+[data-link-type="propdesc"]::after,
+[data-link-type="descriptor"]::after,
+[data-link-type="value"]::after,
+[data-link-type="function"]::after,
+[data-link-type="at-rule"]::after,
+[data-link-type="selector"]::after,
+[data-link-type="maybe"]::after {
+    content: "’";
+}
 
-            [data-link-type].production::before,
-            [data-link-type].production::after,
-            .prod [data-link-type]::before,
-            .prod [data-link-type]::after {
-                content: "";
-            }
+[data-link-type].production::before,
+[data-link-type].production::after,
+.prod [data-link-type]::before,
+.prod [data-link-type]::after {
+    content: "";
+}
 
-            [data-link-type=element],
-            [data-link-type=element-attr] {
-                font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
-                font-size: .9em;
-            }
-            [data-link-type=element]::before { content: "<" }
-            [data-link-type=element]::after  { content: ">" }
+[data-link-type=element],
+[data-link-type=element-attr] {
+    font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    font-size: .9em;
+}
+[data-link-type=element]::before { content: "<" }
+[data-link-type=element]::after  { content: ">" }
 
-            [data-link-type=biblio] {
-                white-space: pre;
-            }</style>
+[data-link-type=biblio] {
+    white-space: pre;
+}</style>
 <style>/* style-dfn-panel */
 
-        .dfn-panel {
-            position: absolute;
-            z-index: 35;
-            height: auto;
-            width: -webkit-fit-content;
-            width: fit-content;
-            max-width: 300px;
-            max-height: 500px;
-            overflow: auto;
-            padding: 0.5em 0.75em;
-            font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-            background: #DDDDDD;
-            color: black;
-            border: outset 0.2em;
-        }
-        .dfn-panel:not(.on) { display: none; }
-        .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
-        .dfn-panel > b { display: block; }
-        .dfn-panel a { color: black; }
-        .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
-        .dfn-panel > b + b { margin-top: 0.25em; }
-        .dfn-panel ul { padding: 0; }
-        .dfn-panel li { list-style: inside; }
-        .dfn-panel.activated {
-            display: inline-block;
-            position: fixed;
-            left: .5em;
-            bottom: 2em;
-            margin: 0 auto;
-            max-width: calc(100vw - 1.5em - .4em - .5em);
-            max-height: 30vh;
-        }
+.dfn-panel {
+    position: absolute;
+    z-index: 35;
+    height: auto;
+    width: -webkit-fit-content;
+    width: fit-content;
+    max-width: 300px;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: #DDDDDD;
+    color: black;
+    border: outset 0.2em;
+}
+.dfn-panel:not(.on) { display: none; }
+.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+.dfn-panel > b { display: block; }
+.dfn-panel a { color: black; }
+.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel > b + b { margin-top: 0.25em; }
+.dfn-panel ul { padding: 0; }
+.dfn-panel li { list-style: inside; }
+.dfn-panel.activated {
+    display: inline-block;
+    position: fixed;
+    left: .5em;
+    bottom: 2em;
+    margin: 0 auto;
+    max-width: calc(100vw - 1.5em - .4em - .5em);
+    max-height: 30vh;
+}
 
-        .dfn-paneled { cursor: pointer; }
-        </style>
+.dfn-paneled { cursor: pointer; }
+</style>
 <style>/* style-syntax-highlighting */
 
-        .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
-        code.highlight { padding: .1em; border-radius: .3em; }
-        pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
-        .highlight .c { color: #708090 } /* Comment */
-        .highlight .k { color: #990055 } /* Keyword */
-        .highlight .l { color: #000000 } /* Literal */
-        .highlight .n { color: #0077aa } /* Name */
-        .highlight .o { color: #999999 } /* Operator */
-        .highlight .p { color: #999999 } /* Punctuation */
-        .highlight .cm { color: #708090 } /* Comment.Multiline */
-        .highlight .cp { color: #708090 } /* Comment.Preproc */
-        .highlight .c1 { color: #708090 } /* Comment.Single */
-        .highlight .cs { color: #708090 } /* Comment.Special */
-        .highlight .kc { color: #990055 } /* Keyword.Constant */
-        .highlight .kd { color: #990055 } /* Keyword.Declaration */
-        .highlight .kn { color: #990055 } /* Keyword.Namespace */
-        .highlight .kp { color: #990055 } /* Keyword.Pseudo */
-        .highlight .kr { color: #990055 } /* Keyword.Reserved */
-        .highlight .kt { color: #990055 } /* Keyword.Type */
-        .highlight .ld { color: #000000 } /* Literal.Date */
-        .highlight .m { color: #000000 } /* Literal.Number */
-        .highlight .s { color: #a67f59 } /* Literal.String */
-        .highlight .na { color: #0077aa } /* Name.Attribute */
-        .highlight .nc { color: #0077aa } /* Name.Class */
-        .highlight .no { color: #0077aa } /* Name.Constant */
-        .highlight .nd { color: #0077aa } /* Name.Decorator */
-        .highlight .ni { color: #0077aa } /* Name.Entity */
-        .highlight .ne { color: #0077aa } /* Name.Exception */
-        .highlight .nf { color: #0077aa } /* Name.Function */
-        .highlight .nl { color: #0077aa } /* Name.Label */
-        .highlight .nn { color: #0077aa } /* Name.Namespace */
-        .highlight .py { color: #0077aa } /* Name.Property */
-        .highlight .nt { color: #669900 } /* Name.Tag */
-        .highlight .nv { color: #222222 } /* Name.Variable */
-        .highlight .ow { color: #999999 } /* Operator.Word */
-        .highlight .mb { color: #000000 } /* Literal.Number.Bin */
-        .highlight .mf { color: #000000 } /* Literal.Number.Float */
-        .highlight .mh { color: #000000 } /* Literal.Number.Hex */
-        .highlight .mi { color: #000000 } /* Literal.Number.Integer */
-        .highlight .mo { color: #000000 } /* Literal.Number.Oct */
-        .highlight .sb { color: #a67f59 } /* Literal.String.Backtick */
-        .highlight .sc { color: #a67f59 } /* Literal.String.Char */
-        .highlight .sd { color: #a67f59 } /* Literal.String.Doc */
-        .highlight .s2 { color: #a67f59 } /* Literal.String.Double */
-        .highlight .se { color: #a67f59 } /* Literal.String.Escape */
-        .highlight .sh { color: #a67f59 } /* Literal.String.Heredoc */
-        .highlight .si { color: #a67f59 } /* Literal.String.Interpol */
-        .highlight .sx { color: #a67f59 } /* Literal.String.Other */
-        .highlight .sr { color: #a67f59 } /* Literal.String.Regex */
-        .highlight .s1 { color: #a67f59 } /* Literal.String.Single */
-        .highlight .ss { color: #a67f59 } /* Literal.String.Symbol */
-        .highlight .vc { color: #0077aa } /* Name.Variable.Class */
-        .highlight .vg { color: #0077aa } /* Name.Variable.Global */
-        .highlight .vi { color: #0077aa } /* Name.Variable.Instance */
-        .highlight .il { color: #000000 } /* Literal.Number.Integer.Long */
-        </style>
+.highlight:not(.idl) { background: hsl(24, 20%, 95%); }
+code.highlight { padding: .1em; border-radius: .3em; }
+pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+c-[a] { color: #990055 } /* Keyword.Declaration */
+c-[b] { color: #990055 } /* Keyword.Type */
+c-[c] { color: #708090 } /* Comment */
+c-[d] { color: #708090 } /* Comment.Multiline */
+c-[e] { color: #0077aa } /* Name.Attribute */
+c-[f] { color: #669900 } /* Name.Tag */
+c-[g] { color: #222222 } /* Name.Variable */
+c-[k] { color: #990055 } /* Keyword */
+c-[l] { color: #000000 } /* Literal */
+c-[m] { color: #000000 } /* Literal.Number */
+c-[n] { color: #0077aa } /* Name */
+c-[o] { color: #999999 } /* Operator */
+c-[p] { color: #999999 } /* Punctuation */
+c-[s] { color: #a67f59 } /* Literal.String */
+c-[t] { color: #a67f59 } /* Literal.String.Single */
+c-[u] { color: #a67f59 } /* Literal.String.Double */
+c-[cp] { color: #708090 } /* Comment.Preproc */
+c-[c1] { color: #708090 } /* Comment.Single */
+c-[cs] { color: #708090 } /* Comment.Special */
+c-[kc] { color: #990055 } /* Keyword.Constant */
+c-[kn] { color: #990055 } /* Keyword.Namespace */
+c-[kp] { color: #990055 } /* Keyword.Pseudo */
+c-[kr] { color: #990055 } /* Keyword.Reserved */
+c-[ld] { color: #000000 } /* Literal.Date */
+c-[nc] { color: #0077aa } /* Name.Class */
+c-[no] { color: #0077aa } /* Name.Constant */
+c-[nd] { color: #0077aa } /* Name.Decorator */
+c-[ni] { color: #0077aa } /* Name.Entity */
+c-[ne] { color: #0077aa } /* Name.Exception */
+c-[nf] { color: #0077aa } /* Name.Function */
+c-[nl] { color: #0077aa } /* Name.Label */
+c-[nn] { color: #0077aa } /* Name.Namespace */
+c-[py] { color: #0077aa } /* Name.Property */
+c-[ow] { color: #999999 } /* Operator.Word */
+c-[mb] { color: #000000 } /* Literal.Number.Bin */
+c-[mf] { color: #000000 } /* Literal.Number.Float */
+c-[mh] { color: #000000 } /* Literal.Number.Hex */
+c-[mi] { color: #000000 } /* Literal.Number.Integer */
+c-[mo] { color: #000000 } /* Literal.Number.Oct */
+c-[sb] { color: #a67f59 } /* Literal.String.Backtick */
+c-[sc] { color: #a67f59 } /* Literal.String.Char */
+c-[sd] { color: #a67f59 } /* Literal.String.Doc */
+c-[se] { color: #a67f59 } /* Literal.String.Escape */
+c-[sh] { color: #a67f59 } /* Literal.String.Heredoc */
+c-[si] { color: #a67f59 } /* Literal.String.Interpol */
+c-[sx] { color: #a67f59 } /* Literal.String.Other */
+c-[sr] { color: #a67f59 } /* Literal.String.Regex */
+c-[ss] { color: #a67f59 } /* Literal.String.Symbol */
+c-[vc] { color: #0077aa } /* Name.Variable.Class */
+c-[vg] { color: #0077aa } /* Name.Variable.Global */
+c-[vi] { color: #0077aa } /* Name.Variable.Instance */
+c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
+</style>
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
@@ -1483,43 +1519,43 @@ Parts of this work may be from another specification document.  If so, those par
    <p>This report was published by the <a href="https://www.w3.org/community/web-api-discovery">W3 WebAPI Discovery Community Group</a>. It is not a W3C Standard nor is it on the W3C Standards Track. Please note that under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a> there is a limited opt-out and other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</p>
    <p>This extension has been created based on real-world use of metadata in the <a data-link-type="biblio" href="#biblio-openapi">[OpenAPI]</a>, <a data-link-type="biblio" href="#biblio-raml">[RAML]</a>, <a data-link-type="biblio" href="#biblio-api-blueprint">[API-Blueprint]</a>, <a data-link-type="biblio" href="#biblio-json-home">[JSON-home]</a> and <a data-link-type="biblio" href="#biblio-apisjson">[apis.json]</a> specifications.</p>
    <h2 class="heading settled" data-level="1" id="definitions"><span class="secno">1. </span><span class="content">Definitions</span><a class="self-link" href="#definitions"></a></h2>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="machine-readable-api-definition">Machine-readable API Definition</dfn> a structured document defining the inputs and outputs of an API in a standardised format, primarily designed for automated processing, not human consumption.</p>
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="machine-readable-api-definition">Machine-readable API Definition</dfn> a structured document defining the inputs and outputs of an API in a standardised format, primarily designed for automated processing, not human consumption.</p>
    <div class="note" role="note">Note: See <a href="http://nordicapis.com/difference-api-documentation-specification-definition/">this article</a> for an explanation of the difference between API documentation, specifications and definitions.</div>
    <h2 class="heading settled" data-level="2" id="proposed-extension"><span class="secno">2. </span><span class="content">Proposed Extension</span><a class="self-link" href="#proposed-extension"></a></h2>
    <p>The base <a href="https://schema.org">Schema.org</a> <a href="https://pending.schema.org">WebAPI</a> type, for example:</p>
-<pre class="language-json highlight"><span class="p">{</span>
-  <span class="nt">"@context"</span><span class="p">:</span> <span class="s2">"http://schema.org/"</span><span class="p">,</span>
-  <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"WebAPI"</span><span class="p">,</span>
-  <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Google Knowledge Graph Search API"</span><span class="p">,</span>
-  <span class="nt">"description"</span><span class="p">:</span> <span class="s2">"The Knowledge Graph Search API lets you find entities in the Google Knowledge Graph. The API uses standard schema.org types and is compliant with the JSON-LD specification."</span><span class="p">,</span>
-  <span class="nt">"documentation"</span><span class="p">:</span> <span class="s2">"https://developers.google.com/knowledge-graph/"</span><span class="p">,</span>
-  <span class="nt">"termsOfService"</span><span class="p">:</span> <span class="s2">"https://developers.google.com/knowledge-graph/terms"</span><span class="p">,</span>
-  <span class="nt">"provider"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"Organization"</span><span class="p">,</span>
-    <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Google Inc."</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<pre class="language-json highlight"><c- p>{</c->
+  <c- f>"@context"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-><c- p>,</c->
+  <c- f>"@type"</c-><c- p>:</c-> <c- u>"WebAPI"</c-><c- p>,</c->
+  <c- f>"name"</c-><c- p>:</c-> <c- u>"Google Knowledge Graph Search API"</c-><c- p>,</c->
+  <c- f>"description"</c-><c- p>:</c-> <c- u>"The Knowledge Graph Search API lets you find entities in the Google Knowledge Graph. The API uses standard schema.org types and is compliant with the JSON-LD specification."</c-><c- p>,</c->
+  <c- f>"documentation"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/"</c-><c- p>,</c->
+  <c- f>"termsOfService"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/terms"</c-><c- p>,</c->
+  <c- f>"provider"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Google Inc."</c->
+  <c- p>}</c->
+<c- p>}</c->
 </pre>
    <p>is to be extended as follows:</p>
    <p>The extension properties (and their types) are:</p>
    <ul>
-    <li data-md="">
+    <li data-md>
      <p>versions (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="http://meta.schema.org/Property">Property</a> -> <a href="http://schema.org/softwareVersion">softwareVersion</a>). It is RECOMMENDED that APIs be versioned using <a data-link-type="biblio" href="#biblio-semver">[semver]</a></p>
-    <li data-md="">
+    <li data-md>
      <p>entryPoints (OPTIONAL array of <a href="https://schema.org/Thing">Thing</a> -> <a href="https://schema.org/Intangible">Intangible</a> -> <a href="https://schema.org/EntryPoint">EntryPoint</a>)</p>
      <ul>
-      <li data-md="">
+      <li data-md>
        <p>extended with: responseContentTypes (OPTIONAL <a href="http://schema.org/Text">Text</a>)</p>
      </ul>
-    <li data-md="">
+    <li data-md>
      <p>license (OPTIONAL, <a href="http://schema.org/CreativeWork">CreativeWork</a> or <a href="http://schema.org/URL">URL</a>) - the license for the design/signature of the API</p>
-    <li data-md="">
+    <li data-md>
      <p>transport (enumerated <a href="http://schema.org/Text">Text</a>: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)</p>
-    <li data-md="">
+    <li data-md>
      <p>apiProtocol (OPTIONAL, enumerated <a href="http://schema.org/Text">Text</a>:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)</p>
-    <li data-md="">
-     <p>webApiDefinitions (OPTIONAL array of <a href="http://schema.org/EntryPoint">EntryPoint</a>s) containing links to <a data-link-type="dfn" href="#machine-readable-api-definition" id="ref-for-machine-readable-api-definition-1">machine-readable API definition</a>s</p>
-    <li data-md="">
+    <li data-md>
+     <p>webApiDefinitions (OPTIONAL array of <a href="http://schema.org/EntryPoint">EntryPoint</a>s) containing links to <a data-link-type="dfn" href="#machine-readable-api-definition" id="ref-for-machine-readable-api-definition">machine-readable API definition</a>s</p>
+    <li data-md>
      <p>webApiActions (OPTIONAL array of potential <a href="http://schema.org/Action">Action</a>s)</p>
    </ul>
    <p>The Content-Type(s) consumed by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.<a href="http://schema.org/contentType">contentType</a> property. The Content-Type(s) produced by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.responseContentType property.</p>
@@ -1574,59 +1610,59 @@ Parts of this work may be from another specification document.  If so, those par
    </table>
    <h2 class="heading settled" data-level="3" id="example"><span class="secno">3. </span><span class="content">Example</span><a class="self-link" href="#example"></a></h2>
    <p>A fuller example of a WebAPI annotation, including the extension attributes. Note the @type name is still to be determined.</p>
-<pre class="language-json highlight"><span class="p">{</span>
-  <span class="nt">"@context"</span><span class="p">:</span> <span class="s2">"http://schema.org/"</span><span class="p">,</span>
-  <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"ActionableWebAPI"</span><span class="p">,</span>
-  <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Google Knowledge Graph Search API"</span><span class="p">,</span>
-  <span class="nt">"description"</span><span class="p">:</span> <span class="s2">"The Knowledge Graph Search API lets you find entities in the Google Knowledge Graph. The API uses standard schema.org types and is compliant with the JSON-LD specification."</span><span class="p">,</span>
-  <span class="nt">"documentation"</span><span class="p">:</span> <span class="s2">"https://developers.google.com/knowledge-graph/"</span><span class="p">,</span>
-  <span class="nt">"termsOfService"</span><span class="p">:</span> <span class="s2">"https://developers.google.com/knowledge-graph/terms"</span><span class="p">,</span>
-  <span class="nt">"logo"</span><span class="p">:</span> <span class="s2">"https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"</span><span class="p">,</span>
-  <span class="nt">"license"</span><span class="p">:</span> <span class="s2">"https://creativecommons.org/licenses/by/3.0/"</span><span class="p">,</span>
-  <span class="nt">"provider"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"Organization"</span><span class="p">,</span>
-    <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Google Inc."</span><span class="p">,</span>
-    <span class="nt">"contactPoint"</span><span class="p">:</span> <span class="p">[</span>
-      <span class="p">{</span>
-        <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"ContactPoint"</span><span class="p">,</span>
-        <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Google"</span><span class="p">,</span>
-        <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"https://google.com"</span>
-      <span class="p">}</span>
-    <span class="p">]</span><span class="p">,</span>
-  <span class="p">}</span><span class="p">,</span>
-  <span class="nt">"versions"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">"1.0.0"</span>
-  <span class="p">]</span><span class="p">,</span>
-  <span class="nt">"entryPoints"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"EntryPoint"</span><span class="p">,</span>
-      <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"https://kgsearch.googleapis.com/"</span><span class="p">,</span>
-      <span class="nt">"contentType"</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
-      <span class="nt">"responseContentTypes"</span><span class="p">:</span> <span class="s2">"application/json"</span>
-    <span class="p">}</span>
-  <span class="p">]</span><span class="p">,</span>
-  <span class="nt">"transport"</span><span class="p">:</span> <span class="s2">"HTTP"</span><span class="p">,</span>
-  <span class="nt">"apiProtocol"</span><span class="p">:</span> <span class="s2">"JSON API"</span><span class="p">,</span>
-  <span class="nt">"webApiDefinitions"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"EntryPoint"</span><span class="p">,</span>
-      <span class="nt">"contentType"</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
-      <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"https://kgsearch.googleapis.com/$discovery/rest?version=v1"</span>
-    <span class="p">}</span><span class="p">,</span>
-    <span class="p">{</span>
-      <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"EntryPoint"</span><span class="p">,</span>
-      <span class="nt">"contentType"</span><span class="p">:</span> <span class="s2">"application/openapi+json"</span><span class="p">,</span>
-      <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"</span>
-    <span class="p">}</span><span class="p">,</span>
-  <span class="p">]</span><span class="p">,</span>
-  <span class="nt">"webApiActions"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">"@type"</span><span class="p">:</span> <span class="s2">"ConsumeAction"</span><span class="p">,</span>
-      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"apiAuthentication"</span><span class="p">,</span>
-      <span class="nt">"target"</span><span class="p">:</span> <span class="s2">"https://developers.google.com/knowledge-graph/how-tos/authorizing"</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<pre class="language-json highlight"><c- p>{</c->
+  <c- f>"@context"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-><c- p>,</c->
+  <c- f>"@type"</c-><c- p>:</c-> <c- u>"ActionableWebAPI"</c-><c- p>,</c->
+  <c- f>"name"</c-><c- p>:</c-> <c- u>"Google Knowledge Graph Search API"</c-><c- p>,</c->
+  <c- f>"description"</c-><c- p>:</c-> <c- u>"The Knowledge Graph Search API lets you find entities in the Google Knowledge Graph. The API uses standard schema.org types and is compliant with the JSON-LD specification."</c-><c- p>,</c->
+  <c- f>"documentation"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/"</c-><c- p>,</c->
+  <c- f>"termsOfService"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/terms"</c-><c- p>,</c->
+  <c- f>"logo"</c-><c- p>:</c-> <c- u>"https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"</c-><c- p>,</c->
+  <c- f>"license"</c-><c- p>:</c-> <c- u>"https://creativecommons.org/licenses/by/3.0/"</c-><c- p>,</c->
+  <c- f>"provider"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- u>"Organization"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Google Inc."</c-><c- p>,</c->
+    <c- f>"contactPoint"</c-><c- p>:</c-> <c- p>[</c->
+      <c- p>{</c->
+        <c- f>"@type"</c-><c- p>:</c-> <c- u>"ContactPoint"</c-><c- p>,</c->
+        <c- f>"name"</c-><c- p>:</c-> <c- u>"Google"</c-><c- p>,</c->
+        <c- f>"url"</c-><c- p>:</c-> <c- u>"https://google.com"</c->
+      <c- p>}</c->
+    <c- p>],</c->
+  <c- p>},</c->
+  <c- f>"versions"</c-><c- p>:</c-> <c- p>[</c->
+    <c- u>"1.0.0"</c->
+  <c- p>],</c->
+  <c- f>"entryPoints"</c-><c- p>:</c-> <c- p>[</c->
+    <c- p>{</c->
+      <c- f>"@type"</c-><c- p>:</c-> <c- u>"EntryPoint"</c-><c- p>,</c->
+      <c- f>"url"</c-><c- p>:</c-> <c- u>"https://kgsearch.googleapis.com/"</c-><c- p>,</c->
+      <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/json"</c-><c- p>,</c->
+      <c- f>"responseContentTypes"</c-><c- p>:</c-> <c- u>"application/json"</c->
+    <c- p>}</c->
+  <c- p>],</c->
+  <c- f>"transport"</c-><c- p>:</c-> <c- u>"HTTP"</c-><c- p>,</c->
+  <c- f>"apiProtocol"</c-><c- p>:</c-> <c- u>"JSON API"</c-><c- p>,</c->
+  <c- f>"webApiDefinitions"</c-><c- p>:</c-> <c- p>[</c->
+    <c- p>{</c->
+      <c- f>"@type"</c-><c- p>:</c-> <c- u>"EntryPoint"</c-><c- p>,</c->
+      <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/json"</c-><c- p>,</c->
+      <c- f>"url"</c-><c- p>:</c-> <c- u>"https://kgsearch.googleapis.com/$discovery/rest?version=v1"</c->
+    <c- p>},</c->
+    <c- p>{</c->
+      <c- f>"@type"</c-><c- p>:</c-> <c- u>"EntryPoint"</c-><c- p>,</c->
+      <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/openapi+json"</c-><c- p>,</c->
+      <c- f>"url"</c-><c- p>:</c-> <c- u>"https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"</c->
+    <c- p>},</c->
+  <c- p>],</c->
+  <c- f>"webApiActions"</c-><c- p>:</c-> <c- p>[</c->
+    <c- p>{</c->
+      <c- f>"@type"</c-><c- p>:</c-> <c- u>"ConsumeAction"</c-><c- p>,</c->
+      <c- f>"name"</c-><c- p>:</c-> <c- u>"apiAuthentication"</c-><c- p>,</c->
+      <c- f>"target"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/how-tos/authorizing"</c->
+    <c- p>}</c->
+  <c- p>]</c->
+<c- p>}</c->
 </pre>
   </main>
   <div data-fill-with="conformance">
@@ -1804,63 +1840,62 @@ Parts of this work may be from another specification document.  If so, those par
   <aside class="dfn-panel" data-for="machine-readable-api-definition">
    <b><a href="#machine-readable-api-definition">#machine-readable-api-definition</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-machine-readable-api-definition-1">2. Proposed Extension</a>
+    <li><a href="#ref-for-machine-readable-api-definition">2. Proposed Extension</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
 
-        document.body.addEventListener("click", function(e) {
-            var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
-            // Find the dfn element or panel, if any, that was clicked on.
-            var el = e.target;
-            var target;
-            var hitALink = false;
-            while(el.parentElement) {
-                if(el.tagName == "A") {
-                    // Clicking on a link in a <dfn> shouldn't summon the panel
-                    hitALink = true;
-                }
-                if(el.classList.contains("dfn-paneled")) {
-                    target = "dfn";
-                    break;
-                }
-                if(el.classList.contains("dfn-panel")) {
-                    target = "dfn-panel";
-                    break;
-                }
-                el = el.parentElement;
-            }
-            if(target != "dfn-panel") {
-                // Turn off any currently "on" or "activated" panels.
-                queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
-                    el.classList.remove("on");
-                    el.classList.remove("activated");
-                });
-            }
-            if(target == "dfn" && !hitALink) {
-                // open the panel
-                var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
-                if(dfnPanel) {
-                    console.log(dfnPanel);
-                    dfnPanel.classList.add("on");
-                    var rect = el.getBoundingClientRect();
-                    dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
-                    dfnPanel.style.top = window.scrollY + rect.top + "px";
-                    var panelRect = dfnPanel.getBoundingClientRect();
-                    var panelWidth = panelRect.right - panelRect.left;
-                    if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
-                        // Reposition, because the panel is overflowing
-                        dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
-                    }
-                } else {
-                    console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
-                }
-            } else if(target == "dfn-panel") {
-                // Switch it to "activated" state, which pins it.
-                el.classList.add("activated");
-                el.style.left = null;
-                el.style.top = null;
-            }
-
+document.body.addEventListener("click", function(e) {
+    var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
+    // Find the dfn element or panel, if any, that was clicked on.
+    var el = e.target;
+    var target;
+    var hitALink = false;
+    while(el.parentElement) {
+        if(el.tagName == "A") {
+            // Clicking on a link in a <dfn> shouldn't summon the panel
+            hitALink = true;
+        }
+        if(el.classList.contains("dfn-paneled")) {
+            target = "dfn";
+            break;
+        }
+        if(el.classList.contains("dfn-panel")) {
+            target = "dfn-panel";
+            break;
+        }
+        el = el.parentElement;
+    }
+    if(target != "dfn-panel") {
+        // Turn off any currently "on" or "activated" panels.
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
+            el.classList.remove("on");
+            el.classList.remove("activated");
         });
-        </script>
+    }
+    if(target == "dfn" && !hitALink) {
+        // open the panel
+        var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
+        if(dfnPanel) {
+            dfnPanel.classList.add("on");
+            var rect = el.getBoundingClientRect();
+            dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
+            dfnPanel.style.top = window.scrollY + rect.top + "px";
+            var panelRect = dfnPanel.getBoundingClientRect();
+            var panelWidth = panelRect.right - panelRect.left;
+            if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
+                // Reposition, because the panel is overflowing
+                dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
+            }
+        } else {
+            console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
+        }
+    } else if(target == "dfn-panel") {
+        // Switch it to "activated" state, which pins it.
+        el.classList.add("activated");
+        el.style.left = null;
+        el.style.top = null;
+    }
+
+});
+</script>

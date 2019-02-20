@@ -69,7 +69,7 @@ Proposed Extension
 
 The base <a href="https://schema.org">Schema.org</a> <a href="https://pending.schema.org">WebAPI</a> type, for example:
 
-````json
+```json
 {
   "@context": "http://schema.org/",
   "@type": "WebAPI",
@@ -82,7 +82,7 @@ The base <a href="https://schema.org">Schema.org</a> <a href="https://pending.sc
     "name": "Google Inc."
   }
 }
-````
+```
 
 is to be extended as follows:
 
@@ -143,7 +143,7 @@ Example
 
 A fuller example of a WebAPI annotation, including the extension attributes. Note the @type name is still to be determined.
 
-````json
+```json
 {
   "@context": "http://schema.org/",
   "@type": "ActionableWebAPI",
@@ -197,5 +197,5 @@ A fuller example of a WebAPI annotation, including the extension attributes. Not
     }
   ]
 }
-````
+```
 

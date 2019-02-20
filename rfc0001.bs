@@ -87,7 +87,7 @@ The base <a href="https://schema.org">Schema.org</a> <a href="https://pending.sc
 is to be extended as follows:
 
 The extension properties (and their types) are:
-* `versions` (OPTIONAL array of <a href="https://schema.org/Thing">`Thing`</a> -> <a href="http://meta.schema.org/Property">Property</a> -> <a href="http://schema.org/softwareVersion">`softwareVersion`</a>). It is RECOMMENDED that APIs be versioned using [[semver]]
+* `versions` (OPTIONAL array of <a href="https://schema.org/Thing">`Thing`</a> -> <a href="http://meta.schema.org/Property">`Property`</a> -> <a href="http://schema.org/softwareVersion">`softwareVersion`</a>). It is RECOMMENDED that APIs be versioned using [[semver]]
 * `entryPoints` (OPTIONAL array of <a href="https://schema.org/Thing">`Thing`</a> -> <a href="https://schema.org/Intangible">`Intangible`</a> -> <a href="https://schema.org/EntryPoint">`EntryPoint`</a>)
       * extended with: `responseContentTypes` (OPTIONAL <a href="http://schema.org/Text">`Text`</a>)
 * `license` (OPTIONAL, <a href="http://schema.org/CreativeWork">`CreativeWork`</a> or <a href="http://schema.org/URL">`URL`</a>) - the license for the design/signature of the API

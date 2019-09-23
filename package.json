@@ -23,6 +23,6 @@
     "markdown-it": "^8.4.2"
   },
   "devDependencies": {
-    "mdv": "^1.2.0"
+    "mdv": "^1.2.1"
   }
 }

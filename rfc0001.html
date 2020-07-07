@@ -1469,7 +1469,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">WADG0001 WebAPI type extension</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2020-07-07">7 July 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2020-07-08">8 July 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1578,7 +1578,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <p class="copyright" data-fill-with="copyright" style="display:none"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 7 July 2020,
+In addition, as of 8 July 2020,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1607,7 +1607,7 @@ Parts of this work may be from another specification document.  If so, those par
 <c- p>}</c->
 </pre>
    <p>is to be extended by several properties.</p>
-   <p>These properties are defined within the following list of modular proposals for schema.org. The modularity ensures that adoption can progress pragmatically, and not be blocked by a lack of consensus on all properties. [N] This also ensures that this report does not need to cover all possible use cases.</p>
+   <p>These properties are defined within the following list of modular proposals for schema.org. The modularity ensures that adoption can progress pragmatically, and not be blocked by a lack of consensus on all properties.</p>
    <h3 class="heading settled" data-level="3.1" id="new-property-endpointurl"><span class="secno">3.1. </span><span class="content">New property <code>endpointUrl</code></span><a class="self-link" href="#new-property-endpointurl"></a></h3>
    <h4 class="heading settled" data-level="3.1.1" id="proposal"><span class="secno">3.1.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal"></a></h4>
    <table>
@@ -1731,7 +1731,7 @@ Parts of this work may be from another specification document.  If so, those par
 </pre>
    <h4 class="heading settled" data-level="3.4.3" id="notes③"><span class="secno">3.4.3. </span><span class="content">Notes</span><a class="self-link" href="#notes③"></a></h4>
    <p>The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> proposes the use of <code>schema:serviceOutput</code> within <code>schema:WebAPI</code> to reference the <code>schema:Dataset</code>. For the inverse, this proposal uses a term <a href="https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_serves_dataset">from DCAT v2</a> to reference <code>schema:WebAPI</code> from <code>schema:Dataset</code>:</p>
-   <p>The DCAT v2 term <code>dcat:accessService</code> links a <code>dcat:Distribution</code> (akin to <code>schema:DataDownload</code>) to the <code>dcat:DataService</code>, however given that a <code>schema:WebAPI</code> may allow read/write access to a <code>schema:Dataset</code>, it is not necessarily limited to only a single <code>schema:DataDownload</code>, as it may also cover an entire <code>schema:Dataset</code>.</p>
+   <p>The DCAT v2 term <code>dcat:accessService</code> links a <code>dcat:Distribution</code> (akin to <code>schema:DataDownload</code>) to the <code>dcat:DataService</code>, however given that a <code>schema:WebAPI</code> may allow read/write access to a <code>schema:Dataset</code>, it is not necessarily limited to only a single <code>schema:DataDownload</code>, and may in fact cover an entire <code>schema:Dataset</code>.</p>
    <p>The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> does not include <code>accessService</code>.</p>
    <h3 class="heading settled" data-level="3.5" id="add-webapi-to-domain-of-version"><span class="secno">3.5. </span><span class="content">Add <code>WebAPI</code> to domain of <code>version</code></span><a class="self-link" href="#add-webapi-to-domain-of-version"></a></h3>
    <h4 class="heading settled" data-level="3.5.1" id="proposal④"><span class="secno">3.5.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal④"></a></h4>
@@ -1837,7 +1837,7 @@ Parts of this work may be from another specification document.  If so, those par
        <td> Links to a resource detailing pricing details of the API 
       <tr>
        <td><code>API SLA</code> 
-       <td> Links to a resource detailing the Service Level Agreement relating to the API. This may be machine- or human-readble. 
+       <td> Links to a resource detailing the Service Level Agreement relating to the API. This may be machine- or human-readable. 
       <tr>
        <td><code>API Support</code> 
        <td> Links to a resource where a client may obtain support for the API 

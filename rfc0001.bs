@@ -13,7 +13,7 @@ Status: w3c/CG-DRAFT
 Group: w3c
 URL: https://webapi-discovery.github.io/rfcs/rfc0001.html
 Editor: Mike Ralphson, Mermade Software
-Editor: Ivan Goncharov, APIs.guru
+Editor: Nick Evans, Open Data Institute, http://nickevans.me/
 Repository: webapi-discovery/rfcs
 Abstract: It is proposed to create an extension to the <a href="https://schema.org/">Schema.Org</a> <a href="https://pending.schema.org/WebAPI">WebAPI</a> type to facilitate better automatic discovery of WebAPIs and associated machine- and human-readable documentation.
 Markup Shorthands: css no, markdown yes
@@ -65,12 +65,12 @@ This extension has been created based on real-world use of metadata in the [[Ope
 
 # Scope
 
-This specification does not attempt to replace existing formats of describing an API, such as [OpenAPI]], [[RAML]], [[API-Blueprint]], [[JSON-home]] and [[apis.json]], but rather seeks to describe metadata about an API that maybe useful to those discovering it.
+This specification does not attempt to replace existing formats of describing an API, such as [[OpenAPI]], [[RAML]], [[API-Blueprint]], [[JSON-home]] and [[apis.json]], but rather seeks to describe metadata about an API that maybe useful to those discovering it.
 
 
 # Proposed Extension
 
-Schema.org's Dataset vocabulary was originally [based on DCAT](https://schema.org/docs/data-and-datasets.html), which in turn used used Dublin Core and FOAF terms. Hence it follows that [DCAT Version 2](https://www.w3.org/TR/vocab-dcat-2/) should be used to influence this extension.
+Schema.org's Dataset vocabulary was originally [based on DCAT](https://schema.org/docs/data-and-datasets.html), which in turn used Dublin Core and FOAF terms. [DCAT Version 2](https://www.w3.org/TR/vocab-dcat-2/) is now current, and is therefore used within this draft.
 
 The base [schema.org](https://schema.org/) [WebAPI](https://schema.org/WebAPI) type, for example:
 
@@ -267,7 +267,7 @@ The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo
 
 ### Notes
 
-The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) proposes `serviceOutput` to within `schema:WebAPI` to reference the `schema:Dataset`. For the inverse, this proposal uses a term [from DCAT v2](https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_serves_dataset) to reference `schema:WebAPI` from `schema:Dataset`:
+The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) proposes the use of `schema:serviceOutput` within `schema:WebAPI` to reference the `schema:Dataset`. For the inverse, this proposal uses a term [from DCAT v2](https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_serves_dataset) to reference `schema:WebAPI` from `schema:Dataset`:
 
 The DCAT v2 term `dcat:accessService` links a `dcat:Distribution` to the `dcat:DataService` (akin to `schema:DataDownload`), however given that an `schema:WebAPI` may allow read/write access to a Dataset, it is not necessarily limited to only a single `schema:DataDownload`, but may also cover an entire `schema:Dataset`.
 

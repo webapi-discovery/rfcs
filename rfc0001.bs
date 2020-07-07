@@ -338,6 +338,21 @@ Add `schema:WebAPI` to the domain of `schema:license`, to describe the license f
 "license": "https://creativecommons.org/licenses/by/3.0/",
 ```
 
+## Add `url` to the `WebAPI` example
+
+### Proposal
+
+Add the following to the examples in the [https://schema.org/WebAPI](https://schema.org/WebAPI) page:
+
+```json
+"url": "https://developers.google.com/knowledge-graph/",
+"documentation": "https://developers.google.com/knowledge-graph/reference/rest/v1",
+```
+
+### Notes
+
+The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) overloads the `schema:url` property for both `dcat:endpointURL` and `dcat:landingPage`. Hence `url` should be used for the landing page of the API (e.g. [https://azure.microsoft.com/en-gb/services/cdn/](https://azure.microsoft.com/en-gb/services/cdn/)) rather than the documentation (e.g. [https://docs.microsoft.com/en-gb/azure/cdn/](https://docs.microsoft.com/en-gb/azure/cdn/)).
+
 <div class="non-normative">
 
 # Suggested values
@@ -407,7 +422,7 @@ A fuller example of a `WebAPI` annotation, including the proposed properties.
     {
       "@type": "CreativeWork",
       "encodingFormat": "text/html",
-      "url": "https://developers.google.com/knowledge-graph/"
+      "url": "https://developers.google.com/knowledge-graph/reference/rest/v1"
     },
     {
       "@type": "CreativeWork",
@@ -420,6 +435,7 @@ A fuller example of a `WebAPI` annotation, including the proposed properties.
       "url": "https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"
     },
   ],
+  "url": "https://developers.google.com/knowledge-graph/",
   "termsOfService": "https://developers.google.com/knowledge-graph/terms",
   "logo": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
   "license": "https://creativecommons.org/licenses/by/3.0/",

@@ -1719,15 +1719,15 @@ Parts of this work may be from another specification document.  If so, those par
       <td>An API that provides access to the dataset
    </table>
    <h4 class="heading settled" data-level="3.4.2" id="example①"><span class="secno">3.4.2. </span><span class="content">Example</span><a class="self-link" href="#example①"></a></h4>
-<pre class="language-json highlight"><c- p>{</c->
-  <c- f>"@context"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-><c- p>,</c->
-  <c- f>"@type"</c-><c- p>:</c-> <c- u>"Dataset"</c-><c- p>,</c->
-  ...
-  <c- f>"accessService"</c-><c- p>:</c-> <c- p>{</c->
-    <c- f>"@type"</c-><c- p>:</c-> <c- u>"WebAPI"</c-><c- p>,</c->
-    ...
-  <c- p>}</c->
-<c- p>}</c->
+<pre class="language-yaml highlight">{
+  <c- s>"@context"</c->: <c- s>"http://schema.org/"</c->,
+  <c- s>"@type"</c->: <c- s>"Dataset"</c->,
+  <c- g>...</c->
+  <c- g>"accessService"</c->: {
+    <c- s>"@type"</c->: <c- s>"WebAPI"</c->,
+    <c- g>...</c->
+  }
+}
 </pre>
    <h4 class="heading settled" data-level="3.4.3" id="notes③"><span class="secno">3.4.3. </span><span class="content">Notes</span><a class="self-link" href="#notes③"></a></h4>
    <p>The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> proposes the use of <code>schema:serviceOutput</code> within <code>schema:WebAPI</code> to reference the <code>schema:Dataset</code>. For the inverse, this proposal uses a term <a href="https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_serves_dataset">from DCAT v2</a> to reference <code>schema:WebAPI</code> from <code>schema:Dataset</code>:</p>

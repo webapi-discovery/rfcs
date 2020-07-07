@@ -6,9 +6,9 @@ Copyright © 2017,2019,2020 the Contributors to the WADG0001/Jul2020 report, pub
 <pre class='metadata'>
 Title: WADG0001 WebAPI type extension
 H1: Version 0.4.0
-Date: 2020-07-06
+Date: 2020-07-08
 Shortname: wadg0001
-Revision: 3
+Revision: 4
 Status: w3c/CG-DRAFT
 Group: w3c
 URL: https://webapi-discovery.github.io/rfcs/rfc0001.html
@@ -65,7 +65,7 @@ This extension has been created based on real-world use of metadata in the [[Ope
 
 # Scope
 
-This specification does not attempt to replace existing formats of describing an API, such as [[OpenAPI]], [[RAML]], [[API-Blueprint]], [[JSON-home]] and [[apis.json]], but rather seeks to describe metadata about an API that maybe useful to those discovering it.
+This specification does not attempt to replace existing formats of describing an API, such as [[OpenAPI]], [[RAML]], [[API-Blueprint]], [[JSON-home]] and [[apis.json]], but rather seeks to describe metadata about an API that will be useful to those who are discovering it.
 
 
 # Proposed Extension
@@ -91,7 +91,7 @@ The base [schema.org](https://schema.org/) [WebAPI](https://schema.org/WebAPI) t
 
 is to be extended by several properties.
 
-These properties are defined within the following list of modular proposals for schema.org. The modularity ensures that adoption can progressed pragmatically, and not be blocked by a lack of consensus on all properties. This also ensures that this report does not need to cover all possible use cases in this iteration.
+These properties are defined within the following list of modular proposals for schema.org. The modularity ensures that adoption can progress pragmatically, and not be blocked by a lack of consensus on all properties.
 
 ## New property `endpointUrl`
 
@@ -226,7 +226,7 @@ An alternative that was considered was to create an additional property, `schema
 
 This proposal brings the property [directly from DCAT v2](https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_url).
 
-The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) does not include `conformsTo`, and that the mapping gap was also recognised in [previous mapping attempts](https://ec-jrc.github.io/dcat-ap-to-schema-org/#mapping-properties-dataset) and not addressed within [DCAT v2 discussions](https://github.com/w3c/dxwg/issues/251).
+The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) does not include `conformsTo`. The mapping gap was recognised in [previous mapping attempts](https://ec-jrc.github.io/dcat-ap-to-schema-org/#mapping-properties-dataset) and not addressed within [DCAT v2 discussions](https://github.com/w3c/dxwg/issues/251).
 
 ## New property `accessService`
 
@@ -269,7 +269,7 @@ The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo
 
 The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) proposes the use of `schema:serviceOutput` within `schema:WebAPI` to reference the `schema:Dataset`. For the inverse, this proposal uses a term [from DCAT v2](https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_serves_dataset) to reference `schema:WebAPI` from `schema:Dataset`:
 
-The DCAT v2 term `dcat:accessService` links a `dcat:Distribution` to the `dcat:DataService` (akin to `schema:DataDownload`), however given that an `schema:WebAPI` may allow read/write access to a Dataset, it is not necessarily limited to only a single `schema:DataDownload`, but may also cover an entire `schema:Dataset`.
+The DCAT v2 term `dcat:accessService` links a `dcat:Distribution` (akin to `schema:DataDownload`) to the `dcat:DataService`, however given that a `schema:WebAPI` may allow read/write access to a `schema:Dataset`, it is not necessarily limited to only a single `schema:DataDownload`, and may in fact cover an entire `schema:Dataset`.
 
 The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) does not include `accessService`.
 
@@ -342,7 +342,11 @@ Add `schema:WebAPI` to the domain of `schema:license`, to describe the license f
 
 ### Proposal
 
-Add the following to the examples in the [https://schema.org/WebAPI](https://schema.org/WebAPI) page:
+Include the following in the documentation of `schema:WebAPI`:
+
+> The [[url]] property indicates a landing page for the API, which is a web page that can be navigated to in a web browser to gain access to the API and/or additional information.
+
+Add the following to the examples to the [https://schema.org/WebAPI](https://schema.org/WebAPI) page:
 
 ```json
 "url": "https://developers.google.com/knowledge-graph/",
@@ -380,7 +384,7 @@ When `encodingFormat` is used to specify the API description format used, and wh
 
 Media types may include a `;version` parameter where appropriate.
 
-Other media types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc may be used, with decreasing levels of machine-readability.
+Other media types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b>, etc. may be used, with decreasing levels of machine-readability.
 
 
 ## `Action` `name` values
@@ -397,7 +401,7 @@ A number of `Action` names are suggested for use with `potentialAction` of `WebA
 <tr><td>`API Client Registration` <td> Links to a resource where a client may register to use the API
 <tr><td>`API Console` <td> Links to an interactive console where API calls may be tested
 <tr><td>`API Payment` <td> Links to a resource detailing pricing details of the API
-<tr><td>`API SLA` <td> Links to a resource detailing the Service Level Agreement relating to the API. This may be machine- or human-readble.
+<tr><td>`API SLA` <td> Links to a resource detailing the Service Level Agreement relating to the API. This may be machine- or human-readable.
 <tr><td>`API Support` <td> Links to a resource where a client may obtain support for the API
 </tbody>
 </table>
@@ -454,7 +458,14 @@ A fuller example of a `WebAPI` annotation, including the proposed properties.
   "endpointUrl": [
     {
       "@type": "EntryPoint",
+      "name": "Production (uses live data)",
       "url": "https://kgsearch.googleapis.com/",
+      "contentType": "application/json"
+    },
+    {
+      "@type": "EntryPoint",
+      "name": "Sandbox (uses test data)",
+      "url": "https://sandbox.kgsearch.googleapis.com/",
       "contentType": "application/json"
     }
   ],

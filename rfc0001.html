@@ -1469,7 +1469,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">WADG0001 WebAPI type extension</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2020-07-06">6 July 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2020-07-07">7 July 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1578,7 +1578,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <p class="copyright" data-fill-with="copyright" style="display:none"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 6 July 2020,
+In addition, as of 7 July 2020,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1589,7 +1589,7 @@ Parts of this work may be from another specification document.  If so, those par
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="machine-readable-api-definition">Machine-readable API Definition</dfn> a structured document defining the inputs and outputs of an API in a standardised format, primarily designed for automated processing, not human consumption.</p>
    <div class="note" role="note">Note: See <a href="http://nordicapis.com/difference-api-documentation-specification-definition/">this article</a> for an explanation of the difference between API documentation, specifications and definitions.</div>
    <h2 class="heading settled" data-level="2" id="scope"><span class="secno">2. </span><span class="content">Scope</span><a class="self-link" href="#scope"></a></h2>
-   <p>This specification does not attempt to replace existing formats of describing an API, such as <a data-link-type="biblio" href="#biblio-openapi">[OpenAPI]</a>, <a data-link-type="biblio" href="#biblio-raml">[RAML]</a>, <a data-link-type="biblio" href="#biblio-api-blueprint">[API-Blueprint]</a>, <a data-link-type="biblio" href="#biblio-json-home">[JSON-home]</a> and <a data-link-type="biblio" href="#biblio-apisjson">[apis.json]</a>, but rather seeks to describe metadata about an API that maybe useful to those discovering it.</p>
+   <p>This specification does not attempt to replace existing formats of describing an API, such as <a data-link-type="biblio" href="#biblio-openapi">[OpenAPI]</a>, <a data-link-type="biblio" href="#biblio-raml">[RAML]</a>, <a data-link-type="biblio" href="#biblio-api-blueprint">[API-Blueprint]</a>, <a data-link-type="biblio" href="#biblio-json-home">[JSON-home]</a> and <a data-link-type="biblio" href="#biblio-apisjson">[apis.json]</a>, but rather seeks to describe metadata about an API that will be useful to those who are discovering it.</p>
    <h2 class="heading settled" data-level="3" id="proposed-extension"><span class="secno">3. </span><span class="content">Proposed Extension</span><a class="self-link" href="#proposed-extension"></a></h2>
    <p>Schema.org’s Dataset vocabulary was originally <a href="https://schema.org/docs/data-and-datasets.html">based on DCAT</a>, which in turn used Dublin Core and FOAF terms. <a href="https://www.w3.org/TR/vocab-dcat-2/">DCAT Version 2</a> is now current, and is therefore used within this draft.</p>
    <p>The base <a href="https://schema.org/">schema.org</a> <a href="https://schema.org/WebAPI">WebAPI</a> type, for example:</p>
@@ -1607,7 +1607,7 @@ Parts of this work may be from another specification document.  If so, those par
 <c- p>}</c->
 </pre>
    <p>is to be extended by several properties.</p>
-   <p>These properties are defined within the following list of modular proposals for schema.org. The modularity ensures that adoption can progressed pragmatically, and not be blocked by a lack of consensus on all properties. This also ensures that this report does not need to cover all possible use cases in this iteration.</p>
+   <p>These properties are defined within the following list of modular proposals for schema.org. The modularity ensures that adoption can progress pragmatically, and not be blocked by a lack of consensus on all properties. [N] This also ensures that this report does not need to cover all possible use cases.</p>
    <h3 class="heading settled" data-level="3.1" id="new-property-endpointurl"><span class="secno">3.1. </span><span class="content">New property <code>endpointUrl</code></span><a class="self-link" href="#new-property-endpointurl"></a></h3>
    <h4 class="heading settled" data-level="3.1.1" id="proposal"><span class="secno">3.1.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal"></a></h4>
    <table>
@@ -1701,7 +1701,7 @@ Parts of this work may be from another specification document.  If so, those par
 </pre>
    <h4 class="heading settled" data-level="3.3.3" id="notes②"><span class="secno">3.3.3. </span><span class="content">Notes</span><a class="self-link" href="#notes②"></a></h4>
    <p>This proposal brings the property <a href="https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_url">directly from DCAT v2</a>.</p>
-   <p>The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> does not include <code>conformsTo</code>, and that the mapping gap was also recognised in <a href="https://ec-jrc.github.io/dcat-ap-to-schema-org/#mapping-properties-dataset">previous mapping attempts</a> and not addressed within <a href="https://github.com/w3c/dxwg/issues/251">DCAT v2 discussions</a>.</p>
+   <p>The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> does not include <code>conformsTo</code>. The mapping gap was recognised in <a href="https://ec-jrc.github.io/dcat-ap-to-schema-org/#mapping-properties-dataset">previous mapping attempts</a> and not addressed within <a href="https://github.com/w3c/dxwg/issues/251">DCAT v2 discussions</a>.</p>
    <h3 class="heading settled" data-level="3.4" id="new-property-accessservice"><span class="secno">3.4. </span><span class="content">New property <code>accessService</code></span><a class="self-link" href="#new-property-accessservice"></a></h3>
    <h4 class="heading settled" data-level="3.4.1" id="proposal③"><span class="secno">3.4.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal③"></a></h4>
    <table>
@@ -1731,7 +1731,7 @@ Parts of this work may be from another specification document.  If so, those par
 </pre>
    <h4 class="heading settled" data-level="3.4.3" id="notes③"><span class="secno">3.4.3. </span><span class="content">Notes</span><a class="self-link" href="#notes③"></a></h4>
    <p>The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> proposes the use of <code>schema:serviceOutput</code> within <code>schema:WebAPI</code> to reference the <code>schema:Dataset</code>. For the inverse, this proposal uses a term <a href="https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_serves_dataset">from DCAT v2</a> to reference <code>schema:WebAPI</code> from <code>schema:Dataset</code>:</p>
-   <p>The DCAT v2 term <code>dcat:accessService</code> links a <code>dcat:Distribution</code> to the <code>dcat:DataService</code> (akin to <code>schema:DataDownload</code>), however given that an <code>schema:WebAPI</code> may allow read/write access to a Dataset, it is not necessarily limited to only a single <code>schema:DataDownload</code>, but may also cover an entire <code>schema:Dataset</code>.</p>
+   <p>The DCAT v2 term <code>dcat:accessService</code> links a <code>dcat:Distribution</code> (akin to <code>schema:DataDownload</code>) to the <code>dcat:DataService</code>, however given that a <code>schema:WebAPI</code> may allow read/write access to a <code>schema:Dataset</code>, it is not necessarily limited to only a single <code>schema:DataDownload</code>, as it may also cover an entire <code>schema:Dataset</code>.</p>
    <p>The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> does not include <code>accessService</code>.</p>
    <h3 class="heading settled" data-level="3.5" id="add-webapi-to-domain-of-version"><span class="secno">3.5. </span><span class="content">Add <code>WebAPI</code> to domain of <code>version</code></span><a class="self-link" href="#add-webapi-to-domain-of-version"></a></h3>
    <h4 class="heading settled" data-level="3.5.1" id="proposal④"><span class="secno">3.5.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal④"></a></h4>
@@ -1773,7 +1773,11 @@ Parts of this work may be from another specification document.  If so, those par
 </pre>
    <h3 class="heading settled" data-level="3.8" id="add-url-to-the-webapi-example"><span class="secno">3.8. </span><span class="content">Add <code>url</code> to the <code>WebAPI</code> example</span><a class="self-link" href="#add-url-to-the-webapi-example"></a></h3>
    <h4 class="heading settled" data-level="3.8.1" id="proposal⑦"><span class="secno">3.8.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal⑦"></a></h4>
-   <p>Add the following to the examples in the <a href="https://schema.org/WebAPI">https://schema.org/WebAPI</a> page:</p>
+   <p>Include the following in the documentation of <code>schema:WebAPI</code>:</p>
+   <blockquote>
+    <p>The <a data-link-type="biblio" href="#biblio-url">[url]</a> property indicates a landing page for the API, which is a web page that can be navigated to in a web browser to gain access to the API and/or additional information.</p>
+   </blockquote>
+   <p>Add the following to the examples to the <a href="https://schema.org/WebAPI">https://schema.org/WebAPI</a> page:</p>
 <pre class="language-json highlight"><c- u>"url"</c->: <c- u>"https://developers.google.com/knowledge-graph/"</c->,
 <c- u>"documentation"</c->: <c- u>"https://developers.google.com/knowledge-graph/reference/rest/v1"</c->,
 </pre>
@@ -1810,7 +1814,7 @@ Parts of this work may be from another specification document.  If so, those par
        <td><code>application/vnd.refract.parse-result+json</code> 
     </table>
     <p>Media types may include a <code>;version</code> parameter where appropriate.</p>
-    <p>Other media types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc may be used, with decreasing levels of machine-readability.</p>
+    <p>Other media types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b>, etc. may be used, with decreasing levels of machine-readability.</p>
     <h3 class="heading settled" data-level="4.2" id="action-name-values"><span class="secno">4.2. </span><span class="content"><code>Action</code> <code>name</code> values</span><a class="self-link" href="#action-name-values"></a></h3>
     <p>A number of <code>Action</code> names are suggested for use with <code>potentialAction</code> of <code>WebAPI</code>, though this list is not exhaustive:</p>
     <table class="data">
@@ -1882,7 +1886,14 @@ Parts of this work may be from another specification document.  If so, those par
   <c- f>"endpointUrl"</c-><c- p>:</c-> <c- p>[</c->
     <c- p>{</c->
       <c- f>"@type"</c-><c- p>:</c-> <c- u>"EntryPoint"</c-><c- p>,</c->
+      <c- f>"name"</c-><c- p>:</c-> <c- u>"Production (uses live data)"</c-><c- p>,</c->
       <c- f>"url"</c-><c- p>:</c-> <c- u>"https://kgsearch.googleapis.com/"</c-><c- p>,</c->
+      <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/json"</c->
+    <c- p>},</c->
+    <c- p>{</c->
+      <c- f>"@type"</c-><c- p>:</c-> <c- u>"EntryPoint"</c-><c- p>,</c->
+      <c- f>"name"</c-><c- p>:</c-> <c- u>"Sandbox (uses test data)"</c-><c- p>,</c->
+      <c- f>"url"</c-><c- p>:</c-> <c- u>"https://sandbox.kgsearch.googleapis.com/"</c-><c- p>,</c->
       <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/json"</c->
     <c- p>}</c->
   <c- p>],</c->
@@ -2072,6 +2083,8 @@ Parts of this work may be from another specification document.  If so, those par
    <dd><a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md">OpenAPI Specification v3.0.2</a>. URL: <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md">https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md</a>
    <dt id="biblio-raml">[RAML]
    <dd><a href="https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md">RAML 1.0</a>. URL: <a href="https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md">https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md</a>
+   <dt id="biblio-url">[URL]
+   <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/">URL Standard</a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
   </dl>
   <aside class="dfn-panel" data-for="machine-readable-api-definition">
    <b><a href="#machine-readable-api-definition">#machine-readable-api-definition</a></b><b>Referenced in:</b>

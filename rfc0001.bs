@@ -346,7 +346,7 @@ This section is non-normative, and these values are outside the scope of schema.
 
 ## `encodingFormat` values
 
-When `encodingFormat` is used to specify the API description format used, and where an <a href="https://iana.org">IANA</a>-registered MIME type is not available, the following widely recognised non-IANA MIME types may be used:
+When `encodingFormat` is used to specify the API description format used, and where an <a href="https://iana.org">IANA</a>-registered media type is not available, the following widely recognised non-IANA media types may be used:
 
 <table class=data>
 <thead>

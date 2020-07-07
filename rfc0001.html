@@ -1029,7 +1029,7 @@ Possible extra rowspan handling
 		}
 	/* } */
 
-	@supports (display:grid) {
+	@supports (display:grid) and (display:contents) {
 		/* Use #toc over .toc to override non-@supports rules. */
 		#toc {
 			display: grid;
@@ -1167,6 +1167,18 @@ Possible extra rowspan handling
 		margin-left: auto;
 		margin-right: auto;
 	}
+	.overlarge {
+		/* Magic to create good table positioning:
+		   "content column" is 50ems wide at max; less on smaller screens.
+		   Extra space (after ToC + content) is empty on the right.
+
+		   1. When table < content column, centers table in column.
+		   2. When content < table < available, left-aligns.
+		   3. When table > available, fills available + scroll bar.
+		*/
+		display: grid;
+		grid-template-columns: minmax(0, 50em);
+	}
 	.overlarge > table {
 		/* limit preferred width of table */
 		max-width: 50em;
@@ -1176,7 +1188,6 @@ Possible extra rowspan handling
 
 	@media (min-width: 55em) {
 		.overlarge {
-			margin-left: calc(13px + 26.5rem - 50vw);
 			margin-right: calc(13px + 26.5rem - 50vw);
 			max-width: none;
 		}
@@ -1184,14 +1195,12 @@ Possible extra rowspan handling
 	@media screen and (min-width: 78em) {
 		body:not(.toc-inline) .overlarge {
 			/* 30.5em body padding 50em content area */
-			margin-left: calc(40em - 50vw) !important;
 			margin-right: calc(40em - 50vw) !important;
 		}
 	}
 	@media screen and (min-width: 90em) {
 		body:not(.toc-inline) .overlarge {
 			/* 4em html margin 30.5em body padding 50em content area */
-			margin-left: 0 !important;
 			margin-right: calc(84.5em - 100vw) !important;
 		}
 	}
@@ -1212,93 +1221,8 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 1cff2db4ee2c3bba7a4077d3007528ec73b0485d" name="generator">
+  <meta content="Bikeshed version 40de15f9, updated Thu Jun 11 17:47:04 2020 -0700" name="generator">
   <link href="https://webapi-discovery.github.io/rfcs/rfc0001.html" rel="canonical">
-<style>/* style-md-lists */
-
-/* This is a weird hack for me not yet following the commonmark spec
-   regarding paragraph and lists. */
-[data-md] > :first-child {
-    margin-top: 0;
-}
-[data-md] > :last-child {
-    margin-bottom: 0;
-}</style>
-<style>/* style-selflinks */
-
-.heading, .issue, .note, .example, li, dt {
-    position: relative;
-}
-a.self-link {
-    position: absolute;
-    top: 0;
-    left: calc(-1 * (3.5rem - 26px));
-    width: calc(3.5rem - 26px);
-    height: 2em;
-    text-align: center;
-    border: none;
-    transition: opacity .2s;
-    opacity: .5;
-}
-a.self-link:hover {
-    opacity: 1;
-}
-.heading > a.self-link {
-    font-size: 83%;
-}
-li > a.self-link {
-    left: calc(-1 * (3.5rem - 26px) - 2em);
-}
-dfn > a.self-link {
-    top: auto;
-    left: auto;
-    opacity: 0;
-    width: 1.5em;
-    height: 1.5em;
-    background: gray;
-    color: white;
-    font-style: normal;
-    transition: opacity .2s, background-color .2s, color .2s;
-}
-dfn:hover > a.self-link {
-    opacity: 1;
-}
-dfn > a.self-link:hover {
-    color: black;
-}
-
-a.self-link::before            { content: "¶"; }
-.heading > a.self-link::before { content: "§"; }
-dfn > a.self-link::before      { content: "#"; }</style>
-<style>/* style-counters */
-
-body {
-    counter-reset: example figure issue;
-}
-.issue {
-    counter-increment: issue;
-}
-.issue:not(.no-marker)::before {
-    content: "Issue " counter(issue);
-}
-
-.example {
-    counter-increment: example;
-}
-.example:not(.no-marker)::before {
-    content: "Example " counter(example);
-}
-.invalid.example:not(.no-marker)::before,
-.illegal.example:not(.no-marker)::before {
-    content: "Invalid Example" counter(example);
-}
-
-figcaption {
-    counter-increment: figure;
-}
-figcaption:not(.no-marker)::before {
-    content: "Figure " counter(figure) " ";
-}</style>
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1361,6 +1285,35 @@ pre .property::before, pre .property::after {
 [data-link-type=biblio] {
     white-space: pre;
 }</style>
+<style>/* style-counters */
+
+body {
+    counter-reset: example figure issue;
+}
+.issue {
+    counter-increment: issue;
+}
+.issue:not(.no-marker)::before {
+    content: "Issue " counter(issue);
+}
+
+.example {
+    counter-increment: example;
+}
+.example:not(.no-marker)::before {
+    content: "Example " counter(example);
+}
+.invalid.example:not(.no-marker)::before,
+.illegal.example:not(.no-marker)::before {
+    content: "Invalid Example" counter(example);
+}
+
+figcaption {
+    counter-increment: figure;
+}
+figcaption:not(.no-marker)::before {
+    content: "Figure " counter(figure) " ";
+}</style>
 <style>/* style-dfn-panel */
 
 .dfn-panel {
@@ -1398,6 +1351,62 @@ pre .property::before, pre .property::after {
 
 .dfn-paneled { cursor: pointer; }
 </style>
+<style>/* style-md-lists */
+
+/* This is a weird hack for me not yet following the commonmark spec
+   regarding paragraph and lists. */
+[data-md] > :first-child {
+    margin-top: 0;
+}
+[data-md] > :last-child {
+    margin-bottom: 0;
+}</style>
+<style>/* style-selflinks */
+
+.heading, .issue, .note, .example, li, dt {
+    position: relative;
+}
+a.self-link {
+    position: absolute;
+    top: 0;
+    left: calc(-1 * (3.5rem - 26px));
+    width: calc(3.5rem - 26px);
+    height: 2em;
+    text-align: center;
+    border: none;
+    transition: opacity .2s;
+    opacity: .5;
+}
+a.self-link:hover {
+    opacity: 1;
+}
+.heading > a.self-link {
+    font-size: 83%;
+}
+li > a.self-link {
+    left: calc(-1 * (3.5rem - 26px) - 2em);
+}
+dfn > a.self-link {
+    top: auto;
+    left: auto;
+    opacity: 0;
+    width: 1.5em;
+    height: 1.5em;
+    background: gray;
+    color: white;
+    font-style: normal;
+    transition: opacity .2s, background-color .2s, color .2s;
+}
+dfn:hover > a.self-link {
+    opacity: 1;
+}
+dfn > a.self-link:hover {
+    color: black;
+}
+
+a.self-link::before            { content: "¶"; }
+.heading > a.self-link::before { content: "§"; }
+dfn > a.self-link::before      { content: "#"; }</style>
 <style>/* style-syntax-highlighting */
 
 .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
@@ -1460,7 +1469,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">WADG0001 WebAPI type extension</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2019-02-20">20 February 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2020-07-06">6 July 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1469,7 +1478,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <dd><a href="https://github.com/webapi-discovery/rfcs/issues/">GitHub</a>
      <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard"><span class="p-name fn">Mike Ralphson</span> (<span class="p-org org">Mermade Software</span>)
-     <dd class="editor p-author h-card vcard"><span class="p-name fn">Ivan Goncharov</span> (<span class="p-org org">APIs.guru</span>)
+     <dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="http://nickevans.me/">Nick Evans</a> (<span class="p-org org">Open Data Institute</span>)
     </dl>
    </div>
    <div data-fill-with="warning"></div>
@@ -1485,13 +1494,71 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
     <li><a href="#definitions"><span class="secno">1</span> <span class="content">Definitions</span></a>
+    <li><a href="#scope"><span class="secno">2</span> <span class="content">Scope</span></a>
     <li>
-     <a href="#proposed-extension"><span class="secno">2</span> <span class="content">Proposed Extension</span></a>
+     <a href="#proposed-extension"><span class="secno">3</span> <span class="content">Proposed Extension</span></a>
      <ol class="toc">
-      <li><a href="#content-types"><span class="secno">2.1</span> <span class="content">Content-Types</span></a>
-      <li><a href="#webapiactions"><span class="secno">2.2</span> <span class="content">webApiActions</span></a>
+      <li>
+       <a href="#new-property-endpointurl"><span class="secno">3.1</span> <span class="content">New property <code>endpointUrl</code></span></a>
+       <ol class="toc">
+        <li><a href="#proposal"><span class="secno">3.1.1</span> <span class="content">Proposal</span></a>
+        <li><a href="#examples"><span class="secno">3.1.2</span> <span class="content">Examples</span></a>
+        <li><a href="#notes"><span class="secno">3.1.3</span> <span class="content">Notes</span></a>
+       </ol>
+      <li>
+       <a href="#update-description-for-documentation-property"><span class="secno">3.2</span> <span class="content">Update description for <code>documentation</code> property</span></a>
+       <ol class="toc">
+        <li><a href="#proposal①"><span class="secno">3.2.1</span> <span class="content">Proposal</span></a>
+        <li><a href="#notes①"><span class="secno">3.2.2</span> <span class="content">Notes</span></a>
+       </ol>
+      <li>
+       <a href="#new-property-conformsto"><span class="secno">3.3</span> <span class="content">New property <code>conformsTo</code></span></a>
+       <ol class="toc">
+        <li><a href="#proposal②"><span class="secno">3.3.1</span> <span class="content">Proposal</span></a>
+        <li><a href="#example"><span class="secno">3.3.2</span> <span class="content">Example</span></a>
+        <li><a href="#notes②"><span class="secno">3.3.3</span> <span class="content">Notes</span></a>
+       </ol>
+      <li>
+       <a href="#new-property-accessservice"><span class="secno">3.4</span> <span class="content">New property <code>accessService</code></span></a>
+       <ol class="toc">
+        <li><a href="#proposal③"><span class="secno">3.4.1</span> <span class="content">Proposal</span></a>
+        <li><a href="#example①"><span class="secno">3.4.2</span> <span class="content">Example</span></a>
+        <li><a href="#notes③"><span class="secno">3.4.3</span> <span class="content">Notes</span></a>
+       </ol>
+      <li>
+       <a href="#add-webapi-to-domain-of-version"><span class="secno">3.5</span> <span class="content">Add <code>WebAPI</code> to domain of <code>version</code></span></a>
+       <ol class="toc">
+        <li><a href="#proposal④"><span class="secno">3.5.1</span> <span class="content">Proposal</span></a>
+        <li><a href="#example②"><span class="secno">3.5.2</span> <span class="content">Example</span></a>
+        <li><a href="#notes④"><span class="secno">3.5.3</span> <span class="content">Notes</span></a>
+       </ol>
+      <li>
+       <a href="#new-property-apitransport"><span class="secno">3.6</span> <span class="content">New property <code>apiTransport</code></span></a>
+       <ol class="toc">
+        <li><a href="#proposal⑤"><span class="secno">3.6.1</span> <span class="content">Proposal</span></a>
+        <li><a href="#example③"><span class="secno">3.6.2</span> <span class="content">Example</span></a>
+        <li><a href="#notes⑤"><span class="secno">3.6.3</span> <span class="content">Notes</span></a>
+       </ol>
+      <li>
+       <a href="#add-webapi-to-domain-of-license"><span class="secno">3.7</span> <span class="content">Add <code>WebAPI</code> to domain of <code>license</code></span></a>
+       <ol class="toc">
+        <li><a href="#proposal⑥"><span class="secno">3.7.1</span> <span class="content">Proposal</span></a>
+        <li><a href="#example④"><span class="secno">3.7.2</span> <span class="content">Example</span></a>
+       </ol>
+      <li>
+       <a href="#add-url-to-the-webapi-example"><span class="secno">3.8</span> <span class="content">Add <code>url</code> to the <code>WebAPI</code> example</span></a>
+       <ol class="toc">
+        <li><a href="#proposal⑦"><span class="secno">3.8.1</span> <span class="content">Proposal</span></a>
+        <li><a href="#notes⑥"><span class="secno">3.8.2</span> <span class="content">Notes</span></a>
+       </ol>
      </ol>
-    <li><a href="#example"><span class="secno">3</span> <span class="content">Example</span></a>
+    <li>
+     <a href="#suggested-values"><span class="secno">4</span> <span class="content">Suggested values</span></a>
+     <ol class="toc">
+      <li><a href="#encodingformat-values"><span class="secno">4.1</span> <span class="content"><code>encodingFormat</code> values</span></a>
+      <li><a href="#action-name-values"><span class="secno">4.2</span> <span class="content"><code>Action</code> <code>name</code> values</span></a>
+     </ol>
+    <li><a href="#full-example"><span class="secno">5</span> <span class="content">Full example</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -1511,7 +1578,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <p class="copyright" data-fill-with="copyright" style="display:none"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 20 February 2019,
+In addition, as of 6 July 2020,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1521,8 +1588,11 @@ Parts of this work may be from another specification document.  If so, those par
    <h2 class="heading settled" data-level="1" id="definitions"><span class="secno">1. </span><span class="content">Definitions</span><a class="self-link" href="#definitions"></a></h2>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="machine-readable-api-definition">Machine-readable API Definition</dfn> a structured document defining the inputs and outputs of an API in a standardised format, primarily designed for automated processing, not human consumption.</p>
    <div class="note" role="note">Note: See <a href="http://nordicapis.com/difference-api-documentation-specification-definition/">this article</a> for an explanation of the difference between API documentation, specifications and definitions.</div>
-   <h2 class="heading settled" data-level="2" id="proposed-extension"><span class="secno">2. </span><span class="content">Proposed Extension</span><a class="self-link" href="#proposed-extension"></a></h2>
-   <p>The base <a href="https://schema.org">Schema.org</a> <a href="https://pending.schema.org">WebAPI</a> type, for example:</p>
+   <h2 class="heading settled" data-level="2" id="scope"><span class="secno">2. </span><span class="content">Scope</span><a class="self-link" href="#scope"></a></h2>
+   <p>This specification does not attempt to replace existing formats of describing an API, such as <a data-link-type="biblio" href="#biblio-openapi">[OpenAPI]</a>, <a data-link-type="biblio" href="#biblio-raml">[RAML]</a>, <a data-link-type="biblio" href="#biblio-api-blueprint">[API-Blueprint]</a>, <a data-link-type="biblio" href="#biblio-json-home">[JSON-home]</a> and <a data-link-type="biblio" href="#biblio-apisjson">[apis.json]</a>, but rather seeks to describe metadata about an API that maybe useful to those discovering it.</p>
+   <h2 class="heading settled" data-level="3" id="proposed-extension"><span class="secno">3. </span><span class="content">Proposed Extension</span><a class="self-link" href="#proposed-extension"></a></h2>
+   <p>Schema.org’s Dataset vocabulary was originally <a href="https://schema.org/docs/data-and-datasets.html">based on DCAT</a>, which in turn used Dublin Core and FOAF terms. <a href="https://www.w3.org/TR/vocab-dcat-2/">DCAT Version 2</a> is now current, and is therefore used within this draft.</p>
+   <p>The base <a href="https://schema.org/">schema.org</a> <a href="https://schema.org/WebAPI">WebAPI</a> type, for example:</p>
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-><c- p>,</c->
   <c- f>"@type"</c-><c- p>:</c-> <c- u>"WebAPI"</c-><c- p>,</c->
@@ -1536,93 +1606,264 @@ Parts of this work may be from another specification document.  If so, those par
   <c- p>}</c->
 <c- p>}</c->
 </pre>
-   <p>is to be extended as follows:</p>
-   <p>The extension properties (and their types) are:</p>
-   <ul>
-    <li data-md>
-     <p><code>versions</code> (OPTIONAL array of <a href="https://schema.org/Thing"><code>Thing</code></a> -> <a href="http://meta.schema.org/Property"><code>Property</code></a> -> <a href="http://schema.org/softwareVersion"><code>softwareVersion</code></a>). It is RECOMMENDED that APIs be versioned using <a data-link-type="biblio" href="#biblio-semver">[semver]</a></p>
-    <li data-md>
-     <p><code>entryPoints</code> (OPTIONAL array of <a href="https://schema.org/Thing"><code>Thing</code></a> -> <a href="https://schema.org/Intangible"><code>Intangible</code></a> -> <a href="https://schema.org/EntryPoint"><code>EntryPoint</code></a>)</p>
-     <ul>
-      <li data-md>
-       <p>extended with: <code>responseContentTypes</code> (OPTIONAL <a href="http://schema.org/Text"><code>Text</code></a>)</p>
-     </ul>
-    <li data-md>
-     <p><code>license</code> (OPTIONAL, <a href="http://schema.org/CreativeWork"><code>CreativeWork</code></a> or <a href="http://schema.org/URL"><code>URL</code></a>) - the license for the design/signature of the API</p>
-    <li data-md>
-     <p><code>transport</code> (enumerated <a href="http://schema.org/Text"><code>Text</code></a>: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)</p>
-    <li data-md>
-     <p><code>apiProtocol</code> (OPTIONAL, enumerated <a href="http://schema.org/Text"><code>Text</code></a>:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)</p>
-    <li data-md>
-     <p><code>webApiDefinitions</code> (OPTIONAL array of <a href="http://schema.org/EntryPoint"><code>EntryPoint</code></a>s) containing links to <a data-link-type="dfn" href="#machine-readable-api-definition" id="ref-for-machine-readable-api-definition">machine-readable API definition</a>s</p>
-    <li data-md>
-     <p><code>webApiActions</code> (OPTIONAL array of potential <a href="http://schema.org/Action"><code>Action</code></a>s)</p>
-   </ul>
-   <p>The Content-Type(s) consumed by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.<a href="http://schema.org/contentType">contentType</a> property. The Content-Type(s) produced by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.responseContentType property.</p>
-   <h3 class="heading settled" data-level="2.1" id="content-types"><span class="secno">2.1. </span><span class="content">Content-Types</span><a class="self-link" href="#content-types"></a></h3>
-   <p>The webApiDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. For example, <code>application/wsdl+xml</code> is the IANA registered content-type for the Web Service Definition Language. The following non-IANA contentTypes MAY additionally be used:</p>
-   <table class="data">
+   <p>is to be extended by several properties.</p>
+   <p>These properties are defined within the following list of modular proposals for schema.org. The modularity ensures that adoption can progressed pragmatically, and not be blocked by a lack of consensus on all properties. This also ensures that this report does not need to cover all possible use cases in this iteration.</p>
+   <h3 class="heading settled" data-level="3.1" id="new-property-endpointurl"><span class="secno">3.1. </span><span class="content">New property <code>endpointUrl</code></span><a class="self-link" href="#new-property-endpointurl"></a></h3>
+   <h4 class="heading settled" data-level="3.1.1" id="proposal"><span class="secno">3.1.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal"></a></h4>
+   <table>
     <thead>
      <tr>
-      <th>Format 
-      <th>Content-Type 
+      <th>Property
+      <th>Domain
+      <th>Range
+      <th>Description
     <tbody>
      <tr>
-      <td>OpenAPI / Swagger in YAML
-      <td><code>application/vnd.oai.openapi</code> 
-     <tr>
-      <td>OpenAPI / Swagger in JSON
-      <td><code>application/vnd.oai.openapi+json</code> 
-     <tr>
-      <td>RAML
-      <td><code>application/raml+yaml</code> 
-     <tr>
-      <td>API Blueprint in markdown
-      <td><code>text/vnd.apiblueprint</code> 
-     <tr>
-      <td>API Blueprint parsed in YAML
-      <td><code>application/vnd.refract.parse-result+yaml</code> 
-     <tr>
-      <td>API Blueprint parsed in JSON
-      <td><code>application/vnd.refract.parse-result+json</code> 
+      <td><code>endpointUrl</code>
+      <td><code>schema:WebAPI</code>
+      <td><code>schema:URL</code>, <code>schema:EntryPoint</code>
+      <td>The root location or primary endpoint of the API.
    </table>
-   <p>Content-Types MAY include a <code>;version</code> parameter where appropriate.</p>
-   <p>Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webApiDefinition (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.</p>
-   <h3 class="heading settled" data-level="2.2" id="webapiactions"><span class="secno">2.2. </span><span class="content">webApiActions</span><a class="self-link" href="#webapiactions"></a></h3>
-   <p>Valid <a href="https://schema.org/Action">Action</a>.<a href="https://schema.org/name">name</a>s for webApiActions are:</p>
-   <table class="data">
+   <h4 class="heading settled" data-level="3.1.2" id="examples"><span class="secno">3.1.2. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h4>
+   <p>Simple usage:</p>
+<pre class="language-json highlight"><c- u>"endpointUrl"</c->: <c- u>"https://kgsearch.googleapis.com/"</c->,
+</pre>
+   <p>Advanced usage:</p>
+<pre class="language-json highlight"><c- u>"endpointUrl"</c->: <c- p>[</c->
+  <c- p>{</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- u>"EntryPoint"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Production server (uses live data)"</c-><c- p>,</c->
+    <c- f>"url"</c-><c- p>:</c-> <c- u>"https://api.example.com/v1"</c-><c- p>,</c->
+    <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/json"</c->
+  <c- p>},</c->
+  <c- p>{</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- u>"EntryPoint"</c-><c- p>,</c->
+    <c- f>"name"</c-><c- p>:</c-> <c- u>"Sandbox server (uses test data)"</c-><c- p>,</c->
+    <c- f>"url"</c-><c- p>:</c-> <c- u>"https://sandbox-api.example.com:8443/v1"</c-><c- p>,</c->
+    <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/json"</c->
+  <c- p>}</c->
+<c- p>]</c->,
+</pre>
+   <h4 class="heading settled" data-level="3.1.3" id="notes"><span class="secno">3.1.3. </span><span class="content">Notes</span><a class="self-link" href="#notes"></a></h4>
+   <p>This proposal brings the property above <a href="https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_url">directly from DCAT v2</a>. The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> overloads the <code>schema:url</code> property for both <code>dcat:endpointURL</code> and <code>dcat:landingPage</code>. Given the nature of <code>endpointUrl</code> being the base URL of an API (rather than a web page URL, which is likely the most useful to a web-crawler), a specific property has been defined.</p>
+   <p>To be consistent with the current inclusion of <code>schema:CreativeWork</code> in the range of <code>schema:documentation</code>, <code>schema:EntryPoint</code> could also be included here for cases where a richer description of the endpoint is required. For example, to differentiate between different environments.</p>
+   <h3 class="heading settled" data-level="3.2" id="update-description-for-documentation-property"><span class="secno">3.2. </span><span class="content">Update description for <code>documentation</code> property</span><a class="self-link" href="#update-description-for-documentation-property"></a></h3>
+   <h4 class="heading settled" data-level="3.2.1" id="proposal①"><span class="secno">3.2.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal①"></a></h4>
+   <p>The description of the <code>schema:documentation</code> property is updated to:</p>
+   <blockquote>
+    <p>A resource that provides further documentation of the services available via the WebAPI, including their operations, parameters etc.</p>
+    <p>The <code>documentation</code> property gives specific details of the actual endpoint instances, while the <code>conformsTo</code> property is used to indicate the general standard or specification that the endpoints implement.</p>
+    <p>Documentation may be expressed in a machine-readable format, such as an OpenAPI (Swagger) description, an OGC GetCapabilities response WFS, ISO-19142, WMS, ISO-19128, a SPARQL Service Description, an OpenSearch or WSDL20 document, a Hydra API description, else in HTML, text or some other informal mode. The <code>encodingFormat</code> of the <code>CreativeWork</code> should be used to indicate the use of such formats via their MIME type.</p>
+   </blockquote>
+   <p>An example should be added to <a href="https://schema.org/documentation">https://schema.org/documentation</a> as follows:</p>
+<pre class="language-json highlight"><c- u>"documentation"</c->: <c- p>[</c->
+  <c- p>{</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- u>"CreativeWork"</c-><c- p>,</c->
+    <c- f>"encodingFormat"</c-><c- p>:</c-> <c- u>"text/html"</c-><c- p>,</c->
+    <c- f>"url"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/reference/rest/v1"</c->
+  <c- p>},</c->
+  <c- p>{</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- u>"CreativeWork"</c-><c- p>,</c->
+    <c- f>"encodingFormat"</c-><c- p>:</c-> <c- u>"application/json"</c-><c- p>,</c->
+    <c- f>"url"</c-><c- p>:</c-> <c- u>"https://kgsearch.googleapis.com/$discovery/rest?version=v1"</c->
+  <c- p>},</c->
+  <c- p>{</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- u>"CreativeWork"</c-><c- p>,</c->
+    <c- f>"encodingFormat"</c-><c- p>:</c-> <c- u>"application/vnd.oai.openapi+json;version=2.0"</c-><c- p>,</c->
+    <c- f>"url"</c-><c- p>:</c-> <c- u>"https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"</c->
+  <c- p>},</c->
+<c- p>]</c->,
+</pre>
+   <h4 class="heading settled" data-level="3.2.2" id="notes①"><span class="secno">3.2.2. </span><span class="content">Notes</span><a class="self-link" href="#notes①"></a></h4>
+   <p>This proposal makes it clear that the <code>schema:documentation</code> property can also be used for <a data-link-type="dfn" href="#machine-readable-api-definition" id="ref-for-machine-readable-api-definition">machine-readable API definition</a>s, bringing it in line with <a href="https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_url">DCAT v2</a>.</p>
+   <p>Note that the <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> recommends the <code>schema:documentation</code> property for <code>dcat:endpointDescription</code>, as above.</p>
+   <p>An alternative that was considered was to create an additional property, <code>schema:endpointDescription</code> with range <code>schema:CreativeWork</code>, in order to create a more explicit separation between human-readable <code>documentation</code>, and machine-readable <code>endpointDescription</code>.</p>
+   <h3 class="heading settled" data-level="3.3" id="new-property-conformsto"><span class="secno">3.3. </span><span class="content">New property <code>conformsTo</code></span><a class="self-link" href="#new-property-conformsto"></a></h3>
+   <h4 class="heading settled" data-level="3.3.1" id="proposal②"><span class="secno">3.3.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal②"></a></h4>
+   <table>
     <thead>
      <tr>
-      <th>Name 
-      <th>Description 
+      <th>Property
+      <th>Domain
+      <th>Range
+      <th>Description
     <tbody>
      <tr>
-      <td><code>apiAuthentication</code> 
-      <td> Links to a resource detailing authentication requirements. Note this is a human-readable resource, not an authentication endpoint 
-     <tr>
-      <td><code>apiClientRegistration</code> 
-      <td> Links to a resource where a client may register to use the API 
-     <tr>
-      <td><code>apiConsole</code> 
-      <td> Links to an interactive console where API calls may be tested 
-     <tr>
-      <td><code>apiPayment</code> 
-      <td> Links to a resource detailing pricing details of the API 
-     <tr>
-      <td><code>apiSLA</code> 
-      <td> Links to a resource detailing the Service Level Agreement relating to the API. This may be machine- or human-readble. 
-     <tr>
-      <td><code>apiSupport</code> 
-      <td> Links to a resource where a client may obtain support for the API 
+      <td><code>conformsTo</code>
+      <td><code>schema:WebAPI</code>
+      <td><code>schema:URL</code>
+      <td>The URL reference of an established standard to which the described API conforms, for example <code>https://jsonapi.org/format/1.0/</code>, <code>https://grpc.io/</code>, or <code>http://www.hydra-cg.com/spec/latest/core/</code>.
    </table>
-   <h2 class="heading settled" data-level="3" id="example"><span class="secno">3. </span><span class="content">Example</span><a class="self-link" href="#example"></a></h2>
-   <p>A fuller example of a WebAPI annotation, including the extension attributes. Note the @type name is still to be determined.</p>
+   <h4 class="heading settled" data-level="3.3.2" id="example"><span class="secno">3.3.2. </span><span class="content">Example</span><a class="self-link" href="#example"></a></h4>
+<pre class="language-json highlight"><c- u>"conformsTo"</c->: <c- p>[</c->
+  <c- u>"https://jsonapi.org/format/1.0/"</c->
+<c- p>]</c->,
+</pre>
+   <h4 class="heading settled" data-level="3.3.3" id="notes②"><span class="secno">3.3.3. </span><span class="content">Notes</span><a class="self-link" href="#notes②"></a></h4>
+   <p>This proposal brings the property <a href="https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_url">directly from DCAT v2</a>.</p>
+   <p>The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> does not include <code>conformsTo</code>, and that the mapping gap was also recognised in <a href="https://ec-jrc.github.io/dcat-ap-to-schema-org/#mapping-properties-dataset">previous mapping attempts</a> and not addressed within <a href="https://github.com/w3c/dxwg/issues/251">DCAT v2 discussions</a>.</p>
+   <h3 class="heading settled" data-level="3.4" id="new-property-accessservice"><span class="secno">3.4. </span><span class="content">New property <code>accessService</code></span><a class="self-link" href="#new-property-accessservice"></a></h3>
+   <h4 class="heading settled" data-level="3.4.1" id="proposal③"><span class="secno">3.4.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal③"></a></h4>
+   <table>
+    <thead>
+     <tr>
+      <th>Property
+      <th>Domain
+      <th>Range
+      <th>Description
+    <tbody>
+     <tr>
+      <td><code>accessService</code>
+      <td><code>schema:Dataset</code>, <code>schema:DataDownload</code>
+      <td><code>schema:WebAPI</code>
+      <td>An API that provides access to the dataset
+   </table>
+   <h4 class="heading settled" data-level="3.4.2" id="example①"><span class="secno">3.4.2. </span><span class="content">Example</span><a class="self-link" href="#example①"></a></h4>
 <pre class="language-json highlight"><c- p>{</c->
   <c- f>"@context"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-><c- p>,</c->
-  <c- f>"@type"</c-><c- p>:</c-> <c- u>"ActionableWebAPI"</c-><c- p>,</c->
+  <c- f>"@type"</c-><c- p>:</c-> <c- u>"Dataset"</c-><c- p>,</c->
+  ...
+  <c- f>"accessService"</c-><c- p>:</c-> <c- p>{</c->
+    <c- f>"@type"</c-><c- p>:</c-> <c- u>"WebAPI"</c-><c- p>,</c->
+    ...
+  <c- p>}</c->
+<c- p>}</c->
+</pre>
+   <h4 class="heading settled" data-level="3.4.3" id="notes③"><span class="secno">3.4.3. </span><span class="content">Notes</span><a class="self-link" href="#notes③"></a></h4>
+   <p>The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> proposes the use of <code>schema:serviceOutput</code> within <code>schema:WebAPI</code> to reference the <code>schema:Dataset</code>. For the inverse, this proposal uses a term <a href="https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_serves_dataset">from DCAT v2</a> to reference <code>schema:WebAPI</code> from <code>schema:Dataset</code>:</p>
+   <p>The DCAT v2 term <code>dcat:accessService</code> links a <code>dcat:Distribution</code> to the <code>dcat:DataService</code> (akin to <code>schema:DataDownload</code>), however given that an <code>schema:WebAPI</code> may allow read/write access to a Dataset, it is not necessarily limited to only a single <code>schema:DataDownload</code>, but may also cover an entire <code>schema:Dataset</code>.</p>
+   <p>The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> does not include <code>accessService</code>.</p>
+   <h3 class="heading settled" data-level="3.5" id="add-webapi-to-domain-of-version"><span class="secno">3.5. </span><span class="content">Add <code>WebAPI</code> to domain of <code>version</code></span><a class="self-link" href="#add-webapi-to-domain-of-version"></a></h3>
+   <h4 class="heading settled" data-level="3.5.1" id="proposal④"><span class="secno">3.5.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal④"></a></h4>
+   <p>Add <code>schema:WebAPI</code> to the domain of <code>schema:version</code>, to describe the version of the API.</p>
+   <h4 class="heading settled" data-level="3.5.2" id="example②"><span class="secno">3.5.2. </span><span class="content">Example</span><a class="self-link" href="#example②"></a></h4>
+<pre class="language-json highlight"><c- u>"version"</c->: <c- u>"1.0.0"</c->,
+</pre>
+   <h4 class="heading settled" data-level="3.5.3" id="notes④"><span class="secno">3.5.3. </span><span class="content">Notes</span><a class="self-link" href="#notes④"></a></h4>
+   <p>This is the version of the API itself, and hence <code>schema:softwareVersion</code>, <code>schema:assemblyVersion</code>, and <code>schemaVersion</code> are not appropriate.</p>
+   <h3 class="heading settled" data-level="3.6" id="new-property-apitransport"><span class="secno">3.6. </span><span class="content">New property <code>apiTransport</code></span><a class="self-link" href="#new-property-apitransport"></a></h3>
+   <h4 class="heading settled" data-level="3.6.1" id="proposal⑤"><span class="secno">3.6.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal⑤"></a></h4>
+   <table>
+    <thead>
+     <tr>
+      <th>Property
+      <th>Domain
+      <th>Range
+      <th>Description
+    <tbody>
+     <tr>
+      <td><code>apiTransport</code>
+      <td><code>schema:WebAPI</code>
+      <td><code>schema:Text</code>
+      <td>The type of transport used for the API, such as HTTP, HTTPS, SMTP, MQTT, WS, WSS
+   </table>
+   <h4 class="heading settled" data-level="3.6.2" id="example③"><span class="secno">3.6.2. </span><span class="content">Example</span><a class="self-link" href="#example③"></a></h4>
+<pre class="language-json highlight"><c- u>"apiTransport"</c->: <c- p>[</c->
+  <c- u>"HTTP"</c-><c- p>,</c->
+  <c- u>"HTTPS"</c->
+<c- p>]</c->,
+</pre>
+   <h4 class="heading settled" data-level="3.6.3" id="notes⑤"><span class="secno">3.6.3. </span><span class="content">Notes</span><a class="self-link" href="#notes⑤"></a></h4>
+   <p>Given the widely recognised acronyms in use for modes of API transport, there is no need to reference an explicit controlled vocabulary.</p>
+   <h3 class="heading settled" data-level="3.7" id="add-webapi-to-domain-of-license"><span class="secno">3.7. </span><span class="content">Add <code>WebAPI</code> to domain of <code>license</code></span><a class="self-link" href="#add-webapi-to-domain-of-license"></a></h3>
+   <h4 class="heading settled" data-level="3.7.1" id="proposal⑥"><span class="secno">3.7.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal⑥"></a></h4>
+   <p>Add <code>schema:WebAPI</code> to the domain of <code>schema:license</code>, to describe the license for the design/signature of the API.</p>
+   <h4 class="heading settled" data-level="3.7.2" id="example④"><span class="secno">3.7.2. </span><span class="content">Example</span><a class="self-link" href="#example④"></a></h4>
+<pre class="language-json highlight"><c- u>"license"</c->: <c- u>"https://creativecommons.org/licenses/by/3.0/"</c->,
+</pre>
+   <h3 class="heading settled" data-level="3.8" id="add-url-to-the-webapi-example"><span class="secno">3.8. </span><span class="content">Add <code>url</code> to the <code>WebAPI</code> example</span><a class="self-link" href="#add-url-to-the-webapi-example"></a></h3>
+   <h4 class="heading settled" data-level="3.8.1" id="proposal⑦"><span class="secno">3.8.1. </span><span class="content">Proposal</span><a class="self-link" href="#proposal⑦"></a></h4>
+   <p>Add the following to the examples in the <a href="https://schema.org/WebAPI">https://schema.org/WebAPI</a> page:</p>
+<pre class="language-json highlight"><c- u>"url"</c->: <c- u>"https://developers.google.com/knowledge-graph/"</c->,
+<c- u>"documentation"</c->: <c- u>"https://developers.google.com/knowledge-graph/reference/rest/v1"</c->,
+</pre>
+   <h4 class="heading settled" data-level="3.8.2" id="notes⑥"><span class="secno">3.8.2. </span><span class="content">Notes</span><a class="self-link" href="#notes⑥"></a></h4>
+   <p>The <a href="https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo">DCAT v2 to schema.org mapping</a> overloads the <code>schema:url</code> property for both <code>dcat:endpointURL</code> and <code>dcat:landingPage</code>. Hence <code>url</code> should be used for the landing page of the API (e.g. <a href="https://azure.microsoft.com/en-gb/services/cdn/">https://azure.microsoft.com/en-gb/services/cdn/</a>) rather than the documentation (e.g. <a href="https://docs.microsoft.com/en-gb/azure/cdn/">https://docs.microsoft.com/en-gb/azure/cdn/</a>).</p>
+   <div class="non-normative">
+    <h2 class="heading settled" data-level="4" id="suggested-values"><span class="secno">4. </span><span class="content">Suggested values</span><a class="self-link" href="#suggested-values"></a></h2>
+    <p>This section is non-normative, and these values are outside the scope of schema.org. They serve as an illustration of suggested usage.</p>
+    <h3 class="heading settled" data-level="4.1" id="encodingformat-values"><span class="secno">4.1. </span><span class="content"><code>encodingFormat</code> values</span><a class="self-link" href="#encodingformat-values"></a></h3>
+    <p>When <code>encodingFormat</code> is used to specify the API description format used, and where an <a href="https://iana.org">IANA</a>-registered media type is not available, the following widely recognised non-IANA media types may be used:</p>
+    <table class="data">
+     <thead>
+      <tr>
+       <th>Format 
+       <th>Media type 
+     <tbody>
+      <tr>
+       <td>OpenAPI / Swagger in YAML
+       <td><code>application/vnd.oai.openapi</code> 
+      <tr>
+       <td>OpenAPI / Swagger in JSON
+       <td><code>application/vnd.oai.openapi+json</code> 
+      <tr>
+       <td>RAML
+       <td><code>application/raml+yaml</code> 
+      <tr>
+       <td>API Blueprint in markdown
+       <td><code>text/vnd.apiblueprint</code> 
+      <tr>
+       <td>API Blueprint parsed in YAML
+       <td><code>application/vnd.refract.parse-result+yaml</code> 
+      <tr>
+       <td>API Blueprint parsed in JSON
+       <td><code>application/vnd.refract.parse-result+json</code> 
+    </table>
+    <p>Media types may include a <code>;version</code> parameter where appropriate.</p>
+    <p>Other media types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc may be used, with decreasing levels of machine-readability.</p>
+    <h3 class="heading settled" data-level="4.2" id="action-name-values"><span class="secno">4.2. </span><span class="content"><code>Action</code> <code>name</code> values</span><a class="self-link" href="#action-name-values"></a></h3>
+    <p>A number of <code>Action</code> names are suggested for use with <code>potentialAction</code> of <code>WebAPI</code>, though this list is not exhaustive:</p>
+    <table class="data">
+     <thead>
+      <tr>
+       <th>Name 
+       <th>Description 
+     <tbody>
+      <tr>
+       <td><code>API Authentication</code> 
+       <td> Links to a resource detailing authentication requirements. Note this is a human-readable resource, not an authentication endpoint 
+      <tr>
+       <td><code>API Client Registration</code> 
+       <td> Links to a resource where a client may register to use the API 
+      <tr>
+       <td><code>API Console</code> 
+       <td> Links to an interactive console where API calls may be tested 
+      <tr>
+       <td><code>API Payment</code> 
+       <td> Links to a resource detailing pricing details of the API 
+      <tr>
+       <td><code>API SLA</code> 
+       <td> Links to a resource detailing the Service Level Agreement relating to the API. This may be machine- or human-readble. 
+      <tr>
+       <td><code>API Support</code> 
+       <td> Links to a resource where a client may obtain support for the API 
+    </table>
+   </div>
+   <h2 class="heading settled" data-level="5" id="full-example"><span class="secno">5. </span><span class="content">Full example</span><a class="self-link" href="#full-example"></a></h2>
+   <p>A fuller example of a <code>WebAPI</code> annotation, including the proposed properties.</p>
+<pre class="language-json highlight"><c- p>{</c->
+  <c- f>"@context"</c-><c- p>:</c-> <c- u>"http://schema.org/"</c-><c- p>,</c->
+  <c- f>"@type"</c-><c- p>:</c-> <c- u>"WebAPI"</c-><c- p>,</c->
   <c- f>"name"</c-><c- p>:</c-> <c- u>"Google Knowledge Graph Search API"</c-><c- p>,</c->
   <c- f>"description"</c-><c- p>:</c-> <c- u>"The Knowledge Graph Search API lets you find entities in the Google Knowledge Graph. The API uses standard schema.org types and is compliant with the JSON-LD specification."</c-><c- p>,</c->
-  <c- f>"documentation"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/"</c-><c- p>,</c->
+  <c- f>"documentation"</c-><c- p>:</c-> <c- p>[</c->
+    <c- p>{</c->
+      <c- f>"@type"</c-><c- p>:</c-> <c- u>"CreativeWork"</c-><c- p>,</c->
+      <c- f>"encodingFormat"</c-><c- p>:</c-> <c- u>"text/html"</c-><c- p>,</c->
+      <c- f>"url"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/reference/rest/v1"</c->
+    <c- p>},</c->
+    <c- p>{</c->
+      <c- f>"@type"</c-><c- p>:</c-> <c- u>"CreativeWork"</c-><c- p>,</c->
+      <c- f>"encodingFormat"</c-><c- p>:</c-> <c- u>"application/json"</c-><c- p>,</c->
+      <c- f>"url"</c-><c- p>:</c-> <c- u>"https://kgsearch.googleapis.com/$discovery/rest?version=v1"</c->
+    <c- p>},</c->
+    <c- p>{</c->
+      <c- f>"@type"</c-><c- p>:</c-> <c- u>"CreativeWork"</c-><c- p>,</c->
+      <c- f>"encodingFormat"</c-><c- p>:</c-> <c- u>"application/vnd.oai.openapi+json;version=2.0"</c-><c- p>,</c->
+      <c- f>"url"</c-><c- p>:</c-> <c- u>"https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"</c->
+    <c- p>},</c->
+  <c- p>],</c->
+  <c- f>"url"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/"</c-><c- p>,</c->
   <c- f>"termsOfService"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/terms"</c-><c- p>,</c->
   <c- f>"logo"</c-><c- p>:</c-> <c- u>"https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"</c-><c- p>,</c->
   <c- f>"license"</c-><c- p>:</c-> <c- u>"https://creativecommons.org/licenses/by/3.0/"</c-><c- p>,</c->
@@ -1637,35 +1878,25 @@ Parts of this work may be from another specification document.  If so, those par
       <c- p>}</c->
     <c- p>],</c->
   <c- p>},</c->
-  <c- f>"versions"</c-><c- p>:</c-> <c- p>[</c->
-    <c- u>"1.0.0"</c->
-  <c- p>],</c->
-  <c- f>"entryPoints"</c-><c- p>:</c-> <c- p>[</c->
+  <c- f>"version"</c-><c- p>:</c-> <c- u>"1.0.0"</c-><c- p>,</c->
+  <c- f>"endpointUrl"</c-><c- p>:</c-> <c- p>[</c->
     <c- p>{</c->
       <c- f>"@type"</c-><c- p>:</c-> <c- u>"EntryPoint"</c-><c- p>,</c->
       <c- f>"url"</c-><c- p>:</c-> <c- u>"https://kgsearch.googleapis.com/"</c-><c- p>,</c->
-      <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/json"</c-><c- p>,</c->
-      <c- f>"responseContentTypes"</c-><c- p>:</c-> <c- u>"application/json"</c->
+      <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/json"</c->
     <c- p>}</c->
   <c- p>],</c->
-  <c- f>"transport"</c-><c- p>:</c-> <c- u>"HTTP"</c-><c- p>,</c->
-  <c- f>"apiProtocol"</c-><c- p>:</c-> <c- u>"JSON API"</c-><c- p>,</c->
-  <c- f>"webApiDefinitions"</c-><c- p>:</c-> <c- p>[</c->
-    <c- p>{</c->
-      <c- f>"@type"</c-><c- p>:</c-> <c- u>"EntryPoint"</c-><c- p>,</c->
-      <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/json"</c-><c- p>,</c->
-      <c- f>"url"</c-><c- p>:</c-> <c- u>"https://kgsearch.googleapis.com/$discovery/rest?version=v1"</c->
-    <c- p>},</c->
-    <c- p>{</c->
-      <c- f>"@type"</c-><c- p>:</c-> <c- u>"EntryPoint"</c-><c- p>,</c->
-      <c- f>"contentType"</c-><c- p>:</c-> <c- u>"application/vnd.oai.openapi+json;version=2.0"</c-><c- p>,</c->
-      <c- f>"url"</c-><c- p>:</c-> <c- u>"https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"</c->
-    <c- p>},</c->
+  <c- f>"apiTransport"</c-><c- p>:</c-> <c- p>[</c->
+    <c- u>"HTTP"</c-><c- p>,</c->
+    <c- u>"HTTPS"</c->
   <c- p>],</c->
-  <c- f>"webApiActions"</c-><c- p>:</c-> <c- p>[</c->
+  <c- f>"conformsTo"</c-><c- p>:</c-> <c- p>[</c->
+    <c- u>"https://jsonapi.org/format/1.0/"</c->
+  <c- p>],</c->
+  <c- f>"potentialAction"</c-><c- p>:</c-> <c- p>[</c->
     <c- p>{</c->
       <c- f>"@type"</c-><c- p>:</c-> <c- u>"ConsumeAction"</c-><c- p>,</c->
-      <c- f>"name"</c-><c- p>:</c-> <c- u>"apiAuthentication"</c-><c- p>,</c->
+      <c- f>"name"</c-><c- p>:</c-> <c- u>"API Client Registration"</c-><c- p>,</c->
       <c- f>"target"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/how-tos/authorizing"</c->
     <c- p>}</c->
   <c- p>]</c->
@@ -1841,13 +2072,11 @@ Parts of this work may be from another specification document.  If so, those par
    <dd><a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md">OpenAPI Specification v3.0.2</a>. URL: <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md">https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md</a>
    <dt id="biblio-raml">[RAML]
    <dd><a href="https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md">RAML 1.0</a>. URL: <a href="https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md">https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md</a>
-   <dt id="biblio-semver">[SEMVER]
-   <dd><a href="https://semver.org/">Semantic Versioning 2.0.0</a>. URL: <a href="https://semver.org/">https://semver.org/</a>
   </dl>
   <aside class="dfn-panel" data-for="machine-readable-api-definition">
    <b><a href="#machine-readable-api-definition">#machine-readable-api-definition</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-machine-readable-api-definition">2. Proposed Extension</a>
+    <li><a href="#ref-for-machine-readable-api-definition">3.2.2. Notes</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */

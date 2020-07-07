@@ -6,14 +6,14 @@ Copyright © 2017,2019 the Contributors to the WADG0001/Feb2019, published by th
 <pre class='metadata'>
 Title: WADG0001 WebAPI type extension
 H1: Version 0.4.0
-Date: 2019-02-20
+Date: 2020-07-06
 Shortname: wadg0001
-Revision: 2
+Revision: 3
 Status: w3c/CG-DRAFT
 Group: w3c
 URL: https://webapi-discovery.github.io/rfcs/rfc0001.html
 Editor: Mike Ralphson, Mermade Software
-Editor: Ivan Goncharov, APIs.guru
+Editor: Nick Evans, Open Data Institute, http://nickevans.me/
 Repository: webapi-discovery/rfcs
 Abstract: It is proposed to create an extension to the <a href="https://schema.org/">Schema.Org</a> <a href="https://pending.schema.org/WebAPI">WebAPI</a> type to facilitate better automatic discovery of WebAPIs and associated machine- and human-readable documentation.
 Markup Shorthands: css no, markdown yes
@@ -57,17 +57,22 @@ This draft report is the work of the <a href="https://www.w3.org/community/web-a
 
 This extension has been created based on real-world use of metadata in the [[OpenAPI]], [[RAML]], [[API-Blueprint]], [[JSON-home]] and [[apis.json]] specifications.
 
-Definitions
-===========
+# Definitions
 
 <dfn>Machine-readable API Definition</dfn> a structured document defining the inputs and outputs of an API in a standardised format, primarily designed for automated processing, not human consumption.
 
 <div class="note">Note: See <a href="http://nordicapis.com/difference-api-documentation-specification-definition/">this article</a> for an explanation of the difference between API documentation, specifications and definitions.</div>
 
-Proposed Extension
-==================
+# Scope
 
-The base <a href="https://schema.org">Schema.org</a> <a href="https://pending.schema.org">WebAPI</a> type, for example:
+This specification does not attempt to replace existing formats of describing an API, such as [[OpenAPI]], [[RAML]], [[API-Blueprint]], [[JSON-home]] and [[apis.json]], but rather seeks to describe metadata about an API that maybe useful to those discovering it.
+
+
+# Proposed Extension
+
+Schema.org's Dataset vocabulary was originally [based on DCAT](https://schema.org/docs/data-and-datasets.html), which in turn used Dublin Core and FOAF terms. [DCAT Version 2](https://www.w3.org/TR/vocab-dcat-2/) is now current, and is therefore used within this draft.
+
+The base [schema.org](https://schema.org/) [WebAPI](https://schema.org/WebAPI) type, for example:
 
 ```json
 {
@@ -84,48 +89,303 @@ The base <a href="https://schema.org">Schema.org</a> <a href="https://pending.sc
 }
 ```
 
-is to be extended as follows:
+is to be extended by several properties.
 
-The extension properties (and their types) are:
-* `versions` (OPTIONAL array of <a href="https://schema.org/Thing">`Thing`</a> -> <a href="http://meta.schema.org/Property">`Property`</a> -> <a href="http://schema.org/softwareVersion">`softwareVersion`</a>). It is RECOMMENDED that APIs be versioned using [[semver]]
-* `entryPoints` (OPTIONAL array of <a href="https://schema.org/Thing">`Thing`</a> -> <a href="https://schema.org/Intangible">`Intangible`</a> -> <a href="https://schema.org/EntryPoint">`EntryPoint`</a>)
-      * extended with: `responseContentTypes` (OPTIONAL <a href="http://schema.org/Text">`Text`</a>)
-* `license` (OPTIONAL, <a href="http://schema.org/CreativeWork">`CreativeWork`</a> or <a href="http://schema.org/URL">`URL`</a>) - the license for the design/signature of the API
-* `transport` (enumerated <a href="http://schema.org/Text">`Text`</a>: HTTP, HTTPS, SMTP,  MQTT, WS, WSS etc)
-* `apiProtocol` (OPTIONAL, enumerated <a href="http://schema.org/Text">`Text`</a>:  SOAP, GraphQL, gRPC, Hydra, JSON API, XML-RPC, JSON-RPC etc)
-* `webApiDefinitions` (OPTIONAL array of <a href="http://schema.org/EntryPoint">`EntryPoint`</a>s) containing links to <a>machine-readable API definition</a>s
-* `webApiActions` (OPTIONAL array of potential <a href="http://schema.org/Action">`Action`</a>s)
+These properties are defined within the following list of modular proposals for schema.org. The modularity ensures that adoption can progressed pragmatically, and not be blocked by a lack of consensus on all properties. This also ensures that this report does not need to cover all possible use cases in this iteration.
 
-The Content-Type(s) consumed by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.<a href="http://schema.org/contentType">contentType</a> property. The Content-Type(s) produced by the WebAPI MAY be included in the <a href="http://schema.org/EntryPoint">EntryPoint</a>.responseContentType property.
+## New property `endpointUrl`
 
-Content-Types
--------------
+### Proposal
 
-The webApiDefinitions (<a href="http://schema.org/EntryPoint">EntryPoint</a>) <a href="http://schema.org/contentType">contentType</a> property MUST contain the singular contentType relevant to the API description format used. It is RECOMMENDED that <a href="https://iana.org">IANA</a>-registered contentTypes be used. For example, `application/wsdl+xml` is the IANA registered content-type for the Web Service Definition Language. The following non-IANA contentTypes MAY additionally be used:
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Domain</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`endpointUrl`</td>
+<td>`schema:WebAPI`</td>
+<td>`schema:URL`, `schema:EntryPoint`</td>
+<td>The root location or primary endpoint of the API.</td>
+</tr>
+</tbody>
+</table>
+
+### Examples
+
+Simple usage:
+
+```json
+"endpointUrl": "https://kgsearch.googleapis.com/",
+```
+
+Advanced usage:
+
+```json
+"endpointUrl": [
+  {
+    "@type": "EntryPoint",
+    "name": "Production server (uses live data)",
+    "url": "https://api.example.com/v1",
+    "contentType": "application/json"
+  },
+  {
+    "@type": "EntryPoint",
+    "name": "Sandbox server (uses test data)",
+    "url": "https://sandbox-api.example.com:8443/v1",
+    "contentType": "application/json"
+  }
+],
+```
+
+### Notes
+
+This proposal brings the property above [directly from DCAT v2](https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_url). The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) overloads the `schema:url` property for both `dcat:endpointURL` and `dcat:landingPage`. Given the nature of `endpointUrl` being the base URL of an API (rather than a web page URL, which is likely the most useful to a web-crawler), a specific property has been defined.
+
+To be consistent with the current inclusion of `schema:CreativeWork` in the range of `schema:documentation`, `schema:EntryPoint` could also be included here for cases where a richer description of the endpoint is required. For example, to differentiate between different environments.
+
+## Update description for `documentation` property
+
+### Proposal
+
+The description of the `schema:documentation` property is updated to:
+
+> A resource that provides further documentation of the services available via the WebAPI, including their operations, parameters etc.
+> 
+> The `documentation` property gives specific details of the actual endpoint instances, while the `conformsTo` property is used to indicate the general standard or specification that the endpoints implement.
+> 
+> Documentation may be expressed in a machine-readable format, such as an OpenAPI (Swagger) description, an OGC GetCapabilities response WFS, ISO-19142, WMS, ISO-19128, a SPARQL Service Description, an OpenSearch or WSDL20 document, a Hydra API description, else in HTML, text or some other informal mode. The `encodingFormat` of the `CreativeWork` should be used to indicate the use of such formats via their MIME type.
+
+An example should be added to [https://schema.org/documentation](https://schema.org/documentation) as follows:
+
+```json
+"documentation": [
+  {
+    "@type": "CreativeWork",
+    "encodingFormat": "text/html",
+    "url": "https://developers.google.com/knowledge-graph/reference/rest/v1"
+  },
+  {
+    "@type": "CreativeWork",
+    "encodingFormat": "application/json",
+    "url": "https://kgsearch.googleapis.com/$discovery/rest?version=v1"
+  },
+  {
+    "@type": "CreativeWork",
+    "encodingFormat": "application/vnd.oai.openapi+json;version=2.0",
+    "url": "https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"
+  },
+],
+```
+
+### Notes
+
+This proposal makes it clear that the `schema:documentation` property can also be used for <a>machine-readable API definition</a>s, bringing it in line with [DCAT v2](https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_url).
+
+Note that the [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) recommends the `schema:documentation` property for `dcat:endpointDescription`, as above.
+
+An alternative that was considered was to create an additional property, `schema:endpointDescription` with range `schema:CreativeWork`, in order to create a more explicit separation between human-readable `documentation`, and machine-readable `endpointDescription`.
+
+## New property `conformsTo`
+
+### Proposal
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Domain</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`conformsTo`</td>
+<td>`schema:WebAPI`</td>
+<td>`schema:URL`</td>
+<td>The URL reference of an established standard to which the described API conforms, for example `https://jsonapi.org/format/1.0/`, `https://grpc.io/`, or `http://www.hydra-cg.com/spec/latest/core/`.</td>
+</tr>
+</tbody>
+</table>
+
+### Example
+
+```json
+"conformsTo": [
+  "https://jsonapi.org/format/1.0/"
+],
+```
+
+### Notes
+
+This proposal brings the property [directly from DCAT v2](https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_url).
+
+The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) does not include `conformsTo`, and that the mapping gap was also recognised in [previous mapping attempts](https://ec-jrc.github.io/dcat-ap-to-schema-org/#mapping-properties-dataset) and not addressed within [DCAT v2 discussions](https://github.com/w3c/dxwg/issues/251).
+
+## New property `accessService`
+
+### Proposal
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Domain</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`accessService`</td>
+<td>`schema:Dataset`, `schema:DataDownload`</td>
+<td>`schema:WebAPI`</td>
+<td>An API that provides access to the dataset</td>
+</tr>
+</tbody>
+</table>
+
+### Example
+
+```json
+{
+  "@context": "http://schema.org/",
+  "@type": "Dataset",
+  ...
+  "accessService": {
+    "@type": "WebAPI",
+    ...
+  }
+}
+```
+
+### Notes
+
+The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) proposes the use of `schema:serviceOutput` within `schema:WebAPI` to reference the `schema:Dataset`. For the inverse, this proposal uses a term [from DCAT v2](https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_serves_dataset) to reference `schema:WebAPI` from `schema:Dataset`:
+
+The DCAT v2 term `dcat:accessService` links a `dcat:Distribution` to the `dcat:DataService` (akin to `schema:DataDownload`), however given that an `schema:WebAPI` may allow read/write access to a Dataset, it is not necessarily limited to only a single `schema:DataDownload`, but may also cover an entire `schema:Dataset`.
+
+The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) does not include `accessService`.
+
+## Add `WebAPI` to domain of `version`
+
+### Proposal
+
+Add `schema:WebAPI` to the domain of `schema:version`, to describe the version of the API.
+
+### Example
+
+```json
+"version": "1.0.0",
+```
+
+### Notes
+
+This is the version of the API itself, and hence `schema:softwareVersion`, `schema:assemblyVersion`, and `schemaVersion` are not appropriate.
+
+## New property `apiTransport`
+
+### Proposal
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Domain</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`apiTransport`</td>
+<td>`schema:WebAPI`</td>
+<td>`schema:Text`</td>
+<td>The type of transport used for the API, such as HTTP, HTTPS, SMTP, MQTT, WS, WSS</td>
+</tr>
+</tbody>
+</table>
+
+### Example
+
+```json
+"apiTransport": [
+  "HTTP",
+  "HTTPS"
+],
+```
+
+### Notes
+
+Given the widely recognised acronyms in use for modes of API transport, there is no need to reference an explicit controlled vocabulary.
+
+
+## Add `WebAPI` to domain of `license`
+
+### Proposal
+
+Add `schema:WebAPI` to the domain of `schema:license`, to describe the license for the design/signature of the API.
+
+### Example
+
+```json
+"license": "https://creativecommons.org/licenses/by/3.0/",
+```
+
+## Add `url` to the `WebAPI` example
+
+### Proposal
+
+Add the following to the examples in the [https://schema.org/WebAPI](https://schema.org/WebAPI) page:
+
+```json
+"url": "https://developers.google.com/knowledge-graph/",
+"documentation": "https://developers.google.com/knowledge-graph/reference/rest/v1",
+```
+
+### Notes
+
+The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) overloads the `schema:url` property for both `dcat:endpointURL` and `dcat:landingPage`. Hence `url` should be used for the landing page of the API (e.g. [https://azure.microsoft.com/en-gb/services/cdn/](https://azure.microsoft.com/en-gb/services/cdn/)) rather than the documentation (e.g. [https://docs.microsoft.com/en-gb/azure/cdn/](https://docs.microsoft.com/en-gb/azure/cdn/)).
+
+<div class="non-normative">
+
+# Suggested values
+
+This section is non-normative, and these values are outside the scope of schema.org. They serve as an illustration of suggested usage.
+
+## `encodingFormat` values
+
+When `encodingFormat` is used to specify the API description format used, and where an <a href="https://iana.org">IANA</a>-registered media type is not available, the following widely recognised non-IANA media types may be used:
 
 <table class=data>
 <thead>
 <tr>
 <th>Format
-<th>Content-Type
+<th>Media type
 <tbody>
-<tr><td>OpenAPI / Swagger in YAML<td><code>application/vnd.oai.openapi</code>
-<tr><td>OpenAPI / Swagger in JSON<td><code>application/vnd.oai.openapi+json</code>
-<tr><td>RAML<td><code>application/raml+yaml</code>
-<tr><td>API Blueprint in markdown<td><code>text/vnd.apiblueprint</code>
-<tr><td>API Blueprint parsed in YAML<td><code>application/vnd.refract.parse-result+yaml</code>
-<tr><td>API Blueprint parsed in JSON<td><code>application/vnd.refract.parse-result+json</code>
+<tr><td>OpenAPI / Swagger in YAML<td>`application/vnd.oai.openapi`
+<tr><td>OpenAPI / Swagger in JSON<td>`application/vnd.oai.openapi+json`
+<tr><td>RAML<td>`application/raml+yaml`
+<tr><td>API Blueprint in markdown<td>`text/vnd.apiblueprint`
+<tr><td>API Blueprint parsed in YAML<td>`application/vnd.refract.parse-result+yaml`
+<tr><td>API Blueprint parsed in JSON<td>`application/vnd.refract.parse-result+json`
 </tbody>
 </table>
 
-Content-Types MAY include a `;version` parameter where appropriate.
+Media types may include a `;version` parameter where appropriate.
 
-Other content-Types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc MAY be used, with decreasing levels of machine-readability. The webApiDefinition (<a href="https://schema.org/EntryPoint">EntryPoint</a>) encodingType property MAY also be specified.
+Other media types such as <b>application/ld+json</b>, <b>application/json</b>, <b>text/markdown</b> etc may be used, with decreasing levels of machine-readability.
 
-webApiActions
--------------
 
-Valid <a href="https://schema.org/Action">Action</a>.<a href="https://schema.org/name">name</a>s for webApiActions are:
+## `Action` `name` values
+
+A number of `Action` names are suggested for use with `potentialAction` of `WebAPI`, though this list is not exhaustive:
 
 <table class=data>
 <thead>
@@ -133,27 +393,49 @@ Valid <a href="https://schema.org/Action">Action</a>.<a href="https://schema.org
 <th>Name
 <th>Description
 <tbody>
-<tr><td>`apiAuthentication` <td> Links to a resource detailing authentication requirements. Note this is a human-readable resource, not an authentication endpoint
-<tr><td>`apiClientRegistration` <td> Links to a resource where a client may register to use the API
-<tr><td>`apiConsole` <td> Links to an interactive console where API calls may be tested
-<tr><td>`apiPayment` <td> Links to a resource detailing pricing details of the API
-<tr><td>`apiSLA` <td> Links to a resource detailing the Service Level Agreement relating to the API. This may be machine- or human-readble.
-<tr><td>`apiSupport` <td> Links to a resource where a client may obtain support for the API
+<tr><td>`API Authentication` <td> Links to a resource detailing authentication requirements. Note this is a human-readable resource, not an authentication endpoint
+<tr><td>`API Client Registration` <td> Links to a resource where a client may register to use the API
+<tr><td>`API Console` <td> Links to an interactive console where API calls may be tested
+<tr><td>`API Payment` <td> Links to a resource detailing pricing details of the API
+<tr><td>`API SLA` <td> Links to a resource detailing the Service Level Agreement relating to the API. This may be machine- or human-readble.
+<tr><td>`API Support` <td> Links to a resource where a client may obtain support for the API
 </tbody>
 </table>
 
-Example
+</div>
+
+
+
+Full example
 =======
 
-A fuller example of a WebAPI annotation, including the extension attributes. Note the @type name is still to be determined.
+A fuller example of a `WebAPI` annotation, including the proposed properties.
+
 
 ```json
 {
   "@context": "http://schema.org/",
-  "@type": "ActionableWebAPI",
+  "@type": "WebAPI",
   "name": "Google Knowledge Graph Search API",
   "description": "The Knowledge Graph Search API lets you find entities in the Google Knowledge Graph. The API uses standard schema.org types and is compliant with the JSON-LD specification.",
-  "documentation": "https://developers.google.com/knowledge-graph/",
+  "documentation": [
+    {
+      "@type": "CreativeWork",
+      "encodingFormat": "text/html",
+      "url": "https://developers.google.com/knowledge-graph/reference/rest/v1"
+    },
+    {
+      "@type": "CreativeWork",
+      "encodingFormat": "application/json",
+      "url": "https://kgsearch.googleapis.com/$discovery/rest?version=v1"
+    },
+    {
+      "@type": "CreativeWork",
+      "encodingFormat": "application/vnd.oai.openapi+json;version=2.0",
+      "url": "https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"
+    },
+  ],
+  "url": "https://developers.google.com/knowledge-graph/",
   "termsOfService": "https://developers.google.com/knowledge-graph/terms",
   "logo": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
   "license": "https://creativecommons.org/licenses/by/3.0/",
@@ -168,35 +450,25 @@ A fuller example of a WebAPI annotation, including the extension attributes. Not
       }
     ],
   },
-  "versions": [
-    "1.0.0"
-  ],
-  "entryPoints": [
+  "version": "1.0.0",
+  "endpointUrl": [
     {
       "@type": "EntryPoint",
       "url": "https://kgsearch.googleapis.com/",
-      "contentType": "application/json",
-      "responseContentTypes": "application/json"
+      "contentType": "application/json"
     }
   ],
-  "transport": "HTTP",
-  "apiProtocol": "JSON API",
-  "webApiDefinitions": [
-    {
-      "@type": "EntryPoint",
-      "contentType": "application/json",
-      "url": "https://kgsearch.googleapis.com/$discovery/rest?version=v1"
-    },
-    {
-      "@type": "EntryPoint",
-      "contentType": "application/vnd.oai.openapi+json;version=2.0",
-      "url": "https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"
-    },
+  "apiTransport": [
+    "HTTP",
+    "HTTPS"
   ],
-  "webApiActions": [
+  "conformsTo": [
+    "https://jsonapi.org/format/1.0/"
+  ],
+  "potentialAction": [
     {
       "@type": "ConsumeAction",
-      "name": "apiAuthentication",
+      "name": "API Client Registration",
       "target": "https://developers.google.com/knowledge-graph/how-tos/authorizing"
     }
   ]

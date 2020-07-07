@@ -344,7 +344,7 @@ Add `schema:WebAPI` to the domain of `schema:license`, to describe the license f
 
 Include the following in the documentation of `schema:WebAPI`:
 
-> The [[url]] property indicates a landing page for the API, which is a web page that can be navigated to in a web browser to gain access to the API and/or additional information.
+> The [[url]] property indicates a landing page for the API, which is a Web page that can be navigated to in a Web browser to gain access to the API and/or additional information.
 
 Add the following to the examples to the [https://schema.org/WebAPI](https://schema.org/WebAPI) page:
 

@@ -1655,7 +1655,7 @@ Parts of this work may be from another specification document.  If so, those par
    <blockquote>
     <p>A resource that provides further documentation of the services available via the WebAPI, including their operations, parameters etc.</p>
     <p>The <code>documentation</code> property gives specific details of the actual endpoint instances, while the <code>conformsTo</code> property is used to indicate the general standard or specification that the endpoints implement.</p>
-    <p>Documentation may be expressed in a machine-readable format, such as an OpenAPI (Swagger) description, an OGC GetCapabilities response WFS, ISO-19142, WMS, ISO-19128, a SPARQL Service Description, an OpenSearch or WSDL20 document, a Hydra API description, otherwise in HTML, text or some other informal mode. The <code>encodingFormat</code> of the <code>CreativeWork</code> should be used to indicate the use of such formats via their MIME type.</p>
+    <p>Documentation may be expressed in a machine-readable format, such as an OpenAPI (Swagger) description, an OGC GetCapabilities response WFS, ISO-19142, WMS, ISO-19128, a SPARQL Service Description, an OpenSearch or WSDL20 document, a Hydra API description, or otherwise in HTML, text or some other informal mode. The <code>encodingFormat</code> of the <code>CreativeWork</code> should be used to indicate the use of such formats via their MIME type.</p>
    </blockquote>
    <p>An example should be added to <a href="https://schema.org/documentation">https://schema.org/documentation</a> as follows:</p>
 <pre class="language-json highlight"><c- u>"documentation"</c->: <c- p>[</c->
@@ -1671,8 +1671,8 @@ Parts of this work may be from another specification document.  If so, those par
   <c- p>},</c->
   <c- p>{</c->
     <c- f>"@type"</c-><c- p>:</c-> <c- u>"CreativeWork"</c-><c- p>,</c->
-    <c- f>"encodingFormat"</c-><c- p>:</c-> <c- u>"application/vnd.oai.openapi+json;version=2.0"</c-><c- p>,</c->
-    <c- f>"url"</c-><c- p>:</c-> <c- u>"https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"</c->
+    <c- f>"encodingFormat"</c-><c- p>:</c-> <c- u>"application/vnd.oai.openapi+json;version=3.0"</c-><c- p>,</c->
+    <c- f>"url"</c-><c- p>:</c-> <c- u>"https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/openapi.json"</c->
   <c- p>},</c->
 <c- p>]</c->,
 </pre>
@@ -1865,8 +1865,8 @@ Parts of this work may be from another specification document.  If so, those par
     <c- p>},</c->
     <c- p>{</c->
       <c- f>"@type"</c-><c- p>:</c-> <c- u>"CreativeWork"</c-><c- p>,</c->
-      <c- f>"encodingFormat"</c-><c- p>:</c-> <c- u>"application/vnd.oai.openapi+json;version=2.0"</c-><c- p>,</c->
-      <c- f>"url"</c-><c- p>:</c-> <c- u>"https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/swagger.json"</c->
+      <c- f>"encodingFormat"</c-><c- p>:</c-> <c- u>"application/vnd.oai.openapi+json;version=3.0"</c-><c- p>,</c->
+      <c- f>"url"</c-><c- p>:</c-> <c- u>"https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/openapi.json"</c->
     <c- p>},</c->
   <c- p>],</c->
   <c- f>"url"</c-><c- p>:</c-> <c- u>"https://developers.google.com/knowledge-graph/"</c-><c- p>,</c->
@@ -2082,7 +2082,7 @@ Parts of this work may be from another specification document.  If so, those par
    <dt id="biblio-json-home">[JSON-home]
    <dd><a href="https://tools.ietf.org/html/draft-nottingham-json-home-06">JSON-home</a>. URL: <a href="https://tools.ietf.org/html/draft-nottingham-json-home-06">https://tools.ietf.org/html/draft-nottingham-json-home-06</a>
    <dt id="biblio-openapi">[OpenAPI]
-   <dd><a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md">OpenAPI Specification v3.0.2</a>. URL: <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md">https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md</a>
+   <dd><a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md">OpenAPI Specification v3.0.3</a>. URL: <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md">https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md</a>
    <dt id="biblio-raml">[RAML]
    <dd><a href="https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md">RAML 1.0</a>. URL: <a href="https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md">https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md</a>
   </dl>

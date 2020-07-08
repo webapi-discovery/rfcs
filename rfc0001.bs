@@ -14,6 +14,7 @@ Group: w3c
 URL: https://webapi-discovery.github.io/rfcs/rfc0001.html
 Editor: Mike Ralphson, Mermade Software
 Editor: Nick Evans, Open Data Institute, http://nickevans.me/
+Former Editor: Ivan Goncharov, APIs.guru
 Repository: webapi-discovery/rfcs
 Abstract: It is proposed to create an extension to the <a href="https://schema.org/">Schema.Org</a> <a href="https://pending.schema.org/WebAPI">WebAPI</a> type to facilitate better automatic discovery of WebAPIs and associated machine- and human-readable documentation.
 Markup Shorthands: css no, markdown yes

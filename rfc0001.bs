@@ -68,7 +68,7 @@ This extension has been created based on real-world use of metadata in the [[Ope
 This specification does not attempt to replace existing formats of describing an API, such as [[OpenAPI]], [[RAML]], [[API-Blueprint]], [[JSON-home]] and [[apis.json]], but rather seeks to describe metadata about an API that will be useful to those who are discovering it.
 
 
-# Proposed Extension
+# Proposed extension
 
 Schema.org's Dataset vocabulary was originally [based on DCAT](https://schema.org/docs/data-and-datasets.html), which in turn used Dublin Core and FOAF terms. [DCAT Version 2](https://www.w3.org/TR/vocab-dcat-2/) is now current, and is therefore used within this draft.
 

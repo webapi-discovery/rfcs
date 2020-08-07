@@ -156,21 +156,49 @@ To be consistent with the current inclusion of `schema:CreativeWork` in the rang
 
 The description of the `schema:documentation` property is updated to:
 
-> A resource that provides further documentation of the services available via the WebAPI, including their operations, parameters etc.
+> Human-readable documentation of the services available via the `WebAPI`, including their operations, parameters etc.
 >
-> The `documentation` property gives specific details of the actual endpoint instances, while the `conformsTo` property is used to indicate the general standard or specification that the endpoints implement.
->
-> Documentation may be expressed in a machine-readable format, such as an OpenAPI (Swagger) description, an OGC GetCapabilities response WFS, ISO-19142, WMS, ISO-19128, a SPARQL Service Description, an OpenSearch or WSDL20 document, a Hydra API description, or otherwise in HTML, text or some other informal mode. The `encodingFormat` of the `CreativeWork` should be used to indicate the use of such formats via their MIME type.
+> `endpointDescription` should be used for machine-readable documentation.
 
-An example should be added to [https://schema.org/documentation](https://schema.org/documentation) as follows:
+### Notes
+
+This proposal makes it clear that the `schema:documentation` property describes the services available via the `WebAPI` in a *human-readable* format, bringing it *partly* in line with the [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) that recommends the `schema:documentation` property for *both* human-readable documentation and <a>machine-readable API definitions</a>. A proposal for a separate `endpointDescription` property reserved for <a>machine-readable API definitions</a> can be found below.
+
+An alternative that was considered was to use `schema:documentation` for *both* human-readable documentation and <a>machine-readable API definitions</a>, bringing it *fully* in line with [DCAT v2](https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_description), and the [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo). Such an approach was discounted as it would have necessitated the use of "whitelists" of human- and machine-readable `encodingFormat`s by data consumers to distinguish between them, which would have entailed unnecessary complexity and maintenance.
+
+
+## New property `endpointDescription`
+
+
+### Proposal
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Domain</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`endpointDescription`</td>
+<td>`schema:WebAPI`</td>
+<td>`schema:CreativeWork`</td>
+<td>
+  <p>Machine-readable API definition of the services available via the `WebAPI`, including their operations, parameters etc.</p>
+  <p>Machine-readable formats include OpenAPI (Swagger) description, an OGC GetCapabilities response WFS, ISO-19142, WMS, ISO-19128, a SPARQL Service Description, an OpenSearch or WSDL20 document, or a Hydra API description. The `encodingFormat` of the `CreativeWork` should be used to indicate the use of such formats via their MIME type.</p>
+  <p>The `endpointDescription` property gives specific details of the actual endpoint instances, while the `conformsTo` property is used to indicate the general standard or specification that the endpoints implement.</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+### Examples
 
 ```json
-"documentation": [
-  {
-    "@type": "CreativeWork",
-    "encodingFormat": "text/html",
-    "url": "https://developers.google.com/knowledge-graph/reference/rest/v1"
-  },
+"endpointDescription": [
   {
     "@type": "CreativeWork",
     "encodingFormat": "application/json",
@@ -180,17 +208,16 @@ An example should be added to [https://schema.org/documentation](https://schema.
     "@type": "CreativeWork",
     "encodingFormat": "application/vnd.oai.openapi+json;version=3.0",
     "url": "https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/openapi.json"
-  },
+  }
 ],
 ```
 
 ### Notes
 
-This proposal makes it clear that the `schema:documentation` property can also be used for <a>machine-readable API definition</a>s, bringing it in line with [DCAT v2](https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_url).
+This proposal brings the property above [directly from DCAT v2](https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_description), using `schema:CreativeWork` to be consistent with the range of `schema:documentation`.
 
-Note that the [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) recommends the `schema:documentation` property for `dcat:endpointDescription`, as above.
+The [DCAT v2 to schema.org mapping](https://www.w3.org/TR/vocab-dcat-2/#dcat-sdo) uses the `schema:documentation` property for both human- and machine-readable documentation, however in order to create an explicit separation between human-readable `documentation` and machine-readable `endpointDescription`, a specific property has been defined.
 
-An alternative that was considered was to create an additional property, `schema:endpointDescription` with range `schema:CreativeWork`, in order to create a more explicit separation between human-readable `documentation`, and machine-readable `endpointDescription`.
 
 ## New property `conformsTo`
 
@@ -423,12 +450,8 @@ A fuller example of a `WebAPI` annotation, including the proposed properties.
   "@type": "WebAPI",
   "name": "Google Knowledge Graph Search API",
   "description": "The Knowledge Graph Search API lets you find entities in the Google Knowledge Graph. The API uses standard schema.org types and is compliant with the JSON-LD specification.",
-  "documentation": [
-    {
-      "@type": "CreativeWork",
-      "encodingFormat": "text/html",
-      "url": "https://developers.google.com/knowledge-graph/reference/rest/v1"
-    },
+  "documentation": "https://developers.google.com/knowledge-graph/reference/rest/v1",
+  "endpointDescription": [
     {
       "@type": "CreativeWork",
       "encodingFormat": "application/json",
@@ -438,7 +461,7 @@ A fuller example of a `WebAPI` annotation, including the proposed properties.
       "@type": "CreativeWork",
       "encodingFormat": "application/vnd.oai.openapi+json;version=3.0",
       "url": "https://api.apis.guru/v2/specs/googleapis.com/kgsearch/v1/openapi.json"
-    },
+    }
   ],
   "url": "https://developers.google.com/knowledge-graph/",
   "termsOfService": "https://developers.google.com/knowledge-graph/terms",
